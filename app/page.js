@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { motion } from "framer-motion"
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import {
   MenuIcon,
@@ -28,7 +28,7 @@ import Link from 'next/link';
 
 export default function TravelLandingPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -73,12 +73,12 @@ export default function TravelLandingPage() {
         duration: 0.5,
       },
     },
-  }
+  };
 
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar for mobile */}
-      <aside
+      {/* <aside
         className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out lg:hidden`}
@@ -119,12 +119,12 @@ export default function TravelLandingPage() {
             Contact
           </a>
         </nav>
-      </aside>
+      </aside> */}
 
       {/* Main Content */}
       <main className="flex-1 overflow-x-hidden">
         {/* Header */}
-        <header className="bg-white shadow-sm">
+        {/* <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div className="flex items-center">
               <Button
@@ -137,7 +137,7 @@ export default function TravelLandingPage() {
               </Button>
               <span className="text-2xl font-bold">ShrineYatra</span>
             </div>
-            {/* Navigation for large screens */}
+           
             <nav className="hidden lg:flex items-center space-x-4">
               <a href="#" className="text-gray-700 hover:text-gray-900">
                 Home
@@ -159,7 +159,7 @@ export default function TravelLandingPage() {
               <Button size="sm">Sign Up</Button>
             </div>
           </div>
-        </header>
+        </header> */}
 
         <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -325,96 +325,102 @@ export default function TravelLandingPage() {
 
         {/* One Click Section */}
         <section className="py-12 bg-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="grid md:grid-cols-2 gap-8 items-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div
-            className="relative h-[400px] rounded-lg overflow-hidden"
-            variants={itemVariants}
-          >
-            <Image
-              src="https://images.pexels.com/photos/57901/pexels-photo-57901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="One click for you"
-              layout="fill"
-              objectFit="cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent flex items-center justify-center">
-              <motion.p
-                className="text-3xl text-center font-bold text-white px-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              className="grid md:grid-cols-2 gap-8 items-center"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.div
+                className="relative h-[400px] rounded-lg overflow-hidden"
+                variants={itemVariants}
               >
-                Embark on your spiritual journey easily with us.
-              </motion.p>
-            </div>
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <motion.p
-              className="text-lg max-md:text-center font-bold mb-2 text-primary/80"
-              variants={itemVariants}
-            >
-              How it works?
-            </motion.p>
-            <motion.h2
-              className="text-3xl font-bold mb-6 max-md:text-center"
-              variants={itemVariants}
-            >
-              One click for you
-            </motion.h2>
-            <motion.ul className="space-y-4" variants={containerVariants}>
-              {DATA.features.map((feature, index) => (
-                <motion.li
-                  key={index}
-                  className="flex gap-4 items-start hover:shadow-lg p-4 rounded-xl hover:bg-white hover:cursor-pointer transition-all duration-300"
-                  variants={itemVariants}
-                  onHoverStart={() => setHoveredIndex(index)}
-                  onHoverEnd={() => setHoveredIndex(null)}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <motion.div
-                    className={`p-4 rounded-full flex items-center justify-center ${
-                      index === 0
-                        ? "bg-blue-500"
-                        : index === 1
-                        ? "bg-red-500"
-                        : "bg-green-500"
-                    }`}
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
+                <Image
+                  src="https://images.pexels.com/photos/57901/pexels-photo-57901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="One click for you"
+                  layout="fill"
+                  objectFit="cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent flex items-center justify-center">
+                  <motion.p
+                    className="text-3xl text-center font-bold text-white px-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
                   >
-                    <feature.icon size={15} className="w-6 h-6" color="white" />
-                  </motion.div>
-                  <div>
-                    <motion.h3
-                      className="font-bold"
-                      animate={{
-                        scale: hoveredIndex === index ? 1 : 1,
-                      }}
-                      transition={{ duration: 0.2 }}
+                    Embark on your spiritual journey easily with us.
+                  </motion.p>
+                </div>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <motion.p
+                  className="text-lg max-md:text-center font-bold mb-2 text-primary/80"
+                  variants={itemVariants}
+                >
+                  How it works?
+                </motion.p>
+                <motion.h2
+                  className="text-3xl font-bold mb-6 max-md:text-center"
+                  variants={itemVariants}
+                >
+                  One click for you
+                </motion.h2>
+                <motion.ul className="space-y-4" variants={containerVariants}>
+                  {DATA.features.map((feature, index) => (
+                    <motion.li
+                      key={index}
+                      className="flex gap-4 items-start hover:shadow-lg p-4 rounded-xl hover:bg-white hover:cursor-pointer transition-all duration-300"
+                      variants={itemVariants}
+                      onHoverStart={() => setHoveredIndex(index)}
+                      onHoverEnd={() => setHoveredIndex(null)}
+                      whileHover={{ scale: 1.05 }}
                     >
-                      {feature.heading}
-                    </motion.h3>
-                    <motion.p
-                      className="text-gray-500 text-sm mt-2"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: hoveredIndex === index ? 1 : 0.7 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {feature.subheading}
-                    </motion.p>
-                  </div>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
+                      <motion.div
+                        className={`p-4 rounded-full flex items-center justify-center ${
+                          index === 0
+                            ? 'bg-blue-500'
+                            : index === 1
+                            ? 'bg-red-500'
+                            : 'bg-green-500'
+                        }`}
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <feature.icon
+                          size={15}
+                          className="w-6 h-6"
+                          color="white"
+                        />
+                      </motion.div>
+                      <div>
+                        <motion.h3
+                          className="font-bold"
+                          animate={{
+                            scale: hoveredIndex === index ? 1 : 1,
+                          }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {feature.heading}
+                        </motion.h3>
+                        <motion.p
+                          className="text-gray-500 text-sm mt-2"
+                          initial={{ opacity: 0 }}
+                          animate={{
+                            opacity: hoveredIndex === index ? 1 : 0.7,
+                          }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {feature.subheading}
+                        </motion.p>
+                      </div>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
         {/* Our Tourist Destination Section */}
         <section className="">
@@ -430,15 +436,17 @@ export default function TravelLandingPage() {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {packageItem.options.map((option, subIndex) => (
-                    <TripCard
-                      key={subIndex}
-                      title={option.name}
-                      description={option.description}
-                      days={option.days}
-                      image={option.image}
-                      price={option.price}
-                      rating={option.rating}
-                    />
+                    <Link key={subIndex} href="/package">
+                      <TripCard
+                        key={subIndex}
+                        title={option.name}
+                        description={option.description}
+                        days={option.days}
+                        image={option.image}
+                        price={option.price}
+                        rating={option.rating}
+                      />
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -494,8 +502,12 @@ export default function TravelLandingPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold mb-8">Our travel memories</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <BlogCard />
-              <BlogCard />
+              <Link href="/blog">
+                <BlogCard />
+              </Link>
+              <Link href="/blog">
+                <BlogCard />
+              </Link>
             </div>
             <div className="text-center mt-8">
               <Button variant="outline">Read more</Button>
@@ -504,7 +516,7 @@ export default function TravelLandingPage() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-gray-900 text-white py-12">
+        {/* <footer className="bg-gray-900 text-white py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
@@ -604,7 +616,7 @@ export default function TravelLandingPage() {
               <p>&copy; 2024 Indotravi. All rights reserved.</p>
             </div>
           </div>
-        </footer>
+        </footer> */}
       </main>
     </div>
   );
