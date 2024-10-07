@@ -20,11 +20,13 @@ import {
 } from 'lucide-react';
 import * as Icons from 'lucide-react';
 import Image from 'next/image';
-import { DATA, PACKAGES } from '@/utils/data';
+import { blogs, DATA, PACKAGES } from '@/utils/data';
 import TripCard from '@/components/ui/home/TripCard';
 import Review from '@/components/ui/home/Review';
 import BlogCard from '@/components/ui/home/BlogCard';
 import Link from 'next/link';
+import TripCard2 from '@/components/ui/home/TripCard2';
+import PackageSlider from '@/components/ui/custom/PackageSlider';
 
 export default function TravelLandingPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -77,90 +79,8 @@ export default function TravelLandingPage() {
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar for mobile */}
-      {/* <aside
-        className={`${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out lg:hidden`}
-      >
-        <div className="flex items-center justify-between p-4">
-          <span className="text-2xl font-bold">ShrineYatra</span>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setSidebarOpen(false)}
-          >
-            <XIcon className="h-6 w-6" />
-          </Button>
-        </div>
-        <nav className="mt-8">
-          <a
-            href="#"
-            className="block py-2 px-4 text-gray-700 hover:bg-gray-200"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="block py-2 px-4 text-gray-700 hover:bg-gray-200"
-          >
-            Destinations
-          </a>
-          <a
-            href="#"
-            className="block py-2 px-4 text-gray-700 hover:bg-gray-200"
-          >
-            About
-          </a>
-          <a
-            href="#"
-            className="block py-2 px-4 text-gray-700 hover:bg-gray-200"
-          >
-            Contact
-          </a>
-        </nav>
-      </aside> */}
-
       {/* Main Content */}
       <main className="flex-1 overflow-x-hidden">
-        {/* Header */}
-        {/* <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div className="flex items-center">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="lg:hidden mr-2"
-                onClick={() => setSidebarOpen(true)}
-              >
-                <MenuIcon className="h-6 w-6" />
-              </Button>
-              <span className="text-2xl font-bold">ShrineYatra</span>
-            </div>
-           
-            <nav className="hidden lg:flex items-center space-x-4">
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                Home
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                Destinations
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                About
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                Contact
-              </a>
-            </nav>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm">
-                Sign In
-              </Button>
-              <Button size="sm">Sign Up</Button>
-            </div>
-          </div>
-        </header> */}
-
         <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="container mx-auto"
@@ -422,10 +342,8 @@ export default function TravelLandingPage() {
           </div>
         </section>
 
-        {/* Our Tourist Destination Section */}
         <section className="">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> */}
             {PACKAGES.packages.map((packageItem, index) => (
               <div key={index}>
                 <h2 className="text-3xl font-bold mt-12">
@@ -434,66 +352,27 @@ export default function TravelLandingPage() {
                 <h2 className="text-gray-600 mt-2 mb-10">
                   {packageItem.subHeading}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {packageItem.options.map((option, subIndex) => (
-                    <Link key={subIndex} href="/package">
-                      <TripCard
-                        key={subIndex}
-                        title={option.name}
-                        description={option.description}
-                        days={option.days}
-                        image={option.image}
-                        price={option.price}
-                        rating={option.rating}
-                      />
-                    </Link>
-                  ))}
-                </div>
+              
+                  
+                    <div>
+                      
+                      <PackageSlider trips={packageItem.trips} />
+                    </div>
+                  
+                
               </div>
             ))}
-            {/* </div> */}
+
             <div className="text-center mt-8">
               <Button variant="outline">View more</Button>
             </div>
           </div>
         </section>
 
+        
+
         {/* Testimonial Section */}
         <section className="py-12 bg-gray-100">
-          {/* <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white/80 backdrop-blur-md rounded-lg p-6 shadow-lg">
-              <div className="flex items-center space-x-4 mb-4">
-                <Image
-                  src="/placeholder.svg?height=50&width=50"
-                  alt="User Avatar"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                />
-                <div>
-                  <h3 className="font-semibold">Donald Sullivan</h3>
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <svg
-                        key={i}
-                        className="w-5 h-5 fill-current"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                      </svg>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <p className="text-gray-600">
-                "This travel website is very informative and easy to use. I like
-                how they present various destination options and travel packages
-                with clear details. Offering customizable itineraries is also a
-                great feature. Additionally, the ability to compare prices and
-                reviews from other users is very helpful in decision making."
-              </p>
-            </div>
-          </div> */}
           <Review />
         </section>
 
@@ -502,121 +381,25 @@ export default function TravelLandingPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold mb-8">Our travel memories</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Link href="/blog">
-                <BlogCard />
-              </Link>
-              <Link href="/blog">
-                <BlogCard />
-              </Link>
+              {blogs.map((blog, index) => (
+                <Link key={index} href={`/blog/${index}`}>
+                  <BlogCard
+                    title={blog.title}
+                    content={blog.content}
+                    publishDate={blog.publishDate}
+                    readTime={blog.readTime}
+                    tags={blog.tags}
+                    imageUrl={blog.imageUrl}
+                    imageAlt={blog.imageAlt}
+                  />
+                </Link>
+              ))}
             </div>
             <div className="text-center mt-8">
               <Button variant="outline">Read more</Button>
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        {/* <footer className="bg-gray-900 text-white py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold mb-4">About</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      About Us
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      Features
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      News & Blog
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Support</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      Account
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      Support Center
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      Feedback
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      Contact Us
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Tips</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      How to Book
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      How to Pay
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:text-gray-300">
-                      How to Check In
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
-                <p className="mb-4">
-                  Subscribe to our newsletter for the latest updates and offers.
-                </p>
-                <form className="flex">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="rounded-r-none"
-                  />
-                  <Button type="submit" className="rounded-l-none">
-                    Subscribe
-                  </Button>
-                </form>
-                <div className="flex space-x-4 mt-4">
-                  <a href="#" className="text-white hover:text-gray-300">
-                    <FacebookIcon className="h-6 w-6" />
-                  </a>
-                  <a href="#" className="text-white hover:text-gray-300">
-                    <TwitterIcon className="h-6 w-6" />
-                  </a>
-                  <a href="#" className="text-white hover:text-gray-300">
-                    <InstagramIcon className="h-6 w-6" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-              <p>&copy; 2024 Indotravi. All rights reserved.</p>
-            </div>
-          </div>
-        </footer> */}
       </main>
     </div>
   );
