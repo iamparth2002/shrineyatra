@@ -1,21 +1,32 @@
+'use client';
 import { Star, ChevronLeft, ChevronRight, Phone } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '../button';
+import { useRouter } from 'next/navigation';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import UserForm from '../custom/UserForm';
 
 const TripCard2 = ({
-  image,
+  images,
   title,
   days,
   price,
-  rating,
-  reviews,
-  location,
   originalPrice,
-  savings="2000",
+  realPrice,
+  tripId,
 }) => {
   const formatPrice = (value) => {
     return value ? value.toLocaleString() : 'N/A';
   };
+
+  const router = useRouter();
 
   return (
     <div className="w-[360px] rounded-lg overflow-hidden shadow-lg bg-white">
@@ -26,7 +37,7 @@ const TripCard2 = ({
 
       {/* Image Carousel */}
       <div className="relative h-[300px]">
-        <Image src={image} alt={title} layout="fill" objectFit="cover" />
+        <Image src={images[0]} alt={title} layout="fill" objectFit="cover" />
         {/* <button className="absolute top-1/2 left-2 -translate-y-1/2 bg-white rounded-full p-1">
           <ChevronLeft className="w-6 h-6 text-gray-600" />
         </button>
@@ -46,31 +57,36 @@ const TripCard2 = ({
           <p className="text-xs text-gray-600">
             {days} days & {days - 1} nights
           </p>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <Star className="w-4 h-4 fill-green-500 text-green-500" />
             <span className="text-green-500 font-bold text-sm ml-1">
               {rating}
             </span>
             <span className="text-gray-400 text-xs ml-1">({reviews})</span>
-          </div>
+          </div> */}
         </div>
 
         <h2 className="text-base font-bold line-clamp-2">{title}</h2>
 
         <div className="flex items-baseline justify-between">
           <div className="flex items-baseline space-x-2">
-            <span className="text-2xl font-bold">INR {formatPrice(originalPrice)}</span>
+            <span className="text-2xl font-bold">INR {formatPrice(price)}</span>
             <span className="text-gray-400 line-through text-xs">
-              INR {formatPrice(originalPrice)}
+              INR {formatPrice(realPrice)}
             </span>
           </div>
           <span className="bg-green-100 text-green-800 text-[10px] px-2 py-1 rounded-full">
-            SAVE INR {formatPrice(savings)}
+            SAVE INR {formatPrice(realPrice - price)}
           </span>
         </div>
 
         <div className="flex justify-between w-full gap-2">
-          <button className="flex-1 bg-white border border-primary text-primary py-2 rounded-lg text-sm font-semibold">
+          <button
+            className="flex-1 bg-white border border-primary text-primary py-2 rounded-lg text-sm font-semibold"
+            onClick={() => {
+              router.push(`/package/${tripId}`);
+            }}
+          >
             View Details
           </button>
         </div>
@@ -83,9 +99,16 @@ const TripCard2 = ({
           >
             <Phone className="h-4 w-4" color="#f97316" />
           </Button>
-          <Button className="flex-grow ml-2 h-12 bg-primary hover:bg-primary/90 text-sm">
-            Avail This Offer
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="flex-grow w-full ml-2 h-12 bg-primary hover:bg-primary/90 text-sm">
+                Avail This Offer
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <UserForm />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>

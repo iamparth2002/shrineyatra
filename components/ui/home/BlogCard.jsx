@@ -3,7 +3,8 @@ import { Card, CardContent, CardFooter } from '../card';
 import Image from 'next/image';
 import { Button } from '../button';
 
-const BlogCard = ({ title, imageUrl, content }) => {
+const BlogCard = ({ blog}) => {
+  const {title, imageUrl, content} = blog;
   // Convert HTML to plain text
   const plainTextContent = content.replace(/<[^>]*>/g, '');
 

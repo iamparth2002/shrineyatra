@@ -346,30 +346,34 @@ export default function TravelLandingPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {PACKAGES.packages.map((packageItem, index) => (
               <div key={index}>
-                <h2 className="text-3xl font-bold mt-12">
-                  {packageItem.title}
-                </h2>
-                <h2 className="text-gray-600 mt-2 mb-10">
-                  {packageItem.subHeading}
-                </h2>
-              
-                  
-                    <div>
-                      
-                      <PackageSlider trips={packageItem.trips} />
-                    </div>
-                  
-                
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-3xl font-bold mt-12">
+                      {packageItem.title}
+                    </h2>
+                    <h2 className="text-gray-600 mt-2 mb-10">
+                      {packageItem.subHeading}
+                    </h2>
+                  </div>
+                  <Link href="/detail">
+
+                  <Button className="max-md:hidden" onClick={() => {}}>View All
+                    <Icons.ArrowRight size={20} className="ml-2" />
+                  </Button>
+                  </Link>
+                </div>
+
+                <div>
+                  <PackageSlider trips={packageItem.trips} />
+                </div>
               </div>
             ))}
 
-            <div className="text-center mt-8">
+            {/* <div className="text-center mt-8">
               <Button variant="outline">View more</Button>
-            </div>
+            </div> */}
           </div>
         </section>
-
-        
 
         {/* Testimonial Section */}
         <section className="py-12 bg-gray-100">
@@ -383,15 +387,7 @@ export default function TravelLandingPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {blogs.map((blog, index) => (
                 <Link key={index} href={`/blog/${index}`}>
-                  <BlogCard
-                    title={blog.title}
-                    content={blog.content}
-                    publishDate={blog.publishDate}
-                    readTime={blog.readTime}
-                    tags={blog.tags}
-                    imageUrl={blog.imageUrl}
-                    imageAlt={blog.imageAlt}
-                  />
+                  <BlogCard blog={blog} />
                 </Link>
               ))}
             </div>

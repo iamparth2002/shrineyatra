@@ -53,7 +53,7 @@ export default function PackageSlider({ options, trips }) {
   }, [emblaApi, onInit, onSelect])
 
   return (
-    <div className="relative max-w-7xl mx-auto">
+    <div className="relative mx-auto">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {trips.map((trip, subIndex) => (
@@ -62,12 +62,13 @@ export default function PackageSlider({ options, trips }) {
                 title={trip.name}
                 description={trip.description}
                 days={trip.days}
-                image={trip.image}
+                images={trip.images}
                 price={trip.price}
                 rating={trip.rating}
                 reviews={trip.reviews}
                 location={trip.location}
-                originalPrice={trip.originalPrice}
+                realPrice={trip.realPrice}
+                tripId={trip.tripId}
               />
             </div>
           ))}

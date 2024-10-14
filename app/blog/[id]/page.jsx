@@ -1,6 +1,7 @@
 'use client';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import BackButton from '@/components/ui/custom/BackButton';
 import { blogs } from '@/utils/data';
 import { ArrowLeft, Clock } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
@@ -14,7 +15,7 @@ export default function Page() {
     <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 text-gray-900 p-4">
 
       <main>
-      <Button className="mb-2"> <ArrowLeft className="w-4 h-4 mr-2" onClick={() => router.back()}/> Go Back</Button>
+        <BackButton/>
         <article className="text-center">
           <div className="text-primary mb-2">
             Published {blogData.publishDate}
