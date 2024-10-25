@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
@@ -20,16 +20,19 @@ import {
 } from 'lucide-react';
 import * as Icons from 'lucide-react';
 import Image from 'next/image';
-import { blogs, DATA, PACKAGES } from '@/utils/data';
+import { DATA } from '@/utils/data';
 import TripCard from '@/components/ui/home/TripCard';
 import Review from '@/components/ui/home/Review';
 import BlogCard from '@/components/ui/home/BlogCard';
 import Link from 'next/link';
 import TripCard2 from '@/components/ui/home/TripCard2';
 import PackageSlider from '@/components/ui/custom/PackageSlider';
+import BlogSlider from '@/components/ui/custom/BlogSlider';
+import Header from '@/components/ui/custom/Header';
+import Footer from '@/components/ui/custom/Footer';
+import axios from 'axios';
 
 export default function TravelLandingPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const containerVariants = {
@@ -77,10 +80,36 @@ export default function TravelLandingPage() {
     },
   };
 
+  const [packages, setPackages] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
+
+  // Fetch data from backend
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const [packagesRes, blogsRes] = await Promise.all([
+          axios.get(process.env.NEXT_PUBLIC_API_URL + '/packages/all'),
+          axios.get(process.env.NEXT_PUBLIC_API_URL + '/blogs/all'),
+        ]);
+        setPackages(packagesRes.data);
+        setBlogs(blogsRes.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Main Content */}
       <main className="flex-1 overflow-x-hidden">
+        <Header />
         <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="container mx-auto"
@@ -196,7 +225,7 @@ export default function TravelLandingPage() {
         </section>
 
         {/* Indonesian Tourism Section */}
-        <section className="py-12">
+        {/* <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold mb-8">Glimpses of Our Tours</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -241,7 +270,7 @@ export default function TravelLandingPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* One Click Section */}
         <section className="py-12 bg-gray-100">
@@ -344,7 +373,7 @@ export default function TravelLandingPage() {
 
         <section className="">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {PACKAGES.packages.map((packageItem, index) => (
+            {packages?.map((packageItem, index) => (
               <div key={index}>
                 <div className="flex justify-between items-center">
                   <div>
@@ -355,11 +384,12 @@ export default function TravelLandingPage() {
                       {packageItem.subHeading}
                     </h2>
                   </div>
-                  <Link href="/detail">
-
-                  <Button className="max-md:hidden" onClick={() => {}}>View All
-                    <Icons.ArrowRight size={20} className="ml-2" />
-                  </Button>
+                  <Link href={`/detail/${packageItem._id}`}>
+                  
+                    <Button className="max-md:hidden" onClick={() => {}}>
+                      View All
+                      <Icons.ArrowRight size={20} className="ml-2" />
+                    </Button>
                   </Link>
                 </div>
 
@@ -368,34 +398,22 @@ export default function TravelLandingPage() {
                 </div>
               </div>
             ))}
-
-            {/* <div className="text-center mt-8">
-              <Button variant="outline">View more</Button>
-            </div> */}
           </div>
         </section>
 
         {/* Testimonial Section */}
-        <section className="py-12 bg-gray-100">
+        <section className="pt-8 bg-gray-100">
           <Review />
         </section>
 
         {/* Travel Memories Section */}
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold mb-8">Our travel memories</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {blogs.map((blog, index) => (
-                <Link key={index} href={`/blog/${index}`}>
-                  <BlogCard blog={blog} />
-                </Link>
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <Button variant="outline">Read more</Button>
-            </div>
+            <h2 className="text-3xl font-bold mb-8">Our Blogs</h2>
+            <BlogSlider blogs={blogs} />
           </div>
         </section>
+        <Footer />
       </main>
     </div>
   );

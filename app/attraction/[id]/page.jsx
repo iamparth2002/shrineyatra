@@ -12,19 +12,21 @@ import { useParams, useRouter } from 'next/navigation';
 export default function Page() {
   const router = useRouter();
   const { id } = useParams();
-  
+
   // State to manage blog data and loading status
-  const [blogData, setBlogData] = useState(null);
+  const [attractionData, setAttractionData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // useEffect to fetch blog data
   useEffect(() => {
-    const fetchBlogData = async () => {
+    const fetchattractionData = async () => {
       try {
         setLoading(true); // Start loading
-        const response = await axios.get(process.env.NEXT_PUBLIC_API_URL+`/blogs/${id}`);
-        console.log(response.data)
-        setBlogData(response.data); // Assuming response contains blog data
+        const response = await axios.get(
+          process.env.NEXT_PUBLIC_API_URL + `/attractions/${id}`
+        );
+        console.log(response.data);
+        setAttractionData(response.data); // Assuming response contains blog data
       } catch (error) {
         console.error('Error fetching blog data:', error);
         // Optional: Redirect or handle error
@@ -33,7 +35,7 @@ export default function Page() {
       }
     };
 
-    fetchBlogData();
+    fetchattractionData();
   }, [id]);
 
   if (loading) {
@@ -44,10 +46,10 @@ export default function Page() {
     );
   }
 
-  if (!blogData) {
+  if (!attractionData) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <p>Blog not found.</p>
+        <p>Attracton not found.</p>
       </div>
     );
   }
@@ -60,12 +62,12 @@ export default function Page() {
           <BackButton />
           <article className="text-center">
             <div className="text-primary mb-2">
-              Published {blogData?.createdAt}
+              Published {attractionData?.createdAt}
             </div>
-            <h1 className="text-3xl font-bold mb-4">{blogData?.title}</h1>
+            <h1 className="text-3xl font-bold mb-4">{attractionData?.heading}</h1>
             {/* Uncomment and customize tags if needed */}
             {/* <div className="flex flex-wrap justify-center gap-2 mb-4">
-              {blogData.tags.map((tag, index) => (
+              {attractionData.tags.map((tag, index) => (
                 <Badge key={index} variant="secondary" className={tag.color}>
                   {tag.name}
                 </Badge>
@@ -76,13 +78,13 @@ export default function Page() {
               <span>12 min read</span>
             </div>
             <img
-              src={process.env.NEXT_PUBLIC_IMAGE_URL+blogData?.image}
-              alt={"image"}
+              src={process.env.NEXT_PUBLIC_IMAGE_URL + attractionData?.image}
+              alt={'image'}
               className="w-full h-64 object-cover rounded-2xl mb-6"
             />
             <div
               className="text-left"
-              dangerouslySetInnerHTML={{ __html: blogData.content }}
+              dangerouslySetInnerHTML={{ __html: attractionData.details }}
             />
           </article>
         </main>

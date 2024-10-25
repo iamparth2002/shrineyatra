@@ -14,7 +14,7 @@ import {
 import UserForm from '../custom/UserForm';
 
 const TripCard2 = ({
-  images,
+  image,
   title,
   days,
   price,
@@ -30,25 +30,11 @@ const TripCard2 = ({
 
   return (
     <div className="w-[360px] rounded-lg overflow-hidden shadow-lg bg-white">
-      {/* Banner */}
-      {/* <div className="bg-primary text-white text-center py-1 px-4 text-xs font-bold">
-        THRILL FEST | Get Up To 3 International Trips Free!
-      </div> */}
 
       {/* Image Carousel */}
       <div className="relative h-[300px]">
-        <Image src={images[0]} alt={title} layout="fill" objectFit="cover" />
-        {/* <button className="absolute top-1/2 left-2 -translate-y-1/2 bg-white rounded-full p-1">
-          <ChevronLeft className="w-6 h-6 text-gray-600" />
-        </button>
-        <button className="absolute top-1/2 right-2 -translate-y-1/2 bg-white rounded-full p-1">
-          <ChevronRight className="w-6 h-6 text-gray-600" />
-        </button>
-        <div className="absolute bottom-2 right-2 flex space-x-1">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="w-2 h-2 bg-white rounded-full opacity-50" />
-          ))}
-        </div> */}
+        <Image src={image} alt={title} layout="fill" objectFit="cover" />
+
       </div>
 
       {/* Content */}
@@ -57,13 +43,6 @@ const TripCard2 = ({
           <p className="text-xs text-gray-600">
             {days} days & {days - 1} nights
           </p>
-          {/* <div className="flex items-center">
-            <Star className="w-4 h-4 fill-green-500 text-green-500" />
-            <span className="text-green-500 font-bold text-sm ml-1">
-              {rating}
-            </span>
-            <span className="text-gray-400 text-xs ml-1">({reviews})</span>
-          </div> */}
         </div>
 
         <h2 className="text-base font-bold line-clamp-2">{title}</h2>
@@ -101,12 +80,15 @@ const TripCard2 = ({
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="flex-grow w-full ml-2 h-12 bg-primary hover:bg-primary/90 text-sm">
+              <Button className="flex-grow w-full ml-2 h-12 bg-primary hover:bg-primary/90 text-sm"
+               onClick={()=>{}}
+              
+              >
                 Avail This Offer
               </Button>
             </DialogTrigger>
             <DialogContent>
-              <UserForm />
+              <UserForm title={title} price={price} originalPrice={realPrice} tripId={tripId}/>
             </DialogContent>
           </Dialog>
         </div>

@@ -4,9 +4,9 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
-import TripCard2 from "../home/TripCard2"
+import BlogCard from "../home/BlogCard"
 
-export default function PackageSlider({ options, trips }) {
+export default function BlogSlider({ options, blogs }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     ...options,
     align: "start",
@@ -56,19 +56,10 @@ export default function PackageSlider({ options, trips }) {
     <div className="relative mx-auto">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
-          {trips.map((trip, subIndex) => (
+          {blogs.map((blog, subIndex) => (
             <div key={subIndex} className="flex-[0_0_360px] mr-4">
-              <TripCard2
-                title={trip.name}
-                description={trip.description}
-                days={trip.days}
-                image={process.env.NEXT_PUBLIC_IMAGE_URL+ trip.image}
-                price={trip.price}
-                rating={trip.rating}
-                reviews={trip.reviews}
-                location={trip.location}
-                realPrice={trip.realPrice}
-                tripId={trip._id}
+              <BlogCard
+                blog={blog}
               />
             </div>
           ))}

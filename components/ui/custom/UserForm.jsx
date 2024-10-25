@@ -5,15 +5,15 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 
-export default function UserForm() {
+export default function UserForm({title,price,originalPrice,tripId}) {
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full max-w-md mx-auto border-0">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold">Kailash Mansarovar via Helicopter</CardTitle>
+        <CardTitle className="text-lg font-semibold">{title}</CardTitle>
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold">INR 2200</span>
-          <span className="text-sm text-muted-foreground line-through">INR 2500</span>
-          <span className="text-xs text-green-600 font-semibold">SAVE INR 300</span>
+          <span className="text-2xl font-bold">INR {price}</span>
+          <span className="text-sm text-muted-foreground line-through">INR {originalPrice}</span>
+          <span className="text-xs text-green-600 font-semibold">SAVE INR {originalPrice-price}</span>
         </div>
       </CardHeader>
       <CardContent>
