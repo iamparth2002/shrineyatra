@@ -7,7 +7,7 @@ export default function AttractionCard({
 }) {
   return (
     <Link href={`/attraction/${data._id}`}>
-    <Card className="relative w-[360px] max-w-sm overflow-hidden group">
+    <Card className="relative h-[400px] w-[360px] max-w-sm overflow-hidden group">
       <div className="aspect-[3/4] w-full">
         <Image
           src={process.env.NEXT_PUBLIC_IMAGE_URL+ data.image}

@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import axiosInstance from '@/utils/axios';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css'; // Import Quill CSS for styling
+import { modules } from '@/utils/data';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const BlogForm = ({
   blogs,
@@ -18,12 +22,12 @@ const BlogForm = ({
   setIsCreating,
 }) => {
   const [uploading, setUploading] = useState(false);
-  const [showImageInput, setShowImageInput] = useState(!isEditing); // Show image input directly if creating
-  const [existingImage, setExistingImage] = useState(null); // Store current image (URL)
+  const [showImageInput, setShowImageInput] = useState(!isEditing);
+  const [existingImage, setExistingImage] = useState(null);
 
   useEffect(() => {
     if (isEditing && blogForm.watch('image')) {
-      setExistingImage(blogForm.watch('image')); // Pre-fill existing image if editing
+      setExistingImage(blogForm.watch('image'));
     }
   }, [isEditing, blogForm]);
 
@@ -33,33 +37,28 @@ const BlogForm = ({
     try {
       const formData = new FormData();
       formData.append('title', data.title);
-      formData.append('content', data.content);
+      formData.append('content', data.content); // HTML content
       formData.append('trip', data.tripId);
       formData.append('package', data.packageId);
 
-      // If a new image was uploaded, append it to the FormData
       if (data.image instanceof File) {
         formData.append('image', data.image);
       }
 
       if (isEditing) {
-        // Update logic
         const response = await axiosInstance.put(`/blogs/update/${data.id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-        console.log('Blog updated:', response.data);
         setBlogs(blogs.map((blog) => (blog.id === data._id ? response.data : blog)));
       } else {
-        // Create logic
         const response = await axiosInstance.post('/blogs/create', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
         setBlogs([...blogs, response.data]);
-        console.log('Blog created:', response.data);
       }
     } catch (error) {
       console.error('Error submitting blog:', error.response ? error.response.data : error.message);
@@ -83,7 +82,11 @@ const BlogForm = ({
       </div>
       <div>
         <Label htmlFor="content">Content</Label>
-        <Textarea id="content" {...blogForm.register('content')} />
+        <ReactQuill
+          value={blogForm.watch('content') || ''}
+          onChange={(value) => blogForm.setValue('content', value)}
+          modules={modules}
+        />
         {blogForm.formState.errors.content && (
           <p className="text-sm text-red-500">{blogForm.formState.errors.content.message}</p>
         )}
@@ -91,7 +94,6 @@ const BlogForm = ({
       <div>
         <Label htmlFor="image">Image</Label>
         {showImageInput || !isEditing ? (
-          // Show image input field for uploading new image
           <Input
             id="image"
             type="file"
@@ -100,7 +102,6 @@ const BlogForm = ({
           />
         ) : (
           <div>
-            {/* Display existing image or placeholder if editing */}
             <p className='mt-2'>{existingImage ? existingImage : 'No image selected'}</p>
             <Button onClick={() => setShowImageInput(true)}>Change Image</Button>
           </div>
@@ -109,7 +110,6 @@ const BlogForm = ({
           <p className="text-sm text-red-500">{blogForm.formState.errors.image.message}</p>
         )}
       </div>
-
       <div>
         <Label htmlFor="tripId">Trip</Label>
         <Select

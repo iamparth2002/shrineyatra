@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { LogOut, Package, Map, BookOpen, Landmark } from 'lucide-react';
+import { LogOut, Package, Map, BookOpen, Landmark, MessageSquare } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 const AdminSidebar = ({
   setActiveSection,
@@ -11,9 +13,10 @@ const AdminSidebar = ({
   activeSection,
   isSidebarOpen,
 }) => {
+  const router = useRouter()
   const handleLogout = () => {
-    // Implement logout logic here
-    console.log('Logging out...');
+    Cookies.remove('token');
+    router.push('/auth/login');
   };
   return (
     <div
@@ -75,6 +78,19 @@ const AdminSidebar = ({
             }}
           >
             <Landmark className="mr-2 h-4 w-4" /> Attractions
+          </Button>
+          <Button
+            variant={activeSection === 'queries' ? 'default' : 'ghost'}
+            className="w-full justify-start mb-2"
+            onClick={() => {
+              setActiveSection('queries');
+              setIsSidebarOpen(false);
+              setSelectedItem(null);
+              setIsCreating(false);
+              setIsEditing(false);
+            }}
+          >
+            <MessageSquare className="mr-2 h-4 w-4" /> Queries
           </Button>
         </nav>
       </div>

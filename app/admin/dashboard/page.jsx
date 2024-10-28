@@ -5,24 +5,8 @@ import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
-  ChevronLeft,
-  Pencil,
-  Trash2,
-  MoreVertical,
-  Edit,
-  Trash,
-  X,
-} from 'lucide-react';
+import { ChevronLeft, Pencil, Trash2 } from 'lucide-react';
 import AdminSidebar from './_components/AdminSidebar';
 import AdminHeader from './_components/AdminHeader';
 import RenderDetailView from './_components/RenderDetailView';
@@ -30,17 +14,19 @@ import PackageForm from './_components/Forms/PackageForm';
 import TripForm from './_components/Forms/TripForm';
 import BlogForm from './_components/Forms/BlogForm';
 import AttractionForm from './_components/Forms/AttractionForm';
+import QueriesTable from './_components/QueriesTable';
 import axiosInstance from '@/utils/axios';
 
-const packageSchema =(isEditing)=> z.object({
-  id: z.string(),
-  title: z.string().min(1, 'Title is required'),
-  subHeading: z.string().min(1, 'Subheading is required'),
-  image: isEditing
-      ? z.union([z.instanceof(File), z.string()]).optional() // Optional if editing
-      : z.instanceof(File, { message: 'Image is required' }), // Required if creating
-  description: z.string().min(1, 'Description is required'),
-});
+const packageSchema = (isEditing) =>
+  z.object({
+    id: z.string(),
+    title: z.string().min(1, 'Title is required'),
+    subHeading: z.string().min(1, 'Subheading is required'),
+    image: isEditing
+      ? z.union([z.instanceof(File), z.string()]).optional()
+      : z.instanceof(File, { message: 'Image is required' }),
+    description: z.string().min(1, 'Description is required'),
+  });
 
 const tripSchema = z.object({
   id: z.string(),
@@ -68,26 +54,27 @@ const tripSchema = z.object({
 
 const blogSchema = (isEditing) =>
   z.object({
-    id: z.string().optional(), // Optional ID field for new blogs
+    id: z.string().optional(),
     title: z.string().min(1, 'Title is required'),
     content: z.string().min(1, 'Content is required'),
     image: isEditing
-      ? z.union([z.instanceof(File), z.string()]).optional() // Optional if editing
-      : z.instanceof(File, { message: 'Image is required' }), // Required if creating
+      ? z.union([z.instanceof(File), z.string()]).optional()
+      : z.instanceof(File, { message: 'Image is required' }),
     tripId: z.string().min(1, 'Trip is required'),
     packageId: z.string().min(1, 'Package is required'),
   });
 
-const attractionSchema=(isEditing) => z.object({
-  id: z.string(),
-  heading: z.string().min(1, 'Heading is required'),
-  details: z.string().min(1, 'Details are required'),
-  image: isEditing
-      ? z.union([z.instanceof(File), z.string()]).optional() // Optional if editing
-      : z.instanceof(File, { message: 'Image is required' }), // Required if creating
-  tripId: z.string().min(1, 'Trip is required'),
-  packageId: z.string().min(1, 'Package is required'),
-});
+const attractionSchema = (isEditing) =>
+  z.object({
+    id: z.string(),
+    heading: z.string().min(1, 'Heading is required'),
+    details: z.string().min(1, 'Details are required'),
+    image: isEditing
+      ? z.union([z.instanceof(File), z.string()]).optional()
+      : z.instanceof(File, { message: 'Image is required' }),
+    tripId: z.string().min(1, 'Trip is required'),
+    packageId: z.string().min(1, 'Package is required'),
+  });
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('packages');
@@ -95,6 +82,7 @@ export default function Dashboard() {
   const [trips, setTrips] = useState([]);
   const [blogs, setBlogs] = useState([]);
   const [attractions, setAttractions] = useState([]);
+  const [queries, setQueries] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -102,20 +90,21 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    // Fetch data from backend when component mounts
     const fetchData = async () => {
       try {
-        const [packagesRes, tripsRes, blogsRes, attractionsRes] =
+        const [packagesRes, tripsRes, blogsRes, attractionsRes, queriesRes] =
           await Promise.all([
             axiosInstance.get('/packages/all'),
             axiosInstance.get('/trips/all'),
             axiosInstance.get('/blogs/all'),
             axiosInstance.get('/attractions/all'),
+            axiosInstance.get('/query/all'),
           ]);
         setPackages(packagesRes.data);
         setTrips(tripsRes.data);
         setBlogs(blogsRes.data);
         setAttractions(attractionsRes.data);
+        setQueries(queriesRes.data.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -202,7 +191,7 @@ export default function Dashboard() {
     );
 
     if (!isConfirmed) {
-      return; // Exit the function if the user cancels the action
+      return;
     }
     try {
       switch (activeSection) {
@@ -226,11 +215,26 @@ export default function Dashboard() {
           throw new Error('Unknown section');
       }
 
-      // Clear the selected item after deletion
       setSelectedItem(null);
     } catch (error) {
       console.error('Error deleting item:', error);
-      // Optionally, show an error message to the user
+    }
+  };
+
+  const handleDeleteQuery = async (id) => {
+    const isConfirmed = window.confirm(
+      'Are you sure you want to delete this query?'
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
+    try {
+      await axiosInstance.delete(`/query/delete/${id}`);
+      setQueries(queries.filter((q) => q._id !== id));
+    } catch (error) {
+      console.error('Error deleting query:', error);
     }
   };
 
@@ -239,38 +243,34 @@ export default function Dashboard() {
     setIsEditing(true);
     switch (activeSection) {
       case 'packages':
-        console.log(item);
         packageForm.reset({
-          id: item._id, // Pass _id for API purposes
+          id: item._id,
           title: item.title,
           subHeading: item.subHeading,
           description: item.description,
-          image: item.image, // Handle image separately (if necessary)
+          image: item.image,
         });
         break;
       case 'trips':
         tripForm.reset(item);
         break;
       case 'blogs':
-        console.log(item);
         blogForm.reset({
-          id: item._id, // Pass _id for API purposes
+          id: item._id,
           title: item.title,
           content: item.content,
-          image: item.image, // Handle image separately (if necessary)
-          tripId: item.trip|| '', // Ensure tripId and packageId are included
-          packageId: item.package|| '',
+          image: item.image,
+          tripId: item.trip || '',
+          packageId: item.package || '',
         });
         break;
-
       case 'attractions':
-        console.log(item);
         attractionForm.reset({
-          id: item._id, 
+          id: item._id,
           heading: item.heading,
           details: item.details,
-          image: item.image, 
-          tripId: item.trip || '', 
+          image: item.image,
+          tripId: item.trip || '',
           packageId: item.package || '',
         });
         break;
@@ -362,6 +362,10 @@ export default function Dashboard() {
         return attractions.filter((a) =>
           a.heading.toLowerCase().includes(searchTerm.toLowerCase())
         );
+      case 'queries':
+        return queries.filter((q) =>
+          q.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
       default:
         return [];
     }
@@ -406,7 +410,6 @@ export default function Dashboard() {
             setSelectedItem={setSelectedItem}
           />
         );
-
       case 'blogs':
         return (
           <BlogForm
@@ -442,7 +445,6 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar (unchanged) */}
       <AdminSidebar
         setActiveSection={setActiveSection}
         setIsSidebarOpen={setIsSidebarOpen}
@@ -453,20 +455,25 @@ export default function Dashboard() {
         isSidebarOpen={isSidebarOpen}
       />
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <AdminHeader
           activeSection={activeSection}
           setIsSidebarOpen={setIsSidebarOpen}
           isSidebarOpen={isSidebarOpen}
           handleCreate={handleCreate}
+          
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
 
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            {selectedItem || isCreating ? (
+            {activeSection === 'queries' ? (
+              <QueriesTable 
+                queries={filteredItems()} 
+                handleDeleteQuery={handleDeleteQuery}
+              />
+            ) : selectedItem || isCreating ? (
               <div className="bg-white shadow-md rounded-lg p-6">
                 <Button variant="ghost" onClick={handleBack} className="mb-4">
                   <ChevronLeft className="mr-2 h-4 w-4" /> Back
@@ -505,14 +512,14 @@ export default function Dashboard() {
                 {filteredItems().map((item) => (
                   <Card
                     key={item.id}
-                    className="cursor-pointer hover:shadow-md transition-shadow duration-200"
+                    className="cursor-pointer h-[420px] hover:shadow-md transition-shadow duration-200"
                     onClick={() => handleView(item)}
                   >
                     <CardHeader className="p-4">
                       <img
                         src={`http://localhost:5000/${item.image}`}
                         alt=""
-                        className="rounded-lg"
+                        className="rounded-lg h-[250px]"
                       />
                       <CardTitle className="text-lg line-clamp-2">
                         {activeSection === 'packages'

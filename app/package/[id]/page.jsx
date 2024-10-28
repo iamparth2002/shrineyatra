@@ -28,11 +28,13 @@ import { useParams } from 'next/navigation';
 import axios from 'axios';
 import PackageSlider from '@/components/ui/custom/PackageSlider';
 import BlogSlider from '@/components/ui/custom/BlogSlider';
+import AttractionSlider from '@/components/ui/custom/AttractionSlider';
 import UserForm from '@/components/ui/custom/UserForm';
 import BackButton from '@/components/ui/custom/BackButton';
 import Header from '@/components/ui/custom/Header';
 import Footer from '@/components/ui/custom/Footer';
 import AttractionCard from '@/components/ui/custom/AttractionCard';
+import { handleEmailClick, handleSupportClick, handleWhatsAppClick } from '@/lib/utils';
 
 export default function TourDetailPage() {
   const params = useParams();
@@ -44,6 +46,18 @@ export default function TourDetailPage() {
   const [loadingBlogs, setLoadingBlogs] = useState(true);
   const [loadingAttractions, setLoadingAttractions] = useState(true);
   const id = params?.id;
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  // Split the description into words
+  const words = tourData?.description.split(' ');
+  const displayedText = isExpanded
+    ? tourData?.description
+    : words?.slice(0, 25).join(' ');
 
   useEffect(() => {
     const fetchTourData = async () => {
@@ -160,7 +174,18 @@ export default function TourDetailPage() {
               <TabsContent value="overview">
                 <div className="bg-white rounded-lg p-6 mb-8">
                   <h2 className="text-2xl font-semibold mb-4">Trip Overview</h2>
-                  <p className="mt-4 text-gray-700">{tourData?.description}</p>
+                  <p className="mt-4 text-gray-700">
+                    {displayedText}
+                    {!isExpanded && words.length > 30 && '...'}
+                  </p>
+                  {words.length > 30 && (
+                    <button
+                      onClick={handleToggle}
+                      className="text-blue-500 mt-2 focus:outline-none"
+                    >
+                      {isExpanded ? 'Read Less' : 'Read More'}
+                    </button>
+                  )}
                 </div>
               </TabsContent>
               <TabsContent value="itinerary">
@@ -242,7 +267,12 @@ export default function TourDetailPage() {
           </div>
           <div className="hidden md:block md:w-1/3 space-y-4">
             <PriceCard tourData={tourData} />
-            <UserForm price={tourData?.price} originalPrice={tourData?.realPrice} title={tourData?.name} tripId={tourData?._id}/>
+            <UserForm
+              price={tourData?.price}
+              originalPrice={tourData?.realPrice}
+              title={tourData?.name}
+              tripId={tourData?._id}
+            />
           </div>
         </div>
 
@@ -253,12 +283,8 @@ export default function TourDetailPage() {
 
         {!loadingAttractions && attractions.length > 0 && (
           <div className="mb-8 max-w-7xl">
-            <h2 className="text-2xl font-bold mb-4">Related Attractions</h2>
-            <div className="flex flex-col md:flex-row gap-4">
-              {attractions.map((data, index) => (
-                <AttractionCard key={index} data={data} />
-              ))}
-            </div>
+            <h2 className="text-2xl font-bold mb-4">Other Related Blogs</h2>
+            <AttractionSlider attractions={attractions} />
           </div>
         )}
 
@@ -295,6 +321,7 @@ function PriceCard({ tourData }) {
         <Button
           className="w-full flex items-center justify-center"
           variant="outline"
+          onClick={handleSupportClick}
         >
           <Phone className="w-4 h-4 mr-2" />
           Call Support
@@ -302,11 +329,13 @@ function PriceCard({ tourData }) {
         <Button
           className="w-full flex items-center justify-center"
           variant="outline"
+          onClick={handleEmailClick}
         >
           <Mail className="w-4 h-4 mr-2" />
           Email Us
         </Button>
-        <Button className="w-full flex items-center justify-center bg-green-500 hover:bg-green-600 text-white">
+        <Button className="w-full flex items-center justify-center bg-green-500 hover:bg-green-600 text-white"
+        onClick={handleWhatsAppClick}>
           <MessageCircle className="w-4 h-4 mr-2" />
           WhatsApp
         </Button>

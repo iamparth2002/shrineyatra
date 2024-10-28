@@ -6,9 +6,10 @@ import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
 import TripCard2 from '@/components/ui/home/TripCard2';
 import BlogCard from '@/components/ui/home/BlogCard';
-import AttractionCard from '@/components/ui/custom/AttractionCard';
 import Header from '@/components/ui/custom/Header';
 import Footer from '@/components/ui/custom/Footer';
+import BlogSlider from '@/components/ui/custom/BlogSlider';
+import AttractionSlider from '@/components/ui/custom/AttractionSlider';
 import { useParams } from 'next/navigation';
 
 export default function PackageDetails() {
@@ -27,7 +28,9 @@ export default function PackageDetails() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/packages/${id}`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}`
+        );
         setData(response.data);
       } catch (error) {
         console.error('Error fetching package data:', error);
@@ -40,7 +43,9 @@ export default function PackageDetails() {
     const fetchBlogs = async () => {
       try {
         setLoadingBlogs(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blogs/package/${id}`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/blogs/package/${id}`
+        );
         setBlogs(response.data);
       } catch (error) {
         console.error('Error fetching blogs:', error);
@@ -52,7 +57,9 @@ export default function PackageDetails() {
     const fetchAttractions = async () => {
       try {
         setLoadingAttractions(true);
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/attractions/package/${id}`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/attractions/package/${id}`
+        );
         setAttractions(response.data);
       } catch (error) {
         console.error('Error fetching attractions:', error);
@@ -83,16 +90,16 @@ export default function PackageDetails() {
   }
 
   // Destructuring the fetched data
-  const { packages, title,subHeading, description, trips,image } = data;
+  const { packages, title, subHeading, description, trips, image } = data;
 
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative h-[300px] sm:h-[400px] md:h-[500px]">
         <Image
-        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${image}`}
+          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${image}`}
           alt="Dubai Skyline"
           layout="fill"
           objectFit="cover"
@@ -102,23 +109,17 @@ export default function PackageDetails() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
               {title}
             </h1>
-            <p className="text-lg sm:text-xl mb-8">
-              {subHeading}
-            </p>
+            <p className="text-lg sm:text-xl mb-8 max-w-7xl">{subHeading}</p>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Packages Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mt-12">
-            {title}
-          </h2>
-          <p className="text-gray-600 mt-2 mb-10">
-            {description}
-          </p>
+          <h2 className="text-3xl font-bold mt-12">{title}</h2>
+          <p className="text-gray-600 mt-2 mb-10">{description}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trips.map((trip, subIndex) => (
               <div key={subIndex} className="flex-[0_0_360px] mr-4">
@@ -142,12 +143,8 @@ export default function PackageDetails() {
         {/* Blogs Section */}
         {!loadingBlogs && blogs.length > 0 && (
           <div className="mb-8 max-w-7xl">
-            <h2 className="text-2xl font-bold mb-4">Related Blogs</h2>
-            <div className="flex flex-col md:flex-row gap-4">
-              {blogs.map((blog, index) => (
-                <BlogCard key={index} blog={blog} />
-              ))}
-            </div>
+            <h2 className="text-2xl font-bold mb-4">Other Related Blogs</h2>
+            <BlogSlider blogs={blogs} />
           </div>
         )}
         {loadingBlogs && (
@@ -159,12 +156,8 @@ export default function PackageDetails() {
         {/* Attractions Section */}
         {!loadingAttractions && attractions.length > 0 && (
           <div className="mb-8 max-w-7xl">
-            <h2 className="text-2xl font-bold mb-4">Related Attractions</h2>
-            <div className="flex flex-col md:flex-row gap-4">
-              {attractions.map((attraction, index) => (
-                <AttractionCard key={index} data={attraction} />
-              ))}
-            </div>
+            <h2 className="text-2xl font-bold mb-4">Other Related Blogs</h2>
+            <AttractionSlider attractions={attractions} />
           </div>
         )}
         {loadingAttractions && (

@@ -31,7 +31,7 @@ export const PACKAGES = {
         'Embark on a spiritual journey to Kailash Mansarovar, experiencing breathtaking views and spiritual serenity with multiple trips by air or road.',
       trips: [
         {
-          tripId:'TRP001',
+          tripId: 'TRP001',
           name: 'Kailash Mansarovar via Helicopter',
           days: 10,
           location: 'Kailash, Tibet',
@@ -46,23 +46,32 @@ export const PACKAGES = {
             'https://images.pexels.com/photos/18359762/pexels-photo-18359762/free-photo-of-people-walking-in-parade-on-road-in-mountains.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
             'https://images.pexels.com/photos/19010047/pexels-photo-19010047/free-photo-of-crowd-walking-on-street-with-tents-around-in-village-in-mountains.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
             'https://images.pexels.com/photos/19010051/pexels-photo-19010051/free-photo-of-crowd-on-street-in-village-in-mountains.jpeg',
-            
           ],
-          description: 'Experience the spiritual serenity of Kailash Mansarovar through a helicopter journey. The 10-day trip starts from Kathmandu with a picturesque helicopter ride into Tibet. Upon arrival, you will be greeted with views of the sacred Mount Kailash, where pilgrims come from all over the world to attain enlightenment. This trip is designed for those looking for comfort, as helicopter rides offer a smoother journey through the challenging terrains. Once in Tibet, you will stay in comfortable accommodations and partake in religious ceremonies around the holy lake, Mansarovar. Every day, you will witness the deep spiritual traditions of the region, making this a fulfilling journey for spiritual seekers.',
+          description:
+            'Experience the spiritual serenity of Kailash Mansarovar through a helicopter journey. The 10-day trip starts from Kathmandu with a picturesque helicopter ride into Tibet. Upon arrival, you will be greeted with views of the sacred Mount Kailash, where pilgrims come from all over the world to attain enlightenment. This trip is designed for those looking for comfort, as helicopter rides offer a smoother journey through the challenging terrains. Once in Tibet, you will stay in comfortable accommodations and partake in religious ceremonies around the holy lake, Mansarovar. Every day, you will witness the deep spiritual traditions of the region, making this a fulfilling journey for spiritual seekers.',
           itinerary: [
             {
               day: 1,
               title: 'Arrival in Kathmandu',
-              activities: ['Arrival at Kathmandu and transfer to hotel', 'Sightseeing and preparation for the Yatra'],
+              activities: [
+                'Arrival at Kathmandu and transfer to hotel',
+                'Sightseeing and preparation for the Yatra',
+              ],
             },
             {
               day: 2,
               title: 'Kathmandu to Tibet via Helicopter',
-              activities: ['Helicopter journey to the border', 'Transfer to Tibet and check-in at the lodge'],
+              activities: [
+                'Helicopter journey to the border',
+                'Transfer to Tibet and check-in at the lodge',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Helicopter ride over the Himalayas', 'Darshan of Mount Kailash'],
+          highlights: [
+            'Helicopter ride over the Himalayas',
+            'Darshan of Mount Kailash',
+          ],
           inclusions: [
             'Helicopter rides from Kathmandu to Tibet',
             'Accommodation in comfortable hotels',
@@ -90,21 +99,31 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/10881642/pexels-photo-10881642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'Join us on a road trip to Kailash Mansarovar for an unforgettable spiritual experience. This 12-day road journey begins in Kathmandu and continues through the scenic Himalayan ranges until you reach Tibet. Along the way, you will witness breathtaking landscapes, remote monasteries, and have the opportunity to interact with local Tibetan communities. The trip includes a visit to Lake Mansarovar, believed to be the abode of Lord Shiva, and a complete parikrama of Mount Kailash. The journey is physically demanding, especially the trek around Kailash, but it rewards participants with unmatched spiritual fulfillment and a sense of achievement.',
+          description:
+            'Join us on a road trip to Kailash Mansarovar for an unforgettable spiritual experience. This 12-day road journey begins in Kathmandu and continues through the scenic Himalayan ranges until you reach Tibet. Along the way, you will witness breathtaking landscapes, remote monasteries, and have the opportunity to interact with local Tibetan communities. The trip includes a visit to Lake Mansarovar, believed to be the abode of Lord Shiva, and a complete parikrama of Mount Kailash. The journey is physically demanding, especially the trek around Kailash, but it rewards participants with unmatched spiritual fulfillment and a sense of achievement.',
           itinerary: [
             {
               day: 1,
               title: 'Kathmandu Arrival',
-              activities: ['Arrival at Kathmandu', 'Welcome meeting and orientation'],
+              activities: [
+                'Arrival at Kathmandu',
+                'Welcome meeting and orientation',
+              ],
             },
             {
               day: 2,
               title: 'Drive from Kathmandu to Tibet Border',
-              activities: ['Long scenic drive to the Tibet border', 'Overnight stay at the border lodge'],
+              activities: [
+                'Long scenic drive to the Tibet border',
+                'Overnight stay at the border lodge',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Road trip through the Tibetan plateau', 'Scenic views of Mount Kailash'],
+          highlights: [
+            'Road trip through the Tibetan plateau',
+            'Scenic views of Mount Kailash',
+          ],
           inclusions: [
             'Overland transport from Kathmandu to Tibet',
             'Accommodation in hotels and guesthouses',
@@ -132,21 +151,31 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'This 14-day full moon pilgrimage to Kailash Mansarovar is a special spiritual experience that coincides with the full moon. Starting in Kathmandu, you will journey into Tibet, visiting Lake Mansarovar and participating in the parikrama around Mount Kailash. The full moon night at Mansarovar is considered particularly auspicious and provides an unforgettable spiritual atmosphere. The pilgrimage includes prayers, rituals, and meditation sessions under the full moon. The trip also includes visits to sacred Tibetan monasteries along the way.',
+          description:
+            'This 14-day full moon pilgrimage to Kailash Mansarovar is a special spiritual experience that coincides with the full moon. Starting in Kathmandu, you will journey into Tibet, visiting Lake Mansarovar and participating in the parikrama around Mount Kailash. The full moon night at Mansarovar is considered particularly auspicious and provides an unforgettable spiritual atmosphere. The pilgrimage includes prayers, rituals, and meditation sessions under the full moon. The trip also includes visits to sacred Tibetan monasteries along the way.',
           itinerary: [
             {
               day: 1,
               title: 'Arrival in Kathmandu',
-              activities: ['Arrival at Kathmandu and transfer to hotel', 'Preparation for the Yatra'],
+              activities: [
+                'Arrival at Kathmandu and transfer to hotel',
+                'Preparation for the Yatra',
+              ],
             },
             {
               day: 2,
               title: 'Kathmandu to Tibet by Road',
-              activities: ['Road journey to Tibet', 'Overnight stay at the border'],
+              activities: [
+                'Road journey to Tibet',
+                'Overnight stay at the border',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Full moon parikrama around Mount Kailash', 'Night at Mansarovar under the full moon'],
+          highlights: [
+            'Full moon parikrama around Mount Kailash',
+            'Night at Mansarovar under the full moon',
+          ],
           inclusions: [
             'Full moon ceremony and prayers',
             'Accommodation in comfortable lodges and hotels',
@@ -174,21 +203,31 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/10792604/pexels-photo-10792604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'The Inner Kora of Kailash is the most sacred and challenging route for devout pilgrims. This 16-day trip takes you deep into the spiritual and physical journey of Kailash. Starting from Kathmandu, you will travel by road to Tibet and begin the Inner Kora trek, which circles closer to Mount Kailash than the standard outer kora. The journey is physically demanding, with high-altitude trekking and rugged terrains, but is believed to bring immense spiritual blessings to those who complete it. Suitable for those with high fitness levels and strong faith, this is a once-in-a-lifetime pilgrimage.',
+          description:
+            'The Inner Kora of Kailash is the most sacred and challenging route for devout pilgrims. This 16-day trip takes you deep into the spiritual and physical journey of Kailash. Starting from Kathmandu, you will travel by road to Tibet and begin the Inner Kora trek, which circles closer to Mount Kailash than the standard outer kora. The journey is physically demanding, with high-altitude trekking and rugged terrains, but is believed to bring immense spiritual blessings to those who complete it. Suitable for those with high fitness levels and strong faith, this is a once-in-a-lifetime pilgrimage.',
           itinerary: [
             {
               day: 1,
               title: 'Kathmandu Arrival',
-              activities: ['Arrival at Kathmandu', 'Orientation and trek preparation'],
+              activities: [
+                'Arrival at Kathmandu',
+                'Orientation and trek preparation',
+              ],
             },
             {
               day: 2,
               title: 'Road journey to Tibet',
-              activities: ['Drive from Kathmandu to the Tibet border', 'Overnight stay in Tibet'],
+              activities: [
+                'Drive from Kathmandu to the Tibet border',
+                'Overnight stay in Tibet',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Trekking through high-altitude terrains', 'Inner Kora around Mount Kailash'],
+          highlights: [
+            'Trekking through high-altitude terrains',
+            'Inner Kora around Mount Kailash',
+          ],
           inclusions: [
             'Road transport from Kathmandu to Tibet',
             'Accommodation in basic lodges during the trek',
@@ -216,21 +255,31 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/826311/pexels-photo-826311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'The 18-day Kailash Mansarovar Heritage Trek offers a deep dive into the ancient pilgrimage routes taken by sages and devotees for centuries. This trek is physically challenging, as you will traverse high-altitude passes, cross glacial rivers, and walk through the Tibetan plateau. Along the journey, you will visit sacred monasteries, participate in rituals at Lake Mansarovar, and complete the parikrama of Mount Kailash. The trek allows participants to experience the raw beauty of the Tibetan landscape while following in the footsteps of ancient pilgrims, making it a transformative spiritual journey.',
+          description:
+            'The 18-day Kailash Mansarovar Heritage Trek offers a deep dive into the ancient pilgrimage routes taken by sages and devotees for centuries. This trek is physically challenging, as you will traverse high-altitude passes, cross glacial rivers, and walk through the Tibetan plateau. Along the journey, you will visit sacred monasteries, participate in rituals at Lake Mansarovar, and complete the parikrama of Mount Kailash. The trek allows participants to experience the raw beauty of the Tibetan landscape while following in the footsteps of ancient pilgrims, making it a transformative spiritual journey.',
           itinerary: [
             {
               day: 1,
               title: 'Kathmandu Arrival',
-              activities: ['Arrival at Kathmandu', 'Welcome dinner and briefing'],
+              activities: [
+                'Arrival at Kathmandu',
+                'Welcome dinner and briefing',
+              ],
             },
             {
               day: 2,
               title: 'Drive from Kathmandu to Tibet',
-              activities: ['Road journey to Tibet', 'Overnight at a guesthouse'],
+              activities: [
+                'Road journey to Tibet',
+                'Overnight at a guesthouse',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Visit to ancient monasteries', 'Trek through high passes to Mount Kailash'],
+          highlights: [
+            'Visit to ancient monasteries',
+            'Trek through high passes to Mount Kailash',
+          ],
           inclusions: [
             'Trek permits and entrance fees to sacred sites',
             'Accommodation in basic lodges and tents',
@@ -265,21 +314,31 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'Fly to Adi Kailash and experience the spiritual aura of this holy mountain. The 8-day heli darshan package is designed for those seeking a comfortable yet spiritually enriching experience. Starting from Pithoragarh, you will board a helicopter to Adi Kailash, cutting down the travel time significantly. The package includes darshan at the Adi Kailash shrine and visits to local temples. The majestic views of the snow-capped mountains and the serene environment create a deep spiritual connection for all pilgrims. This trip is suitable for families and senior citizens looking for an easier way to complete the pilgrimage.',
+          description:
+            'Fly to Adi Kailash and experience the spiritual aura of this holy mountain. The 8-day heli darshan package is designed for those seeking a comfortable yet spiritually enriching experience. Starting from Pithoragarh, you will board a helicopter to Adi Kailash, cutting down the travel time significantly. The package includes darshan at the Adi Kailash shrine and visits to local temples. The majestic views of the snow-capped mountains and the serene environment create a deep spiritual connection for all pilgrims. This trip is suitable for families and senior citizens looking for an easier way to complete the pilgrimage.',
           itinerary: [
             {
               day: 1,
               title: 'Arrival at Pithoragarh',
-              activities: ['Arrival at Pithoragarh and transfer to hotel', 'Sightseeing around town'],
+              activities: [
+                'Arrival at Pithoragarh and transfer to hotel',
+                'Sightseeing around town',
+              ],
             },
             {
               day: 2,
               title: 'Helicopter to Adi Kailash',
-              activities: ['Helicopter ride to Adi Kailash', 'Check-in and Darshan at Adi Kailash'],
+              activities: [
+                'Helicopter ride to Adi Kailash',
+                'Check-in and Darshan at Adi Kailash',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Helicopter ride over the Himalayas', 'Darshan of Adi Kailash'],
+          highlights: [
+            'Helicopter ride over the Himalayas',
+            'Darshan of Adi Kailash',
+          ],
           inclusions: [
             'Helicopter rides from Pithoragarh to Adi Kailash',
             'Accommodation in comfortable hotels',
@@ -307,7 +366,8 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/2132002/pexels-photo-2132002.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'A scenic trek to Adi Kailash through the breathtaking Himalayan landscapes. The 10-day trek starts from Pithoragarh, and over the course of several days, you will ascend the mountainous trails to reach the holy shrine. The trek is moderately challenging and includes several days of camping along the way. You will visit local villages, interact with the inhabitants, and learn about the region’s rich spiritual heritage. The highlight of the trip is the final darshan at Adi Kailash, where the spiritual energy of the mountain and the surrounding peaks creates a powerful connection to the divine.',
+          description:
+            'A scenic trek to Adi Kailash through the breathtaking Himalayan landscapes. The 10-day trek starts from Pithoragarh, and over the course of several days, you will ascend the mountainous trails to reach the holy shrine. The trek is moderately challenging and includes several days of camping along the way. You will visit local villages, interact with the inhabitants, and learn about the region’s rich spiritual heritage. The highlight of the trip is the final darshan at Adi Kailash, where the spiritual energy of the mountain and the surrounding peaks creates a powerful connection to the divine.',
           itinerary: [
             {
               day: 1,
@@ -321,7 +381,10 @@ export const PACKAGES = {
             },
             // Additional days...
           ],
-          highlights: ['Trek through scenic Himalayan valleys', 'Darshan at Adi Kailash'],
+          highlights: [
+            'Trek through scenic Himalayan valleys',
+            'Darshan at Adi Kailash',
+          ],
           inclusions: [
             'Trek permits and camping fees',
             'Accommodation in tents and guesthouses',
@@ -349,21 +412,31 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/3643920/pexels-photo-3643920.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'Follow the traditional routes to Adi Kailash taken by sages in ancient times. The 12-day journey through the heritage route brings you closer to the spiritual essence of the region. This trek is steeped in history, with stops at several ancient temples and monasteries along the way. You will travel through remote villages and cross over high mountain passes, experiencing both the physical and spiritual challenge of this pilgrimage. The heritage trek is ideal for those who want to experience the old ways of reaching Adi Kailash, in the same spirit as pilgrims did centuries ago.',
+          description:
+            'Follow the traditional routes to Adi Kailash taken by sages in ancient times. The 12-day journey through the heritage route brings you closer to the spiritual essence of the region. This trek is steeped in history, with stops at several ancient temples and monasteries along the way. You will travel through remote villages and cross over high mountain passes, experiencing both the physical and spiritual challenge of this pilgrimage. The heritage trek is ideal for those who want to experience the old ways of reaching Adi Kailash, in the same spirit as pilgrims did centuries ago.',
           itinerary: [
             {
               day: 1,
               title: 'Arrival in Kathgodam',
-              activities: ['Transfer to the trek base', 'Trek briefing and preparations'],
+              activities: [
+                'Transfer to the trek base',
+                'Trek briefing and preparations',
+              ],
             },
             {
               day: 2,
               title: 'Trek begins',
-              activities: ['Start trekking through forests and valleys', 'Camping under the stars'],
+              activities: [
+                'Start trekking through forests and valleys',
+                'Camping under the stars',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Visit ancient temples and monasteries', 'Trek through remote villages'],
+          highlights: [
+            'Visit ancient temples and monasteries',
+            'Trek through remote villages',
+          ],
           inclusions: [
             'Trek permits and guide services',
             'Accommodation in lodges and camps',
@@ -391,21 +464,31 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/3013256/pexels-photo-3013256.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'Visit both Adi Kailash and Om Parvat in this spiritually enriching yatra. The 11-day journey begins with a trek to Adi Kailash, where you will stay for two nights to perform rituals and partake in religious ceremonies. Following this, the group will travel to Om Parvat, a mountain revered by Hindus for its natural snow formation resembling the sacred "Om" symbol. This journey combines both spiritual and natural beauty, as the landscapes and the energy of the sacred mountains leave a deep impression on all who visit.',
+          description:
+            'Visit both Adi Kailash and Om Parvat in this spiritually enriching yatra. The 11-day journey begins with a trek to Adi Kailash, where you will stay for two nights to perform rituals and partake in religious ceremonies. Following this, the group will travel to Om Parvat, a mountain revered by Hindus for its natural snow formation resembling the sacred "Om" symbol. This journey combines both spiritual and natural beauty, as the landscapes and the energy of the sacred mountains leave a deep impression on all who visit.',
           itinerary: [
             {
               day: 1,
               title: 'Arrival in Kathgodam',
-              activities: ['Drive to the base camp', 'Briefing and preparations for the yatra'],
+              activities: [
+                'Drive to the base camp',
+                'Briefing and preparations for the yatra',
+              ],
             },
             {
               day: 2,
               title: 'Trek to Adi Kailash',
-              activities: ['Begin the trek to Adi Kailash', 'Camping along the way'],
+              activities: [
+                'Begin the trek to Adi Kailash',
+                'Camping along the way',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Darshan at Adi Kailash and Om Parvat', 'View the "Om" symbol snow formation'],
+          highlights: [
+            'Darshan at Adi Kailash and Om Parvat',
+            'View the "Om" symbol snow formation',
+          ],
           inclusions: [
             'Trek permits and guide services',
             'Accommodation in lodges and tents',
@@ -433,21 +516,31 @@ export const PACKAGES = {
           images: [
             'https://images.pexels.com/photos/3736486/pexels-photo-3736486.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           ],
-          description: 'Experience Adi Kailash under the spiritual light of the full moon in this special journey. This 14-day trip takes you to Adi Kailash during the full moon, where pilgrims can perform religious ceremonies during this auspicious time. The full moon is considered a powerful spiritual event, and spending the night at Adi Kailash under its light enhances the spiritual energy of the yatra. This journey is designed for those seeking a deeper spiritual connection, with nightly rituals and meditation sessions along the way. The full moon trek is a truly transformative spiritual experience.',
+          description:
+            'Experience Adi Kailash under the spiritual light of the full moon in this special journey. This 14-day trip takes you to Adi Kailash during the full moon, where pilgrims can perform religious ceremonies during this auspicious time. The full moon is considered a powerful spiritual event, and spending the night at Adi Kailash under its light enhances the spiritual energy of the yatra. This journey is designed for those seeking a deeper spiritual connection, with nightly rituals and meditation sessions along the way. The full moon trek is a truly transformative spiritual experience.',
           itinerary: [
             {
               day: 1,
               title: 'Arrival at Kathgodam',
-              activities: ['Drive to the base camp', 'Welcome dinner and yatra preparations'],
+              activities: [
+                'Drive to the base camp',
+                'Welcome dinner and yatra preparations',
+              ],
             },
             {
               day: 2,
               title: 'Start trek to Adi Kailash',
-              activities: ['Trek through the valleys to reach the base of Adi Kailash', 'Camping under the stars'],
+              activities: [
+                'Trek through the valleys to reach the base of Adi Kailash',
+                'Camping under the stars',
+              ],
             },
             // Additional days...
           ],
-          highlights: ['Full moon rituals and ceremonies', 'Meditation under the full moon at Adi Kailash'],
+          highlights: [
+            'Full moon rituals and ceremonies',
+            'Meditation under the full moon at Adi Kailash',
+          ],
           inclusions: [
             'Full moon meditation sessions',
             'Accommodation in camps and lodges',
@@ -465,10 +558,30 @@ export const PACKAGES = {
         },
       ],
     },
-   
   ],
 };
 
+export const modules = {
+  toolbar: [
+    [
+      { header: '1' },
+      { header: '2' },
+      { header: '3' },
+      { header: '4' },
+      { header: '5' },
+      { header: '6' },
+      { font: [] },
+    ],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ script: 'sub' }, { script: 'super' }],
+    [{ align: [] }],
+    ['blockquote', 'code-block'],
+    [{ color: [] }, { background: [] }],
+    ['link', 'image', 'video'],
+    ['clean'],
+  ],
+};
 
 export const blogs = [
   {

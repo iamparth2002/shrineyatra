@@ -13,6 +13,11 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import axiosInstance from '@/utils/axios';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css'; // Import Quill CSS for styling
+import { modules } from '@/utils/data';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const AttractionForm = ({
   attractions,
@@ -102,13 +107,24 @@ const AttractionForm = ({
       </div>
       <div>
         <Label htmlFor="details">Details</Label>
+        <ReactQuill
+          value={attractionForm.watch('details') || ''}
+          onChange={(value) => attractionForm.setValue('details', value)}
+          modules={modules}
+        />
+        {attractionForm.formState.errors.content && (
+          <p className="text-sm text-red-500">{attractionForm.formState.errors.content.message}</p>
+        )}
+      </div>
+      {/* <div>
+        <Label htmlFor="details">Details</Label>
         <Textarea id="details" {...attractionForm.register('details')} />
         {attractionForm.formState.errors.details && (
           <p className="text-sm text-red-500">
             {attractionForm.formState.errors.details.message}
           </p>
         )}
-      </div>
+      </div> */}
       <div>
         <Label htmlFor="image">Image</Label>
         {showImageInput || !isEditing ? (
