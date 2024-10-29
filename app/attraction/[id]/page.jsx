@@ -84,7 +84,7 @@ export default async function Page({ params }) {
               <span>12 min read</span>
             </div>
             <img
-              src={process.env.NEXT_PUBLIC_IMAGE_URL + attractionData?.image}
+              src={attractionData?.image}
               alt={'image'}
               className="w-full h-96 object-cover rounded-2xl mb-6"
             />

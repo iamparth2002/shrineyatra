@@ -5,7 +5,7 @@ export default function RenderDetailView({ activeSection, selectedItem, trips })
 
   console.log(selectedItem)
 
-  const imageUrl = `http://localhost:5000/${selectedItem.image}`
+  const imageUrl = `${selectedItem.image}`
 
   switch (activeSection) {
     case 'packages':
