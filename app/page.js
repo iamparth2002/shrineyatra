@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import * as Icons from 'lucide-react';
 import Image from 'next/image';
-import { DATA } from '@/utils/data';
+import { DATA, Numbers } from '@/utils/data';
 import TripCard from '@/components/ui/home/TripCard';
 import Review from '@/components/ui/home/Review';
 import BlogCard from '@/components/ui/home/BlogCard';
@@ -31,6 +31,7 @@ import BlogSlider from '@/components/ui/custom/BlogSlider';
 import Header from '@/components/ui/custom/Header';
 import Footer from '@/components/ui/custom/Footer';
 import axios from 'axios';
+import Hero from '@/components/ui/home/Hero';
 
 export default function TravelLandingPage() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -70,10 +71,8 @@ export default function TravelLandingPage() {
   };
   const bannerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } }
-  }
-  
-
+    visible: { opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } },
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -116,170 +115,86 @@ export default function TravelLandingPage() {
       {/* Main Content */}
       <main className="flex-1 overflow-x-hidden">
         <Header />
-        {/* <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* <section className="relative h-[620px] overflow-hidden">
           <motion.div
-            className="container mx-auto"
-            variants={containerVariants}
+            className="absolute inset-0 z-0"
             initial="hidden"
             animate="visible"
+            variants={bannerVariants}
           >
-            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16">
-              <motion.div
-                className="lg:w-1/2 space-y-6 lg:pt-8"
-                variants={containerVariants}
-              >
-                <motion.h2
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-                  variants={textVariants}
-                >
-                  You can give us a tour to{' '}
-                  <span className="text-primary">Remember</span> forever!
-                </motion.h2>
-                <motion.p
-                  className="text-gray-600 max-w-md"
-                  variants={textVariants}
-                >
-                  We guarantee you that you will get many benefits when you tour
-                  with our agency. we guarantee you that you will get many
-                  benefits when you tour with our agency
-                </motion.p>
-                <motion.div
-                  className="flex flex-col sm:flex-row gap-4"
-                  variants={textVariants}
-                >
-                  <Link
-                    href="#plan"
-                    className="inline-flex justify-center items-center px-8 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-700 transition-colors"
-                  >
-                    Plan a trip
-                  </Link>
-                  <Link
-                    href="#search"
-                    className="inline-flex justify-center items-center px-8 py-3 rounded-lg border border-primary text-primary font-medium hover:bg-primary-50 transition-colors"
-                  >
-                    Search a trip
-                  </Link>
-                </motion.div>
-              </motion.div>
-              <motion.div
-                className="lg:w-1/2 grid grid-cols-6 grid-rows-6 gap-4 h-[500px]"
-                variants={containerVariants}
-              >
-                <motion.div
-                  className="col-span-3 row-span-3"
-                  variants={imageVariants}
-                >
-                  <Image
-                    src="https://images.pexels.com/photos/16542959/pexels-photo-16542959/free-photo-of-boats-are-docked-in-the-water-near-a-city.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="Beach umbrellas"
-                    width={300}
-                    height={300}
-                    className="rounded-lg object-cover w-full h-full shadow-2xl"
-                  />
-                </motion.div>
-                <motion.div
-                  className="mt-20 col-span-3 row-span-5 col-start-4 row-start-1"
-                  variants={imageVariants}
-                >
-                  <Image
-                    src="https://images.pexels.com/photos/13251146/pexels-photo-13251146.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="Venice canal"
-                    width={300}
-                    height={400}
-                    className="rounded-lg object-cover w-full h-full shadow-2xl"
-                  />
-                </motion.div>
-                <motion.div
-                  className="col-span-3 row-span-3 col-start-1 row-start-4"
-                  variants={imageVariants}
-                >
-                  <Image
-                    src="https://images.pexels.com/photos/19296851/pexels-photo-19296851/free-photo-of-an-old-man-with-a-long-beard-and-orange-turban.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="Sailboat"
-                    width={300}
-                    height={300}
-                    className="rounded-lg object-cover w-full h-full"
-                  />
-                </motion.div>
-              </motion.div>
-            </div>
+            <Image
+              src="https://images.pexels.com/photos/16542959/pexels-photo-16542959/free-photo-of-boats-are-docked-in-the-water-near-a-city.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1"
+              alt="Beautiful cityscape with boats"
+              layout="fill"
+              objectFit="cover"
+              quality={100}
+              priority
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-50" />
           </motion.div>
-        </section> */}
-        <section className="relative h-[620px] overflow-hidden">
-      <motion.div
-        className="absolute inset-0 z-0"
-        initial="hidden"
-        animate="visible"
-        variants={bannerVariants}
-      >
-        <Image
-          src="https://images.pexels.com/photos/16542959/pexels-photo-16542959/free-photo-of-boats-are-docked-in-the-water-near-a-city.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1"
-          alt="Beautiful cityscape with boats"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          priority
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
-      </motion.div>
 
-      <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center text-white">
-        <motion.div
-          className="space-y-6"
-          initial="hidden"
-          animate="visible"
-          variants={textVariants}
-        >
-          <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight" variants={textVariants}>
-            Discover Your Next Adventure
-          </motion.h1>
-          <motion.p className="text-xl md:text-2xl max-w-2xl mx-auto" variants={textVariants}>
-            Embark on a journey to remember with our curated travel experiences
-          </motion.p>
-          <motion.div className="flex flex-col sm:flex-row gap-4 justify-center" variants={textVariants}>
-            <Link
-              href="#packages"
-              className="inline-flex justify-center items-center px-8 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-700 transition-colors"
+          <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center text-white">
+            <motion.div
+              className="space-y-6"
+              initial="hidden"
+              animate="visible"
+              variants={textVariants}
             >
-              Let's Explore
-            </Link>
-            {/* <Link
-              href="#search"
-              className="inline-flex justify-center items-center px-8 py-3 rounded-lg border border-white text-white font-medium hover:bg-white hover:text-primary transition-colors"
-            >
-              Search a trip
-            </Link> */}
-          </motion.div>
-        </motion.div>
-      </div>
+              <motion.h1
+                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                variants={textVariants}
+              >
+                Discover Your Next Adventure
+              </motion.h1>
+              <motion.p
+                className="text-xl md:text-2xl max-w-2xl mx-auto"
+                variants={textVariants}
+              >
+                Embark on a journey to remember with our curated travel
+                experiences
+              </motion.p>
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+                variants={textVariants}
+              >
+                <Link
+                  href="#packages"
+                  className="inline-flex justify-center items-center px-8 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-700 transition-colors"
+                >
+                  Let's Explore
+                </Link>
+                
+              </motion.div>
+            </motion.div>
+          </div>
 
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 flex justify-center space-x-4 pb-8"
-        initial="hidden"
-        animate="visible"
-        variants={textVariants}
-      >
-      </motion.div>
-    </section>
+          <motion.div
+            className="absolute bottom-0 left-0 right-0 flex justify-center space-x-4 pb-8"
+            initial="hidden"
+            animate="visible"
+            variants={textVariants}
+            ></motion.div>
+            </section> */}
+        <Hero />
 
         {/* Stats Section */}
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
-                <p className="text-4xl font-bold">10M+</p>
+                <p className="text-4xl font-bold">{Numbers.customers}</p>
                 <p className="text-gray-600">Happy Customers</p>
               </div>
               <div>
-                <p className="text-4xl font-bold">09+</p>
+                <p className="text-4xl font-bold">{Numbers.experience}</p>
                 <p className="text-gray-600">Years Experience</p>
               </div>
               <div>
-                <p className="text-4xl font-bold">12K</p>
+                <p className="text-4xl font-bold">{Numbers.destinations}</p>
                 <p className="text-gray-600">Destinations</p>
               </div>
               <div>
-                <p className="text-4xl font-bold">5.0</p>
+                <p className="text-4xl font-bold">{Numbers.rating}</p>
                 <p className="text-gray-600">Overall Rating</p>
               </div>
             </div>
@@ -447,7 +362,6 @@ export default function TravelLandingPage() {
                     </h2>
                   </div>
                   <Link href={`/detail/${packageItem._id}`}>
-                  
                     <Button className="max-md:hidden" onClick={() => {}}>
                       View All
                       <Icons.ArrowRight size={20} className="ml-2" />

@@ -11,6 +11,7 @@ import Footer from '@/components/ui/custom/Footer';
 import BlogSlider from '@/components/ui/custom/BlogSlider';
 import AttractionSlider from '@/components/ui/custom/AttractionSlider';
 import { useParams } from 'next/navigation';
+import BackButton from '@/components/ui/custom/BackButton';
 
 export default function PackageDetails() {
   const params = useParams();
@@ -99,11 +100,11 @@ export default function PackageDetails() {
       {/* Hero Section */}
       <section className="relative h-[300px] sm:h-[400px] md:h-[500px]">
         <Image
-          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${image}`}
+          src={image}
           alt="Dubai Skyline"
           layout="fill"
           objectFit="cover"
-        />
+          />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="text-center text-white px-4">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
@@ -117,8 +118,12 @@ export default function PackageDetails() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Packages Section */}
+        <div className='my-4'>
+
+          <BackButton/>
+        </div>
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mt-12">{title}</h2>
+          <h2 className="text-3xl font-bold">{title}</h2>
           <p className="text-gray-600 mt-2 mb-10">{description}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trips.map((trip, subIndex) => (

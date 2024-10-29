@@ -10,7 +10,7 @@ export default function AttractionCard({
     <Card className="relative h-[400px] w-[360px] max-w-sm overflow-hidden group">
       <div className="aspect-[3/4] w-full">
         <Image
-          src={process.env.NEXT_PUBLIC_IMAGE_URL+ data.image}
+          src={data.image}
           alt={data.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

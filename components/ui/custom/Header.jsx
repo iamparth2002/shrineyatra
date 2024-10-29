@@ -4,6 +4,7 @@ import { MenuIcon, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import axiosInstance from '@/utils/axios';
 import { useRouter } from 'next/navigation';
+import Logo from './Logo';
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -43,7 +44,7 @@ const Header = () => {
         </Button>
 
         {/* Full logo on larger screens */}
-        <span className="hidden lg:inline text-2xl font-bold">ShrineYatra</span>
+        <span className="hidden lg:inline text-2xl font-bold"><Logo/></span>
 
         <div className="hidden lg:flex items-center space-x-6">
           <a href="/" className="text-gray-700 hover:text-gray-900">

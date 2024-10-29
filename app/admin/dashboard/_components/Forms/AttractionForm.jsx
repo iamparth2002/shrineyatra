@@ -65,7 +65,7 @@ const AttractionForm = ({
           },
         });
         console.log('Attraction updated:', response.data);
-        setAttractions(attractions.map((attraction) => (attraction.id === data._id ? response.data : attraction)));
+        setAttractions(attractions.map((attraction) => (attraction._id === response.data._id ? response.data : attraction)));
       } else {
         
         const response = await axiosInstance.post('/attractions/create', formData, {
@@ -193,7 +193,8 @@ const AttractionForm = ({
         )}
       </div>
       <Button onClick={attractionForm.handleSubmit(onSubmitAttraction)}>
-        {isEditing ? 'Update' : 'Create'} Attraction
+      {uploading ? 'Uploading...' : isEditing ? 'Update' : 'Create'}{' '}
+      {uploading ? '' : 'Attraction'}
       </Button>
     </div>
   );

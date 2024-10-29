@@ -14,7 +14,7 @@ const BlogCard = ({ blog }) => {
       <CardContent className="p-0">
         <div className="relative h-[200px]">
           <Image
-            src={process.env.NEXT_PUBLIC_IMAGE_URL + image}
+            src={image}
             alt={title}
             layout="fill"
             objectFit="cover"

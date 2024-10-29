@@ -62,7 +62,7 @@ export default function PackageSlider({ options, trips }) {
                 title={trip.name}
                 description={trip.description}
                 days={trip.days}
-                image={process.env.NEXT_PUBLIC_IMAGE_URL+ trip.image}
+                image={trip.image}
                 price={trip.price}
                 rating={trip.rating}
                 reviews={trip.reviews}

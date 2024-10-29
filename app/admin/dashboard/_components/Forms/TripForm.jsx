@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -37,6 +37,14 @@ export default function TripForm({
   setTrips
 }) {
   const [uploading, setUploading] = useState(false);
+  const [showImageInput, setShowImageInput] = useState(!isEditing);
+  const [existingImage, setExistingImage] = useState(null);
+
+  useEffect(() => {
+    if (isEditing && tripForm.watch('image')) {
+      setExistingImage(tripForm.watch('image'));
+    }
+  }, [isEditing, tripForm]);
 
   const onSubmitTrip = async (data) => {
     console.log('hi')
@@ -63,15 +71,27 @@ export default function TripForm({
       if (data.image instanceof File) {
         formData.append('image', data.image); // Add image file to formData
       }
-      
-      const response = await axiosInstance.post('/trips/create', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setTrips([...trips, { ...response.data}]);
 
+      if (isEditing) {
+        const response = await axiosInstance.put(`/trips/update/${data.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        setTrips(trips.map((trip) => (trip._id === response.data._id ? response.data : trip)));
+      } else {
+        const response = await axiosInstance.post('/trips/create', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        
       console.log('Trip created:', data);
+        setTrips([...trips, { ...response.data}]);
+      }
+      
+      
+
 
     } catch (error) {
       console.error('Error submitting trip:', error.response ? error.response.data : error.message);
@@ -83,6 +103,11 @@ export default function TripForm({
     setIsCreating(false);
     setSelectedItem(null);
   };
+
+  const itineraryWatch = tripForm.watch('itinerary', itineraryFields);
+  const highlightsWatch = tripForm.watch('highlights', highlightFields);
+  const inclusionsWatch = tripForm.watch('inclusions', inclusionFields);
+  const exclusionsWatch = tripForm.watch('exclusions', exclusionFields);
 
   return (
     <div className="space-y-4">
@@ -155,6 +180,8 @@ export default function TripForm({
       <div>
         <Label htmlFor="packageId">Package</Label>
         <Select
+          value={tripForm.watch('packageId') || ''}
+
           onValueChange={(value) => tripForm.setValue('packageId', value)}
         >
           <SelectTrigger>
@@ -176,17 +203,21 @@ export default function TripForm({
       </div>
       <div>
         <Label htmlFor="image">Image</Label>
-
-        <Input
-          id="image"
-          type="file"
-          accept="image/*"
-          onChange={(e) => tripForm.setValue('image', e.target.files[0])}
-        />
+        {showImageInput || !isEditing ? (
+          <Input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={(e) => tripForm.setValue('image', e.target.files[0])}
+          />
+        ) : (
+          <div>
+            <p className='mt-2'>{existingImage ? existingImage : 'No image selected'}</p>
+            <Button onClick={() => setShowImageInput(true)}>Change Image</Button>
+          </div>
+        )}
         {tripForm.formState.errors.image && (
-          <p className="text-sm text-red-500">
-            {tripForm.formState.errors.image.message}
-          </p>
+          <p className="text-sm text-red-500">{tripForm.formState.errors.image.message}</p>
         )}
       </div>
       <div>

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import axiosInstance from '@/utils/axios';
+import { footerDetails } from '@/utils/data';
+import Logo from './Logo';
 
 export default function Footer() {
   const [packages, setPackages] = useState([
@@ -132,15 +134,16 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-primary text-white py-12">
+    <footer className="bg-primary/80 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info and Social Media */}
-          <div className="bg-orange-600 rounded-lg p-6">
-            <h2 className="text-2xl font-bold mb-4">ShrineYatra</h2>
+          <div className="bg-white text-gray-500 rounded-lg p-6">
+            <h2 className="text-2xl font-bold mb-4">
+              <Logo/>
+            </h2>
             <p>
-              Trusted in more than 100 countries & 5 million customers. Have any
-              query? Contact us, we are here for you.
+              {footerDetails?.subheading}
             </p>
             
             <div className="flex flex-col  mt-4">
@@ -205,7 +208,7 @@ export default function Footer() {
 
         {/* Footer Bottom Text */}
         <div className="flex justify-between border-t border-white  mt-8 pt-8">
-          <p>&copy; 2024 All Rights Reserved ShrineYatra.</p>
+          <p>&copy; {footerDetails?.year} All Rights Reserved ShrineYatra.</p>
           <p>Created By @Parth Gandhi</p>
         </div>
       </div>

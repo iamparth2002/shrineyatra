@@ -28,7 +28,7 @@ const packageSchema = (isEditing) =>
     description: z.string().min(1, 'Description is required'),
   });
 
-const tripSchema = z.object({
+const tripSchema=(isEditing) => z.object({
   id: z.string(),
   name: z.string().min(1, 'Name is required'),
   days: z.number().min(1, 'Days must be at least 1'),
@@ -37,7 +37,9 @@ const tripSchema = z.object({
   realPrice: z.number().min(0, 'Real price must be non-negative'),
   description: z.string().min(1, 'Description is required'),
   packageId: z.string().min(1, 'Package is required'),
-  image: z.instanceof(File, { message: 'Image is required' }),
+  image: isEditing
+  ? z.union([z.instanceof(File), z.string()]).optional()
+  : z.instanceof(File, { message: 'Image is required' }),
   itinerary: z
     .array(
       z.object({
@@ -132,7 +134,7 @@ export default function Dashboard() {
   });
 
   const tripForm = useForm({
-    resolver: zodResolver(tripSchema),
+    resolver: zodResolver(tripSchema(isEditing)),
     defaultValues: {
       packageId: '',
       name: '',
@@ -252,7 +254,23 @@ export default function Dashboard() {
         });
         break;
       case 'trips':
-        tripForm.reset(item);
+        console.log(item)
+        tripForm.reset({
+          id: item._id,
+          name: item.name,
+          days: item.days,
+          location: item.location,
+          price: item.price,
+          realPrice: item.realPrice,
+          description: item.description,
+          packageId: item.packageId || '',
+          image: item.image,
+          itinerary: item.itinerary,
+          highlights: item.highlights,
+          inclusions: item.inclusions,
+          exclusions: item.exclusions,
+
+        });
         break;
       case 'blogs':
         blogForm.reset({
@@ -509,15 +527,15 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-md:px-2">
-                {filteredItems().map((item) => (
+                {filteredItems().map((item,index) => (
                   <Card
-                    key={item.id}
+                    key={index}
                     className="cursor-pointer h-[420px] hover:shadow-md transition-shadow duration-200"
                     onClick={() => handleView(item)}
                   >
                     <CardHeader className="p-4">
                       <img
-                        src={`http://localhost:5000/${item.image}`}
+                        src={item.image}
                         alt=""
                         className="rounded-lg h-[250px]"
                       />

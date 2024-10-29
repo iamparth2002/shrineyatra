@@ -43,10 +43,11 @@ export default function PackageForm({
             },
           }
         );
-        console.log('Package updated:', response.data);
+        
         setPackages(
-          packages.map((item) => (item.id === data._id ? response.data : item))
+          packages.map((item) => (item._id === response.data._id ? response.data : item))
         );
+        console.log(packages)
       } else {
         // Create logic
         const response = await axiosInstance.post('/packages/create', formData, {
@@ -55,7 +56,7 @@ export default function PackageForm({
           },
         });
         setPackages([...packages, response.data]);
-        console.log('Blog created:', response.data);
+        console.log('Package created:', response.data);
       }
     } catch (error) {
       console.error(

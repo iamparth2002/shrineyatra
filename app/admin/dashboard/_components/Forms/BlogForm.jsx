@@ -51,7 +51,7 @@ const BlogForm = ({
             'Content-Type': 'multipart/form-data',
           },
         });
-        setBlogs(blogs.map((blog) => (blog.id === data._id ? response.data : blog)));
+        setBlogs(blogs.map((blog) => (blog._id === response.data._id ? response.data : blog)));
       } else {
         const response = await axiosInstance.post('/blogs/create', formData, {
           headers: {

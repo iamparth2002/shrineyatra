@@ -157,7 +157,7 @@ export default function TourDetailPage() {
 
             <div className="mb-6 h-[400px]">
               <Image
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${tourData.image}`}
+                src={`${tourData.image}`}
                 alt="Tour"
                 width={500}
                 height={500}
@@ -283,7 +283,7 @@ export default function TourDetailPage() {
 
         {!loadingAttractions && attractions.length > 0 && (
           <div className="mb-8 max-w-7xl">
-            <h2 className="text-2xl font-bold mb-4">Other Related Blogs</h2>
+            <h2 className="text-2xl font-bold mb-4">Related Attractions</h2>
             <AttractionSlider attractions={attractions} />
           </div>
         )}
