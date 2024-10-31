@@ -132,7 +132,7 @@ export default function PackageDetails() {
                   title={trip.name}
                   description={trip.description}
                   days={trip.days}
-                  image={`${process.env.NEXT_PUBLIC_IMAGE_URL}${trip.image}`}
+                  image={`${trip.image}`}
                   price={trip.price}
                   rating={trip.rating}
                   reviews={trip.reviews}
@@ -161,7 +161,7 @@ export default function PackageDetails() {
         {/* Attractions Section */}
         {!loadingAttractions && attractions.length > 0 && (
           <div className="mb-8 max-w-7xl">
-            <h2 className="text-2xl font-bold mb-4">Other Related Blogs</h2>
+            <h2 className="text-2xl font-bold mb-4">Other Related Attractions</h2>
             <AttractionSlider attractions={attractions} />
           </div>
         )}

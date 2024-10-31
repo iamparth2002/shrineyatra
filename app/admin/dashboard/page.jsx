@@ -556,8 +556,8 @@ export default function Dashboard() {
                           : activeSection === 'trips'
                           ? item.location
                           : activeSection === 'blogs'
-                          ? item.content.substring(0, 50) + '...'
-                          : item.details.substring(0, 50) + '...'}
+                          ? item.content.replace(/<[^>]*>/g, '').substring(0, 50) + '...'
+                          : item.details.replace(/<[^>]*>/g, '').substring(0, 50) + '...'}
                       </p>
 
                       <div className="flex gap-2">

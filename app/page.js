@@ -385,7 +385,16 @@ export default function TravelLandingPage() {
         {/* Travel Memories Section */}
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold mb-8">Our Blogs</h2>
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-bold">Our Blogs</h2>
+              <Link href={`/blog`}>
+                <Button className="max-md:hidden">
+                  View All
+                  <Icons.ArrowRight size={20} className="ml-2" />
+                </Button>
+              </Link>
+            </div>
+
             <BlogSlider blogs={blogs} />
           </div>
         </section>

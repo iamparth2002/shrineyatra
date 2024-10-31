@@ -23,7 +23,7 @@ const BlogCard = ({ blog }) => {
       </CardContent>
       <CardFooter className=" flex flex-col gap-4 items-start p-4">
         <div>
-          <h3 className="text-xl font-semibold mb-2">{title}</h3>
+          <h3 className="text-xl font-semibold mb-2 h-14 line-clamp-2">{title}</h3>
           <p className="text-gray-600 line-clamp-3">{plainTextContent}</p>
         </div>
         <Link href={`/blog/${_id}`}>
