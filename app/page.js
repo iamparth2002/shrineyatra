@@ -115,68 +115,8 @@ export default function TravelLandingPage() {
       {/* Main Content */}
       <main className="flex-1 overflow-x-hidden">
         <Header />
-        {/* <section className="relative h-[620px] overflow-hidden">
-          <motion.div
-            className="absolute inset-0 z-0"
-            initial="hidden"
-            animate="visible"
-            variants={bannerVariants}
-          >
-            <Image
-              src="https://images.pexels.com/photos/16542959/pexels-photo-16542959/free-photo-of-boats-are-docked-in-the-water-near-a-city.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1"
-              alt="Beautiful cityscape with boats"
-              layout="fill"
-              objectFit="cover"
-              quality={100}
-              priority
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-50" />
-          </motion.div>
 
-          <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center text-white">
-            <motion.div
-              className="space-y-6"
-              initial="hidden"
-              animate="visible"
-              variants={textVariants}
-            >
-              <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-                variants={textVariants}
-              >
-                Discover Your Next Adventure
-              </motion.h1>
-              <motion.p
-                className="text-xl md:text-2xl max-w-2xl mx-auto"
-                variants={textVariants}
-              >
-                Embark on a journey to remember with our curated travel
-                experiences
-              </motion.p>
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4 justify-center"
-                variants={textVariants}
-              >
-                <Link
-                  href="#packages"
-                  className="inline-flex justify-center items-center px-8 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-700 transition-colors"
-                >
-                  Let's Explore
-                </Link>
-                
-              </motion.div>
-            </motion.div>
-          </div>
-
-          <motion.div
-            className="absolute bottom-0 left-0 right-0 flex justify-center space-x-4 pb-8"
-            initial="hidden"
-            animate="visible"
-            variants={textVariants}
-            ></motion.div>
-            </section> */}
         <Hero />
-
         {/* Stats Section */}
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

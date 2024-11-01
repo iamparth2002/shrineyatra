@@ -37,7 +37,7 @@ export default function Hero() {
         variants={bannerVariants}
       >
         <Image
-          src="https://images.pexels.com/photos/16542959/pexels-photo-16542959/free-photo-of-boats-are-docked-in-the-water-near-a-city.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1"
+          src="/home-banner.jpg"
           alt="Beautiful cityscape with boats"
           layout="fill"
           objectFit="cover"

@@ -12,6 +12,7 @@ import BlogSlider from '@/components/ui/custom/BlogSlider';
 import AttractionSlider from '@/components/ui/custom/AttractionSlider';
 import { useParams } from 'next/navigation';
 import BackButton from '@/components/ui/custom/BackButton';
+import Component from '../_components/MoreAbout';
 
 export default function PackageDetails() {
   const params = useParams();
@@ -144,6 +145,8 @@ export default function PackageDetails() {
             ))}
           </div>
         </section>
+
+        <Component/>
 
         {/* Blogs Section */}
         {!loadingBlogs && blogs.length > 0 && (
