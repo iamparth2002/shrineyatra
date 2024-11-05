@@ -64,7 +64,7 @@ export default function SpiritualReviewCarousel() {
                       height={100}
                       className="rounded-full mb-4 border-4 border-primary"
                     />
-                    <h4 className="text-2xl font-semibold mb-2">{review.name}</h4>
+                    <div className="text-2xl font-semibold mb-2">{review.name}</div>
                     <StarRating rating={review.rating} />
                     <p className="text-center mt-4 text-gray-600 italic">"{review.description}"</p>
                     <div className="mt-4 text-sm text-gray-500">

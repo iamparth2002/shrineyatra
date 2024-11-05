@@ -45,7 +45,7 @@ const TripCard2 = ({
           </p>
         </div>
 
-        <h4 className="text-base font-bold line-clamp-2">{title}</h4>
+        <div className="text-base font-bold line-clamp-2">{title}</div>
 
         <div className="flex items-baseline justify-between">
           <div className="flex items-baseline space-x-2">
