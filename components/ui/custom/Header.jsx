@@ -1,10 +1,18 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { MenuIcon, ChevronDown } from 'lucide-react';
+import {
+  MenuIcon,
+  ChevronDown,
+  Home,
+  Mail,
+  Phone,
+  MessageCircle,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import axiosInstance from '@/utils/axios';
 import { useRouter } from 'next/navigation';
 import Logo from './Logo';
+import Link from 'next/link';
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -30,7 +38,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-sm">
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6  py-4 flex items-center justify-between">
         {/* Left-aligned logo */}
         <span className="text-2xl font-bold lg:hidden">
           <Logo />
@@ -50,76 +58,89 @@ const Header = () => {
           <Logo />
         </span>
 
-        <div className="hidden lg:flex items-center space-x-6">
-          <a href="/" className="text-gray-700 hover:text-gray-900">
-            Home
+        <div className="hidden lg:flex items-center space-x-4">
+          <a
+            href="/"
+            className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out"
+          >
+            <Home color="white" />
           </a>
-
-          {/* "Packages" Link */}
-          <div className="relative group">
-            <a
-              href="/packages"
-              className="text-gray-700 hover:text-gray-900 flex items-center"
-            >
-              Packages
-              <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
-            </a>
-
-            {/* Dropdown Content */}
-            <div className="absolute left-0 top-full mt-2 z-50 w-64 bg-white rounded-lg shadow-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-2">
-              {packages.map((pkg) => (
+          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out">
+            <Mail color="white" />
+          </div>
+          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out">
+            <Phone color="white" />
+          </div>
+          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out">
+            <MessageCircle color="white" />
+          </div>
+        </div>
+      </div>
+      <nav className="hidden md:block bg-primary text-white">
+        <div className="container max-w-7xl mx-auto text-white flex justify-end py-2 px-4">
+          <div className="flex gap-6">
+            <div className="flex space-x-2">
+              {packages.map((pkg, index) => (
                 <div
                   key={pkg._id}
-                  onClick={() => handlePackageClick(pkg._id)}
-                  className="py-2 px-3 cursor-pointer text-gray-700 hover:text-black hover:bg-gray-100 rounded-md"
+                  className="relative group cursor-pointer px-2"
                 >
-                  {pkg.navName}
+                  <div
+                    onClick={() => handlePackageClick(pkg._id)}
+                    className="flex items-center text-white hover:text-gray-200"
+                  >
+                    <span>{pkg.navName}</span>
+                    <ChevronDown className="ml-1 h-4 w-4 transform transition-transform duration-200 group-hover:rotate-180" />
+                  </div>
+
+                  {/* Dropdown for trips */}
+                  <div
+                    className={`absolute z-50 w-[350px] p-2 bg-white shadow-lg rounded-lg opacity-0 pointer-events-none transition-opacity duration-300 group-hover:pointer-events-auto group-hover:opacity-100 ${
+                      index === packages.length - 1 ? 'right-0' : 'left-0'
+                    }`}
+                  >
+                    {pkg.trips.map((trip, tripIndex) => (
+                      <a
+                        key={trip._id}
+                        href={`/package/${trip._id}`}
+                        className={`block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-black rounded-md font-medium ${
+                          tripIndex < pkg.trips.length - 1
+                            ? 'border-b border-gray-200'
+                            : ''
+                        }`}
+                      >
+                        {trip.name}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Packages Dropdown with Hover */}
-          <div className="flex space-x-2">
-            {packages.map((pkg, index) => (
-              <div key={pkg._id} className="relative group cursor-pointer px-2">
-                <div
-                  onClick={() => handlePackageClick(pkg._id)}
-                  className="flex items-center text-gray-700 hover:text-gray-900"
-                >
-                  <span>{pkg.navName}</span>
-                  <ChevronDown className="ml-1 h-4 w-4 transform transition-transform duration-200 group-hover:rotate-180" />
-                </div>
-
-                {/* Dropdown for trips */}
-                <div
-                  className={`absolute z-50 w-[350px] p-2 bg-white shadow-lg rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
-                    index === packages.length - 1 ? 'right-0' : 'left-0'
-                  }`}
-                >
-                  {pkg.trips.map((trip, tripIndex) => (
-                    <a
-                      key={trip._id}
-                      href={`/package/${trip._id}`}
-                      className={`block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-black rounded-md font-medium ${
-                        tripIndex < pkg.trips.length - 1
-                          ? 'border-b border-gray-200'
-                          : ''
-                      }`}
-                    >
-                      {trip.name}
-                    </a>
-                  ))}
-                </div>
+            {/* "Packages" Link */}
+            {/* "Packages" Link */}
+            <div className="relative group">
+              <div className="text-white flex items-center hover:cursor-pointer">
+                Packages
+                <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
               </div>
-            ))}
-          </div>
 
-          <a href="/blog" className="text-gray-700 hover:text-gray-900">
-            Blogs
-          </a>
+              {/* Dropdown Content */}
+              <div className="absolute right-0 top-full  z-50 w-64 bg-white rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100 group-hover:pointer-events-auto p-2">
+                {packages.map((pkg) => (
+                  <div
+                    key={pkg._id}
+                    onClick={() => handlePackageClick(pkg._id)}
+                    className="py-2 px-3 cursor-pointer text-gray-700 hover:text-black hover:bg-gray-100 rounded-md"
+                  >
+                    {pkg.title}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </nav>
 
       {/* Sidebar for Mobile */}
       <aside
