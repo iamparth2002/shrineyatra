@@ -62,9 +62,9 @@ export default function Component() {
                       <div className="text-sm text-muted-foreground mb-2">
                         {format(new Date(blogs[0].createdAt), 'MMMM do, yyyy')}
                       </div>
-                      <h2 className="text-3xl font-serif mb-4 hover:text-orange-500 transition-colors">
+                      <h1 className="text-3xl font-serif mb-4 hover:text-orange-500 transition-colors">
                         {blogs[0].title}
-                      </h2>
+                      </h1>
                       <p className="mb-4 text-gray-600 line-clamp-3">
                         {blogs[0].content.replace(/<[^>]*>/g, '')}
                       </p>

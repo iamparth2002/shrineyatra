@@ -179,12 +179,12 @@ export default function TravelLandingPage() {
                 >
                   How it works?
                 </motion.p>
-                <motion.h2
+                <motion.div
                   className="text-3xl font-bold mb-6 max-md:text-center"
                   variants={itemVariants}
                 >
                   One click for you
-                </motion.h2>
+                </motion.div>
                 <motion.ul className="space-y-4" variants={containerVariants}>
                   {DATA.features.map((feature, index) => (
                     <motion.li
@@ -213,7 +213,7 @@ export default function TravelLandingPage() {
                         />
                       </motion.div>
                       <div>
-                        <motion.h3
+                        <motion.div
                           className="font-bold"
                           animate={{
                             scale: hoveredIndex === index ? 1 : 1,
@@ -221,7 +221,7 @@ export default function TravelLandingPage() {
                           transition={{ duration: 0.2 }}
                         >
                           {feature.heading}
-                        </motion.h3>
+                        </motion.div>
                         <motion.p
                           className="text-gray-500 text-sm mt-2"
                           initial={{ opacity: 0 }}
@@ -256,9 +256,9 @@ export default function TravelLandingPage() {
                     </Link>
                   </div>
 
-                  <h2 className="text-gray-600 mt-2 mb-10">
+                  <p className="text-gray-600 mt-2 mb-10">
                     {packageItem.subHeading}
-                  </h2>
+                  </p>
                 </div>
 
                 <div>

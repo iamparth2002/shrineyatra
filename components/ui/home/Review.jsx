@@ -49,7 +49,7 @@ export default function SpiritualReviewCarousel() {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8">Spiritual Journeys: Pilgrim Experiences</h2>
+      <h3 className="text-3xl font-bold text-center mb-8">Spiritual Journeys: Pilgrim Experiences</h3>
       <div className="relative">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
@@ -64,7 +64,7 @@ export default function SpiritualReviewCarousel() {
                       height={100}
                       className="rounded-full mb-4 border-4 border-primary"
                     />
-                    <h3 className="text-2xl font-semibold mb-2">{review.name}</h3>
+                    <h4 className="text-2xl font-semibold mb-2">{review.name}</h4>
                     <StarRating rating={review.rating} />
                     <p className="text-center mt-4 text-gray-600 italic">"{review.description}"</p>
                     <div className="mt-4 text-sm text-gray-500">

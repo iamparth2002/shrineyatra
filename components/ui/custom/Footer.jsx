@@ -139,9 +139,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info and Social Media */}
           <div className="bg-white text-gray-500 rounded-lg p-6">
-            <h2 className="text-2xl font-bold mb-4">
+            <div className="text-2xl font-bold mb-4">
               <Logo/>
-            </h2>
+            </div>
             <p>
               {footerDetails?.subheading}
             </p>
@@ -177,7 +177,7 @@ export default function Footer() {
 
           {/* Quick Links with Packages and Trips */}
           <div className="md:col-span-2">
-            <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
+            <div className="text-xl font-semibold mb-4">Quick Links</div>
             <div className="grid gap-4">
               {packages.map((pkg) => (
                 <div key={pkg._id}>

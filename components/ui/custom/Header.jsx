@@ -13,6 +13,7 @@ import axiosInstance from '@/utils/axios';
 import { useRouter } from 'next/navigation';
 import Logo from './Logo';
 import Link from 'next/link';
+import { handleEmailClick, handleSupportClick, handleWhatsAppClick } from '@/lib/utils';
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -65,18 +66,21 @@ const Header = () => {
           >
             <Home color="white" />
           </a>
-          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out">
+          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out" 
+          onClick={handleEmailClick}>
             <Mail color="white" />
           </div>
-          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out">
+          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out"
+          onClick={handleSupportClick}>
             <Phone color="white" />
           </div>
-          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out">
+          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out"
+          onClick={handleWhatsAppClick}>
             <MessageCircle color="white" />
           </div>
         </div>
       </div>
-      <nav className="hidden md:block bg-primary text-white">
+      <nav className="hidden lg:block bg-primary text-white">
         <div className="container max-w-7xl mx-auto text-white flex justify-end py-2 px-4">
           <div className="flex gap-6">
             <div className="flex space-x-2">
