@@ -32,7 +32,9 @@ const Header = () => {
     <header className="bg-white shadow-sm">
       <div className=" mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
         {/* Left-aligned logo */}
-        <span className="text-2xl font-bold lg:hidden"><Logo/></span>
+        <span className="text-2xl font-bold lg:hidden">
+          <Logo />
+        </span>
 
         <Button
           variant="ghost"
@@ -44,13 +46,14 @@ const Header = () => {
         </Button>
 
         {/* Full logo on larger screens */}
-        <span className="hidden lg:inline text-2xl font-bold"><Logo/></span>
+        <span className="hidden lg:inline text-2xl font-bold">
+          <Logo />
+        </span>
 
         <div className="hidden lg:flex items-center space-x-6">
           <a href="/" className="text-gray-700 hover:text-gray-900">
             Home
           </a>
-          
 
           {/* "Packages" Link */}
           <div className="relative group">
@@ -75,43 +78,44 @@ const Header = () => {
               ))}
             </div>
           </div>
-            
 
           {/* Packages Dropdown with Hover */}
           <div className="flex space-x-2">
-  {packages.map((pkg, index) => (
-    <div key={pkg._id} className="relative group cursor-pointer px-2">
-      <div
-        onClick={() => handlePackageClick(pkg._id)}
-        className="flex items-center text-gray-700 hover:text-gray-900"
-      >
-        <span>{pkg.navName}</span>
-        <ChevronDown className="ml-1 h-4 w-4 transform transition-transform duration-200 group-hover:rotate-180" />
-      </div>
+            {packages.map((pkg, index) => (
+              <div key={pkg._id} className="relative group cursor-pointer px-2">
+                <div
+                  onClick={() => handlePackageClick(pkg._id)}
+                  className="flex items-center text-gray-700 hover:text-gray-900"
+                >
+                  <span>{pkg.navName}</span>
+                  <ChevronDown className="ml-1 h-4 w-4 transform transition-transform duration-200 group-hover:rotate-180" />
+                </div>
 
-      {/* Dropdown for trips */}
-      <div
-        className={`absolute z-50 w-[350px] p-2 bg-white shadow-lg rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
-          index === packages.length - 1 ? 'right-0' : 'left-0'
-        }`}
-      >
-        {pkg.trips.map((trip, tripIndex) => (
-          <a
-            key={trip._id}
-            href={`/package/${trip._id}`}
-            className={`block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-black rounded-md font-medium ${
-              tripIndex < pkg.trips.length - 1 ? 'border-b border-gray-200' : ''
-            }`}
-          >
-            {trip.name}
-          </a>
-        ))}
-      </div>
-    </div>
-  ))}
-</div>
+                {/* Dropdown for trips */}
+                <div
+                  className={`absolute z-50 w-[350px] p-2 bg-white shadow-lg rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                    index === packages.length - 1 ? 'right-0' : 'left-0'
+                  }`}
+                >
+                  {pkg.trips.map((trip, tripIndex) => (
+                    <a
+                      key={trip._id}
+                      href={`/package/${trip._id}`}
+                      className={`block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-black rounded-md font-medium ${
+                        tripIndex < pkg.trips.length - 1
+                          ? 'border-b border-gray-200'
+                          : ''
+                      }`}
+                    >
+                      {trip.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
 
-          <a href="/" className="text-gray-700 hover:text-gray-900">
+          <a href="/blog" className="text-gray-700 hover:text-gray-900">
             Blogs
           </a>
         </div>
