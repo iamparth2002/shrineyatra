@@ -185,7 +185,7 @@ export default function Footer() {
                     href={`/detail/${pkg._id}`}
                     className="hover:underline font-semibold block mb-1"
                   >
-                    {pkg.title}
+                    {pkg.navName}
                   </Link>
                   <div className="flex flex-wrap gap-x-2 whitespace-nowrap">
                     {pkg.trips.map((trip, index) => (

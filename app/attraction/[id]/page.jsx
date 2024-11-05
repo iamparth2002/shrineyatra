@@ -9,6 +9,8 @@ import Header from '@/components/ui/custom/Header';
 import { ArrowLeft, Clock, Loader2 } from 'lucide-react';
 import PackageSlider from '@/components/ui/custom/PackageSlider';
 import axios from 'axios';
+import UserForm from '@/components/ui/custom/UserForm';
+import Image from 'next/image';
 
 export async function generateMetadata({ params }) {
   const { id } = params;
@@ -21,7 +23,9 @@ export async function generateMetadata({ params }) {
 
     return {
       title: attractionData.heading || 'ShrineYatra Attraction',
-      description: attractionData.description || 'Discover breathtaking attractions with ShrineYatra.',
+      description:
+        attractionData.description ||
+        'Discover breathtaking attractions with ShrineYatra.',
       openGraph: {
         title: attractionData.heading,
         description: attractionData.description,
@@ -56,7 +60,9 @@ export default async function Page({ params }) {
   const { id } = params;
 
   // Fetch attraction and related data for the page
-  const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/attractions/${id}`);
+  const response = await axios.get(
+    process.env.NEXT_PUBLIC_API_URL + `/attractions/${id}`
+  );
   const attractionData = response.data.attractions;
   const relatedTrips = response.data.relatedTrips;
 
@@ -69,40 +75,56 @@ export default async function Page({ params }) {
   }
 
   return (
-    <div>
+    <>
       <Header />
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 text-gray-900 p-4">
-        <main>
-          <BackButton />
-          <article className="text-center">
-            <div className="text-primary mb-2">
-              Published on {format(new Date(attractionData?.createdAt), 'MMMM do, yyyy')}
-            </div>
-            <h1 className="text-3xl lg:text-4xl font-bold mb-4">{attractionData?.heading}</h1>
-            <div className="flex items-center justify-center text-gray-600 mb-4">
-              <Clock className="w-4 h-4 mr-1" />
-              <span>12 min read</span>
-            </div>
-            <img
-              src={attractionData?.image}
-              alt={'image'}
+      <main className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 text-gray-900 p-4">
+        <BackButton />
+        <div className="flex flex-col lg:flex-row gap-8 mt-4">
+          <article className="lg:w-2/3" itemScope itemType="https://schema.org/TouristAttraction">
+            <meta itemProp="name" content={attractionData.heading} />
+            <meta itemProp="description" content={attractionData.description} />
+            <meta itemProp="image" content={attractionData.image} />
+            <meta itemProp="datePublished" content={attractionData.createdAt} />
+            
+            <header className="mb-6">
+              <p className="text-primary mt-2">
+                Published on {format(new Date(attractionData.createdAt), 'MMMM do, yyyy')}
+              </p>
+              <h1 className="text-3xl lg:text-4xl font-bold mb-4" itemProp="headline">
+                {attractionData.heading}
+              </h1>
+              <div className="flex items-center text-gray-600">
+                <Clock className="w-4 h-4 mr-1" />
+                <span>12 min read</span>
+              </div>
+            </header>
+            
+            <Image
+              src={attractionData.image}
+              alt={attractionData.heading}
+              width={800}
+              height={450}
               className="w-full h-96 object-cover rounded-2xl mb-6"
             />
+
             <div
               className="text-left html-content"
+              itemProp="description"
               dangerouslySetInnerHTML={{ __html: attractionData.details }}
             />
           </article>
 
-          <section className="mt-8">
-            <div className="max-w-7xl mx-auto">
-              <h2 className="text-3xl font-bold mb-8">Related Packages</h2>
-              <PackageSlider trips={relatedTrips} />
-            </div>
-          </section>
-        </main>
-      </div>
+          <aside className="lg:w-1/3">
+            <UserForm />
+          </aside>
+        </div>
+        
+        <section className="mt-8">
+          <div className="text-3xl font-bold mb-8">Related Packages</div>
+          <PackageSlider trips={relatedTrips} />
+        </section>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

@@ -174,7 +174,7 @@ export default function TourDetailPage() {
               <TabsContent value="overview">
                 <div className="bg-white rounded-lg p-6 mb-8">
                   <h2 className="text-2xl font-semibold mb-4">Trip Overview</h2>
-                  <p className="mt-4 text-gray-700">
+                  <p className="mt-4 text-gray-700 w-full text-justify">
                     {displayedText}
                     {!isExpanded && words.length > 30 && '...'}
                   </p>

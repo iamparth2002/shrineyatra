@@ -79,51 +79,49 @@ export default async function Page({ params }) {
   }
 
   return (
-    <div>
+    <>
       <Header />
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 text-gray-900 p-4">
+      <main className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 text-gray-900 p-4">
         <BackButton />
         <div className="flex flex-col lg:flex-row gap-8 mt-4">
-          <main className="lg:w-2/3">
-            <article className="">
-              <div className="text-primary mb-2">
-                Published on{' '}
-                {format(new Date(blogData?.createdAt), 'MMMM do, yyyy')}
-              </div>
-              <h1 className="text-3xl lg:text-4xl font-bold mb-4">
+          <article className="lg:w-2/3" itemScope itemType="https://schema.org/Article">
+            <meta itemProp="author" content="ShrineYatra" />
+            <meta itemProp="datePublished" content={blogData.createdAt} />
+            <meta itemProp="dateModified" content={blogData.updatedAt || blogData.createdAt} />
+            <meta itemProp="image" content={blogData.image} />
+            
+            <header className="mb-6">
+              <p className="text-primary mt-2" itemProp="datePublished">
+                Published on {format(new Date(blogData?.createdAt), 'MMMM do, yyyy')}
+              </p>
+              <h1 className="text-3xl lg:text-4xl font-bold mb-4" itemProp="headline">
                 {blogData?.title}
               </h1>
-              <div className="flex items-center justify-start text-gray-600 mb-4">
-                <Clock className="w-4 h-4 mr-1" />
-                <span>12 min read</span>
+              <div className="flex items-center text-gray-600">
+                <span >Author : Parth Gandhi</span>
               </div>
-              <img
-                src={blogData?.image}
-                alt={'image'}
-                className="w-full h-96 object-cover rounded-2xl mb-6"
-              />
-              <div
-                className="text-left html-content"
-                dangerouslySetInnerHTML={{ __html: blogData.content }}
-              />
-            </article>
-
-            {/* <section className="mt-8">
-              <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold mb-8">Other Blogs</h2>
-                <BlogSlider blogs={relatedBlogs} />
-              </div>
-            </section> */}
+            </header>
             
-          </main>
-          <aside className="lg:w-1/3 ">
-            <UserForm />
+            <Image
+              src={blogData?.image}
+              alt={blogData.title}
+              width={800}
+              height={450}
+              className="w-full h-96 object-cover rounded-2xl mb-6"
+            />
 
+            <div
+              className="text-left html-content"
+              itemProp="articleBody"
+              dangerouslySetInnerHTML={{ __html: blogData.content }}
+            />
+          </article>
+
+          <aside className="lg:w-1/3">
+            <UserForm />
             <Card className="w-full mt-4">
               <CardHeader>
-                <CardTitle className="text-2xl font-semibold">
-                  RECENT BLOGS
-                </CardTitle>
+                <CardTitle className="text-lg font-semibold">RECENT BLOGS</CardTitle>
               </CardHeader>
               <CardContent className="grid gap-6">
                 {relatedBlogs.map((post) => (
@@ -145,7 +143,7 @@ export default async function Page({ params }) {
                         {post.title}
                       </h3>
                       <p className="text-sm text-muted-foreground">
-                      {format(new Date(post?.createdAt), 'MMMM do, yyyy')}
+                        {format(new Date(post?.createdAt), 'MMMM do, yyyy')}
                       </p>
                     </div>
                   </Link>
@@ -154,14 +152,13 @@ export default async function Page({ params }) {
             </Card>
           </aside>
         </div>
+        
         <section className="mt-8">
-              <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold mb-8">Related Packages</h2>
-                <PackageSlider trips={relatedTrips} />
-              </div>
-            </section>
-      </div>
+          <div className="text-3xl font-bold mb-8">Related Packages</div>
+          <PackageSlider trips={relatedTrips} />
+        </section>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

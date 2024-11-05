@@ -100,7 +100,7 @@ body {
 }
 
 .html-content p {
-  @apply text-base leading-relaxed text-gray-600 my-4 text-balance;
+  @apply text-base leading-relaxed text-gray-600 my-4 text-justify w-full;
 }
 
 .html-content a {

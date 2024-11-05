@@ -13,8 +13,8 @@ const Logo = () => {
         />
       </div>
       <div className="flex flex-col border-l-2 border-gray-300 pl-4">
-        <span className="text-lg sm:text-xl font-bold text-black">Kailash Mansarovar Yatra</span>
-        <span className="text-sm sm:text-base font-medium text-primary">कैलाश मानसरोवर यात्रा</span>
+        <span className="text-lg sm:text-xl font-bold text-black">The Kailash Yatra</span>
+        <span className="text-sm sm:text-base font-medium text-primary">द कैलाश यात्रा</span>
       </div>
     </div>
   )

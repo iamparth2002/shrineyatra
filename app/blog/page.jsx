@@ -126,7 +126,6 @@ export default function Component() {
               </>
             )}
           </div>
-
           {/* Sidebar */}
           <div className="lg:w-1/3">
             <UserForm />

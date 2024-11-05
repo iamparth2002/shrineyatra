@@ -111,7 +111,7 @@ export default function PackageDetails() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
               {title}
             </h1>
-            <p className="text-lg sm:text-xl mb-8 max-w-7xl">{subHeading}</p>
+            
           </div>
         </div>
       </section>
@@ -151,7 +151,7 @@ export default function PackageDetails() {
         {/* Blogs Section */}
         {!loadingBlogs && blogs.length > 0 && (
           <div className="mb-8 max-w-7xl">
-            <h2 className="text-2xl font-bold mb-4">Other Related Blogs</h2>
+            <h3 className="text-2xl font-bold mb-4">Other Related Blogs</h3>
             <BlogSlider blogs={blogs} />
           </div>
         )}
@@ -164,7 +164,7 @@ export default function PackageDetails() {
         {/* Attractions Section */}
         {!loadingAttractions && attractions.length > 0 && (
           <div className="mb-8 max-w-7xl">
-            <h2 className="text-2xl font-bold mb-4">Other Related Attractions</h2>
+            <h3 className="text-2xl font-bold mb-4">Other Related Attractions</h3>
             <AttractionSlider attractions={attractions} />
           </div>
         )}

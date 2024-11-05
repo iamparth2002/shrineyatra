@@ -141,53 +141,6 @@ export default function TravelLandingPage() {
           </div>
         </section>
 
-        {/* Indonesian Tourism Section */}
-        {/* <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold mb-8">Glimpses of Our Tours</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="col-span-2 relative h-[300px] rounded-lg overflow-hidden">
-                <Image
-                  src="https://images.pexels.com/photos/2104882/pexels-photo-2104882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt="Bromo Tengger Tour"
-                  layout="fill"
-                  objectFit="cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-                  <h3 className="text-xl font-semibold text-white">
-                    Nepal Tour
-                  </h3>
-                </div>
-              </div>
-              <div className="relative h-[200px] rounded-lg overflow-hidden">
-                <Image
-                  src="https://images.pexels.com/photos/4185836/pexels-photo-4185836.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt="Bali Beach Tourism"
-                  layout="fill"
-                  objectFit="cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-                  <h3 className="text-xl font-semibold text-white">
-                    Adi Kailash Tour
-                  </h3>
-                </div>
-              </div>
-              <div className="relative h-[200px] rounded-lg overflow-hidden">
-                <Image
-                  src="https://images.pexels.com/photos/2410391/pexels-photo-2410391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt="Borobudur Temple Tour"
-                  layout="fill"
-                  objectFit="cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-                  <h3 className="text-xl font-semibold text-white">
-                    Chardham Temple Tour
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
 
         {/* One Click Section */}
         <section className="py-12 bg-gray-100">
@@ -292,21 +245,20 @@ export default function TravelLandingPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {packages?.map((packageItem, index) => (
               <div key={index}>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h2 className="text-3xl font-bold mt-12">
-                      {packageItem.title}
-                    </h2>
-                    <h2 className="text-gray-600 mt-2 mb-10">
-                      {packageItem.subHeading}
-                    </h2>
+                <div>
+                  <div className="flex items-center justify-between mt-12">
+                    <h2 className="text-3xl font-bold">{packageItem.title}</h2>
+                    <Link href={`/detail/${packageItem._id}`}>
+                      <Button className="max-md:hidden" onClick={() => {}}>
+                        View All
+                        <Icons.ArrowRight size={20} className="ml-2" />
+                      </Button>
+                    </Link>
                   </div>
-                  <Link href={`/detail/${packageItem._id}`}>
-                    <Button className="max-md:hidden" onClick={() => {}}>
-                      View All
-                      <Icons.ArrowRight size={20} className="ml-2" />
-                    </Button>
-                  </Link>
+
+                  <h2 className="text-gray-600 mt-2 mb-10">
+                    {packageItem.subHeading}
+                  </h2>
                 </div>
 
                 <div>
@@ -326,7 +278,7 @@ export default function TravelLandingPage() {
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold">Our Blogs</h2>
+              <h3 className="text-3xl font-bold">Our Blogs</h3>
               <Link href={`/blog`}>
                 <Button className="max-md:hidden">
                   View All
