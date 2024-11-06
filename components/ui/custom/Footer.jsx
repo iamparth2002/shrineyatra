@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axiosInstance from '@/utils/axios';
-import { footerDetails } from '@/utils/data';
+import { details, footerDetails } from '@/utils/data';
 import Logo from './Logo';
 import {
   Facebook,
@@ -167,22 +167,20 @@ export default function Footer() {
             <Link href="#" className="hover:opacity-80 p-2 rounded-full bg-primary">
               <Linkedin className="w-8 h-8" />
             </Link>
-            {/* <Link href="#" className="hover:opacity-80">
-              <Pinterest className="w-8 h-8" />
-            </Link> */}
           </div>
         </div>
 
         {/* Office Address Section */}
-        <div className="mt-8">
+        <div className="mt-8 flex flex-col gap-2">
           <h3 className="font-bold mb-2">Office Address :</h3>
-          <address className="not-italic">
-            <p>Trip To Temples, 201, JOP Plaza</p>
-            <p>Sector 18, Noida, 201301</p>
-            <p>Uttar Pradesh, India</p>
-            <p>Call : +91-8510007751</p>
-            <p>E-mail : info@triptotemples.com</p>
+          <address className="not-italic flex flex-col gap-2">
+            <p>The Kailash Yatra, R-112</p>
+            <p>East Vinod Nagar</p>
+            <p>New Delhi-110091, India</p>
+            
           </address>
+          <p>Call : {details.contact}</p>
+            <p>E-mail : {details.email}</p>
         </div>
           </div>
 
@@ -196,29 +194,34 @@ export default function Footer() {
                     Home
                   </Link>{' '}
                   /
-                  <Link href="/about-us" className="hover:underline">
+                  <Link href="/" className="hover:underline">
                     {' '}
                     About us
                   </Link>{' '}
                   /
-                  <Link href="/contact-us" className="hover:underline">
+                  <Link href="/" className="hover:underline">
                     {' '}
                     Contact Us
                   </Link>{' '}
                   /
-                  <Link href="/b2b" className="hover:underline">
+                  <Link href="/" className="hover:underline">
                     {' '}
                     Privacy Policy
                   </Link>{' '}
                   /
-                  <Link href="/career" className="hover:underline">
+                  <Link href="/" className="hover:underline">
                     {' '}
                     Terms & Conditions
                   </Link>{' '}
                   /
-                  <Link href="/faqs" className="hover:underline">
+                  <Link href="/" className="hover:underline">
                     {' '}
-                    Contact Us
+                    Contact Us{' '}
+                    /
+                  </Link>
+                  <Link href="/blog" className="hover:underline">
+                    {' '}
+                    Blogs
                   </Link>
                 </p>
               </div>
@@ -251,7 +254,9 @@ export default function Footer() {
         <div className="mt-8 pt-4 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center text-sm">
           <p>© 2024 Trip To Temples. All Rights Reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
-            Created by @Parth Gandhi
+            <div>Privacy Policy</div>
+            <div>Terms & Conditions</div>
+            <div>Contact Us</div>
           </div>
         </div>
       </div>

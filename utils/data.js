@@ -93,9 +93,9 @@ export const reviews= [
 ]
 
 export const details = {
-  contact:"",
-  address:"",
-  email:"",
+  contact:"919958647371",
+  address:"The Kailash Yatra, R-112, East Vinod Nagar, New Delhi-110091, India.",
+  email:"info@thekailashyatra.com",
   links:{
     twitter:"",
     instagram:"",
