@@ -7,6 +7,7 @@ import {
   Mail,
   Phone,
   MessageCircle,
+  X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import axiosInstance from '@/utils/axios';
@@ -17,6 +18,7 @@ import { handleEmailClick, handleSupportClick, handleWhatsAppClick } from '@/lib
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [expandedPackage, setExpandedPackage] = useState(null);
   const [packages, setPackages] = useState([]);
   const router = useRouter();
 
@@ -35,6 +37,10 @@ const Header = () => {
 
   const handlePackageClick = (pkgId) => {
     router.push(`/detail/${pkgId}`);
+  };
+  
+  const togglePackageExpansion = (pkgId) => {
+    setExpandedPackage(expandedPackage === pkgId ? null : pkgId);
   };
 
   return (
@@ -158,67 +164,54 @@ const Header = () => {
         onClick={() => setSidebarOpen(false)}
       >
         <div
-          className="w-64 bg-white p-4 transform transition-transform duration-300"
-          onClick={(e) => e.stopPropagation()} // Prevents closing sidebar when clicking inside
+          className="w-80 bg-white h-full overflow-y-auto transform transition-transform duration-300"
+          onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex items-center justify-between mb-6">
-            <span className="text-2xl font-bold">ShrineYatra</span>
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+            <span className="text-2xl font-bold text-primary">ShrineYatra</span>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setSidebarOpen(false)}
             >
-              ✕
+              <X className="h-6 w-6" />
             </Button>
           </div>
-          <nav>
-            <a
-              href="/"
-              className="block py-2 px-4 text-gray-700 hover:bg-gray-200"
-            >
+          <nav className="p-4">
+            <Link href="/" className="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md font-semibold">
               Home
-            </a>
+            </Link>
+            <Link href="/blog" className="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md font-semibold">
+              Blogs
+            </Link>
 
-            <div className="mt-4">
-              <div className="mb-2 py-2 px-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-200 rounded-md">
-                Packages
-              </div>
-              {packages.map((pkg, index) => (
-                <div
-                  key={pkg._id}
-                  onClick={() => handlePackageClick(pkg._id)}
-                  className={`block px-6 py-1 text-gray-600 hover:bg-gray-100 rounded-md ${
-                    index < packages.length - 1
-                      ? 'border-b border-gray-200'
-                      : ' '
-                  }`}
-                >
-                  {pkg.title}
-                </div>
-              ))}
-            </div>
-            <div className="mt-4">
+            <div className="mt-4 space-y-2">
               {packages.map((pkg) => (
-                <div key={pkg._id} className="mb-2">
-                  <div
-                    onClick={() => handlePackageClick(pkg._id)}
-                    className="block py-2 px-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-200 rounded-md"
+                <div key={pkg._id} className="border-b border-gray-200 last:border-b-0">
+                  <button
+                    onClick={() => togglePackageExpansion(pkg._id)}
+                    className="flex items-center justify-between w-full py-2 px-4 text-left text-gray-700 hover:bg-gray-100 rounded-md font-semibold"
                   >
                     {pkg.title}
-                  </div>
-                  {pkg.trips.map((trip, index) => (
-                    <a
-                      key={trip._id}
-                      href={`/package/${trip._id}`}
-                      className={`block px-6 py-1 text-gray-600 hover:bg-gray-100 rounded-md ${
-                        index < pkg.trips.length - 1
-                          ? 'border-b border-gray-200'
-                          : ''
+                    <ChevronDown
+                      className={`h-5 w-5 transition-transform duration-200 ${
+                        expandedPackage === pkg._id ? 'rotate-180' : ''
                       }`}
-                    >
-                      {trip.name}
-                    </a>
-                  ))}
+                    />
+                  </button>
+                  {expandedPackage === pkg._id && (
+                    <div className="ml-4 space-y-1">
+                      {pkg.trips.map((trip) => (
+                        <Link
+                          key={trip._id}
+                          href={`/package/${trip._id}`}
+                          className="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded-md"
+                        >
+                          {trip.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
