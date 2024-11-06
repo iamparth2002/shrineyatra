@@ -242,7 +242,7 @@ export default function TourDetailPage() {
 
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div className="bg-white rounded-lg p-6">
-                <h2 className="text-2xl font-semibold mb-4">Inclusions</h2>
+                <div className="text-2xl font-semibold mb-4">Inclusions</div>
                 <ul className="space-y-2">
                   {tourData?.inclusions?.map((item, index) => (
                     <li key={index} className="flex items-start">
@@ -253,7 +253,7 @@ export default function TourDetailPage() {
                 </ul>
               </div>
               <div className="bg-white rounded-lg p-6">
-                <h2 className="text-2xl font-semibold mb-4">Exclusions</h2>
+                <div className="text-2xl font-semibold mb-4">Exclusions</div>
                 <ul className="space-y-2">
                   {tourData?.exclusions?.map((item, index) => (
                     <li key={index} className="flex items-start">
@@ -317,7 +317,7 @@ function PriceCard({ tourData }) {
         </div>
       </div>
       <div className="space-y-4 mt-6">
-        <h3 className="font-semibold text-lg">Contact Us</h3>
+        <div className="font-semibold text-lg">Contact Us</div>
         <Button
           className="w-full flex items-center justify-center"
           variant="outline"

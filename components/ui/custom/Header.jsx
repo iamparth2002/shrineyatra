@@ -81,17 +81,17 @@ const Header = () => {
         </div>
       </div>
       <nav className="hidden lg:block bg-primary text-white">
-        <div className="container max-w-7xl mx-auto text-white flex justify-end py-2 px-4">
-          <div className="flex gap-6">
-            <div className="flex space-x-2">
+        <div className="container max-w-7xl mx-auto text-white flex justify-end px-4">
+          <div className="flex">
+            <div className="flex">
               {packages.map((pkg, index) => (
                 <div
                   key={pkg._id}
-                  className="relative group cursor-pointer px-2"
+                  className="relative group cursor-pointer"
                 >
                   <div
                     onClick={() => handlePackageClick(pkg._id)}
-                    className="flex items-center text-white hover:text-gray-200"
+                    className="flex items-center text-white hover:bg-black/20 p-2"
                   >
                     <span>{pkg.navName}</span>
                     <ChevronDown className="ml-1 h-4 w-4 transform transition-transform duration-200 group-hover:rotate-180" />
@@ -99,7 +99,7 @@ const Header = () => {
 
                   {/* Dropdown for trips */}
                   <div
-                    className={`absolute z-50 w-[350px] p-2 bg-white shadow-lg rounded-lg opacity-0 pointer-events-none transition-opacity duration-300 group-hover:pointer-events-auto group-hover:opacity-100 ${
+                    className={`absolute text-nowrap z-50  p-2 bg-white shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 group-hover:pointer-events-auto group-hover:opacity-100 border-b-4 border-primary ${
                       index === packages.length - 1 ? 'right-0' : 'left-0'
                     }`}
                   >
@@ -107,7 +107,7 @@ const Header = () => {
                       <a
                         key={trip._id}
                         href={`/package/${trip._id}`}
-                        className={`block px-6 py-2 text-gray-700 hover:bg-gray-100 hover:text-black rounded-md font-medium ${
+                        className={`block px-2 py-2 text-gray-700 hover:bg-gray-100 hover:text-black font-medium ${
                           tripIndex < pkg.trips.length - 1
                             ? 'border-b border-gray-200'
                             : ''
@@ -124,18 +124,22 @@ const Header = () => {
             {/* "Packages" Link */}
             {/* "Packages" Link */}
             <div className="relative group">
-              <div className="text-white flex items-center hover:cursor-pointer">
+              <div className="text-white flex items-center hover:cursor-pointer hover:bg-black/20 p-2">
                 Packages
                 <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
               </div>
 
               {/* Dropdown Content */}
-              <div className="absolute right-0 top-full  z-50 w-64 bg-white rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100 group-hover:pointer-events-auto p-2">
-                {packages.map((pkg) => (
+              <div className="absolute text-nowrap right-0 top-full z-50 bg-white shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100 group-hover:pointer-events-auto p-2 border-b-4 border-primary">
+                {packages.map((pkg,index) => (
                   <div
                     key={pkg._id}
                     onClick={() => handlePackageClick(pkg._id)}
-                    className="py-2 px-3 cursor-pointer text-gray-700 hover:text-black hover:bg-gray-100 rounded-md"
+                    className={`py-2 px-3 cursor-pointer text-gray-700 hover:text-black hover:bg-gray-100 rounded-md ${
+                      index < packages.length - 1
+                        ? 'border-b border-gray-200'
+                        : ''
+                    }`}
                   >
                     {pkg.title}
                   </div>

@@ -32,6 +32,7 @@ import Header from '@/components/ui/custom/Header';
 import Footer from '@/components/ui/custom/Footer';
 import axios from 'axios';
 import Hero from '@/components/ui/home/Hero';
+import Footer2 from '@/components/ui/custom/Footer2';
 
 export default function TravelLandingPage() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
