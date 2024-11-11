@@ -26,6 +26,8 @@ const packageSchema = (isEditing) =>
       ? z.union([z.instanceof(File), z.string()]).optional()
       : z.instanceof(File, { message: 'Image is required' }),
     description: z.string().min(1, 'Description is required'),
+    navName: z.string().min(1, 'Navigation Name is required'),
+    urlName: z.string().min(1, 'URL Name is required'),
   });
 
 const tripSchema=(isEditing) => z.object({
@@ -48,10 +50,13 @@ const tripSchema=(isEditing) => z.object({
         description: z.string(),
       })
     )
-    .min(1, 'At least one itinerary item is required'),
-  highlights: z.array(z.string()).min(1, 'At least one highlight is required'),
-  inclusions: z.array(z.string()).min(1, 'At least one inclusion is required'),
-  exclusions: z.array(z.string()).min(1, 'At least one exclusion is required'),
+    .optional(),
+  highlights: z.array(z.string()).optional(),
+  inclusions: z.array(z.string()).optional(),
+  
+  exclusions: z.array(z.string()).optional(),
+  urlName: z.string().min(1, 'URL Name is required'),
+
 });
 
 const blogSchema = (isEditing) =>
@@ -64,6 +69,7 @@ const blogSchema = (isEditing) =>
       : z.instanceof(File, { message: 'Image is required' }),
     tripId: z.string().min(1, 'Trip is required'),
     packageId: z.string().min(1, 'Package is required'),
+    urlName: z.string().min(1, 'URL Name is required'),
   });
 
 const attractionSchema = (isEditing) =>
@@ -76,6 +82,8 @@ const attractionSchema = (isEditing) =>
       : z.instanceof(File, { message: 'Image is required' }),
     tripId: z.string().min(1, 'Trip is required'),
     packageId: z.string().min(1, 'Package is required'),
+    urlName: z.string().min(1, 'URL Name is required'),
+
   });
 
 export default function Dashboard() {
@@ -251,6 +259,8 @@ export default function Dashboard() {
           subHeading: item.subHeading,
           description: item.description,
           image: item.image,
+          navName: item.navName,
+          urlName: item.urlName,
         });
         break;
       case 'trips':
@@ -269,6 +279,7 @@ export default function Dashboard() {
           highlights: item.highlights,
           inclusions: item.inclusions,
           exclusions: item.exclusions,
+          urlName: item.urlName,
 
         });
         break;
@@ -280,6 +291,7 @@ export default function Dashboard() {
           image: item.image,
           tripId: item.trip || '',
           packageId: item.package || '',
+          urlName: item.urlName,
         });
         break;
       case 'attractions':
@@ -290,6 +302,7 @@ export default function Dashboard() {
           image: item.image,
           tripId: item.trip || '',
           packageId: item.package || '',
+          urlName: item.urlName,
         });
         break;
     }

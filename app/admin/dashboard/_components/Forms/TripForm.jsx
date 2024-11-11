@@ -58,6 +58,7 @@ export default function TripForm({
       formData.append('realPrice', data.realPrice);
       formData.append('description', data.description);
       formData.append('packageId', data.packageId);
+      formData.append('urlName', data.urlName);
 
       // Convert arrays to JSON strings
       data.itinerary.map(item => {
@@ -104,10 +105,11 @@ export default function TripForm({
     setSelectedItem(null);
   };
 
-  const itineraryWatch = tripForm.watch('itinerary', itineraryFields);
-  const highlightsWatch = tripForm.watch('highlights', highlightFields);
-  const inclusionsWatch = tripForm.watch('inclusions', inclusionFields);
-  const exclusionsWatch = tripForm.watch('exclusions', exclusionFields);
+  // const itineraryWatch = tripForm.watch('itinerary', itineraryFields);
+  // const highlightsWatch = tripForm.watch('highlights', highlightFields);
+  // const inclusionsWatch = tripForm.watch('inclusions', inclusionFields);
+  // const exclusionsWatch = tripForm.watch('exclusions', exclusionFields);
+
 
   return (
     <div className="space-y-4">
@@ -117,6 +119,15 @@ export default function TripForm({
         {tripForm.formState.errors.name && (
           <p className="text-sm text-red-500">
             {tripForm.formState.errors.name.message}
+          </p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="urlName">URL Name</Label>
+        <Input id="urlName" {...tripForm.register('urlName')} />
+        {tripForm.formState.errors.urlName && (
+          <p className="text-sm text-red-500">
+            {tripForm.formState.errors.urlName.message}
           </p>
         )}
       </div>

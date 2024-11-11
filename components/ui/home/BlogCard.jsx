@@ -5,7 +5,7 @@ import { Button } from '../button';
 import Link from 'next/link';
 
 const BlogCard = ({ blog }) => {
-  const { title, image, content,_id } = blog;
+  const { title, image, content,_id,urlName } = blog;
   // Convert HTML to plain text
   const plainTextContent = content.replace(/<[^>]*>/g, '');
 
@@ -26,7 +26,7 @@ const BlogCard = ({ blog }) => {
           <div className="text-xl font-semibold mb-2 h-14 line-clamp-2">{title}</div>
           <p className="text-gray-600 line-clamp-3">{plainTextContent}</p>
         </div>
-        <Link href={`/blog/${_id}`}>
+        <Link href={`/blog/${urlName}`}>
           <Button>Read More</Button>
         </Link>
       </CardFooter>

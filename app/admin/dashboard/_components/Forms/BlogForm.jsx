@@ -40,6 +40,7 @@ const BlogForm = ({
       formData.append('content', data.content); // HTML content
       formData.append('trip', data.tripId);
       formData.append('package', data.packageId);
+      formData.append('urlName', data.urlName);
 
       if (data.image instanceof File) {
         formData.append('image', data.image);
@@ -78,6 +79,13 @@ const BlogForm = ({
         <Input id="title" {...blogForm.register('title')} />
         {blogForm.formState.errors.title && (
           <p className="text-sm text-red-500">{blogForm.formState.errors.title.message}</p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="urlName">URL Name</Label>
+        <Input id="urlName" {...blogForm.register('urlName')} />
+        {blogForm.formState.errors.urlName && (
+          <p className="text-sm text-red-500">{blogForm.formState.errors.urlName.message}</p>
         )}
       </div>
       <div>

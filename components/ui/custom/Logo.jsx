@@ -12,7 +12,7 @@ const Logo = () => {
           className='rounded-full'
         />
       </div>
-      <div className="flex flex-col border-l-2 border-gray-300 pl-4">
+      <div className="flex flex-col border-l-2 border-gray-300 pl-2">
         <span className="text-lg sm:text-xl font-bold text-black">The Kailash Yatra</span>
         <span className="text-sm sm:text-base font-medium text-primary">द कैलाश यात्रा</span>
       </div>

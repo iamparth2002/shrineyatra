@@ -27,6 +27,8 @@ export default function PackageForm({
       formData.append('title', data.title);
       formData.append('subHeading', data.subHeading);
       formData.append('description', data.description);
+      formData.append('navName', data.navName);
+      formData.append('urlName', data.urlName);
 
       if (data.image instanceof File) {
         formData.append('image', data.image); // Add the image file to formData
@@ -86,6 +88,24 @@ export default function PackageForm({
         {packageForm.formState.errors.title && (
           <p className="text-sm text-red-500">
             {packageForm.formState.errors.title.message}
+          </p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="navName">Navigation Name</Label>
+        <Input id="navName" {...packageForm.register('navName')} />
+        {packageForm.formState.errors.navName && (
+          <p className="text-sm text-red-500">
+            {packageForm.formState.errors.navName.message}
+          </p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="urlName">URL Name</Label>
+        <Input id="urlName" {...packageForm.register('urlName')} />
+        {packageForm.formState.errors.urlName && (
+          <p className="text-sm text-red-500">
+            {packageForm.formState.errors.urlName.message}
           </p>
         )}
       </div>

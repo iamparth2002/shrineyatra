@@ -248,7 +248,7 @@ export default function TravelLandingPage() {
                 <div>
                   <div className="flex items-center justify-between mt-12">
                     <h2 className="text-3xl font-bold">{packageItem.title}</h2>
-                    <Link href={`/detail/${packageItem._id}`}>
+                    <Link href={`/detail/${packageItem.urlName}`}>
                       <Button className="max-md:hidden" onClick={() => {}}>
                         View All
                         <Icons.ArrowRight size={20} className="ml-2" />

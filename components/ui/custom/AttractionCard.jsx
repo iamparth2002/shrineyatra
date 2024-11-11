@@ -6,7 +6,7 @@ export default function AttractionCard({
   data
 }) {
   return (
-    <Link href={`/attraction/${data._id}`}>
+    <Link href={`/attraction/${data.urlName}`}>
     <Card className="relative h-[400px] w-[360px] max-w-sm overflow-hidden group">
       <div className="aspect-[3/4] w-full">
         <Image

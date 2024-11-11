@@ -52,6 +52,7 @@ const AttractionForm = ({
       formData.append('details', data.details);
       formData.append('trip', data.tripId);
       formData.append('package', data.packageId);
+      formData.append('urlName', data.urlName);
 
       if (data.image instanceof File) {
         formData.append('image', data.image); // Add the image file to formData
@@ -102,6 +103,15 @@ const AttractionForm = ({
         {attractionForm.formState.errors.heading && (
           <p className="text-sm text-red-500">
             {attractionForm.formState.errors.heading.message}
+          </p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="urlName">URL Name</Label>
+        <Input id="urlName" {...attractionForm.register('urlName')} />
+        {attractionForm.formState.errors.urlName && (
+          <p className="text-sm text-red-500">
+            {attractionForm.formState.errors.urlName.message}
           </p>
         )}
       </div>

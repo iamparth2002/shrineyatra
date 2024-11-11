@@ -68,7 +68,7 @@ export default function Component() {
                       <p className="mb-4 text-gray-600 line-clamp-3">
                         {blogs[0].content.replace(/<[^>]*>/g, '')}
                       </p>
-                      <Link href={`/blog/${blogs[0]._id}`}>
+                      <Link href={`/blog/${blogs[0].urlName}`}>
                         <Button className="bg-orange-500 hover:bg-orange-600 text-white">
                           Read More
                         </Button>
@@ -102,7 +102,7 @@ export default function Component() {
                             .substring(0, 100)}
                           ...
                         </p>
-                        <Link href={`/blog/${post._id}`}>
+                        <Link href={`/blog/${post.urlName}`}>
                           <Button className="bg-orange-500 hover:bg-orange-600 text-white text-sm">
                             Read More
                           </Button>

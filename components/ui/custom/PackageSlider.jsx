@@ -69,6 +69,7 @@ export default function PackageSlider({ options, trips }) {
                 location={trip.location}
                 realPrice={trip.realPrice}
                 tripId={trip._id}
+                urlName={trip.urlName}
               />
             </div>
           ))}

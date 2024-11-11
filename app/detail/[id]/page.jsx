@@ -125,7 +125,7 @@ export default function PackageDetails() {
         </div>
         <section className="mb-12">
           <h2 className="text-3xl font-bold">{title}</h2>
-          <p className="text-gray-600 mt-2 mb-10">{description}</p>
+          <p className="text-gray-600 mt-2 mb-10 text-justify">{description}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trips.map((trip, subIndex) => (
               <div key={subIndex} className="flex-[0_0_360px] mr-4">
@@ -140,6 +140,8 @@ export default function PackageDetails() {
                   location={trip.location}
                   realPrice={trip.realPrice}
                   tripId={trip._id}
+                  urlName={trip.urlName}
+                  className="w-[380px]"
                 />
               </div>
             ))}

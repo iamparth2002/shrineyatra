@@ -14,12 +14,17 @@ import axiosInstance from '@/utils/axios';
 import { useRouter } from 'next/navigation';
 import Logo from './Logo';
 import Link from 'next/link';
-import { handleEmailClick, handleSupportClick, handleWhatsAppClick } from '@/lib/utils';
+import {
+  handleEmailClick,
+  handleSupportClick,
+  handleWhatsAppClick,
+} from '@/lib/utils';
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [expandedPackage, setExpandedPackage] = useState(null);
   const [packages, setPackages] = useState([]);
+  const [packagesOpen,setpackagesOpen] = useState(false)
   const router = useRouter();
 
   useEffect(() => {
@@ -38,7 +43,7 @@ const Header = () => {
   const handlePackageClick = (pkgId) => {
     router.push(`/detail/${pkgId}`);
   };
-  
+
   const togglePackageExpansion = (pkgId) => {
     setExpandedPackage(expandedPackage === pkgId ? null : pkgId);
   };
@@ -72,16 +77,22 @@ const Header = () => {
           >
             <Home color="white" />
           </a>
-          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out" 
-          onClick={handleEmailClick}>
+          <div
+            className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out"
+            onClick={handleEmailClick}
+          >
             <Mail color="white" />
           </div>
-          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out"
-          onClick={handleSupportClick}>
+          <div
+            className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out"
+            onClick={handleSupportClick}
+          >
             <Phone color="white" />
           </div>
-          <div className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out"
-          onClick={handleWhatsAppClick}>
+          <div
+            className="bg-primary p-2 rounded-full hover:cursor-pointer hover:bg-primary-dark hover:scale-105 transition-all duration-200 ease-in-out"
+            onClick={handleWhatsAppClick}
+          >
             <MessageCircle color="white" />
           </div>
         </div>
@@ -91,12 +102,9 @@ const Header = () => {
           <div className="flex">
             <div className="flex">
               {packages.map((pkg, index) => (
-                <div
-                  key={pkg._id}
-                  className="relative group cursor-pointer"
-                >
+                <div key={pkg._id} className="relative group cursor-pointer">
                   <div
-                    onClick={() => handlePackageClick(pkg._id)}
+                    onClick={() => handlePackageClick(pkg.urlName)}
                     className="flex items-center text-white hover:bg-black/20 p-2"
                   >
                     <span>{pkg.navName}</span>
@@ -112,7 +120,7 @@ const Header = () => {
                     {pkg.trips.map((trip, tripIndex) => (
                       <a
                         key={trip._id}
-                        href={`/package/${trip._id}`}
+                        href={`/package/${trip.urlName}`}
                         className={`block px-2 py-2 text-gray-700 hover:bg-gray-100 hover:text-black font-medium ${
                           tripIndex < pkg.trips.length - 1
                             ? 'border-b border-gray-200'
@@ -137,18 +145,18 @@ const Header = () => {
 
               {/* Dropdown Content */}
               <div className="absolute text-nowrap right-0 top-full z-50 bg-white shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-100 group-hover:pointer-events-auto p-2 border-b-4 border-primary">
-                {packages.map((pkg,index) => (
-                  <div
+                {packages.map((pkg, index) => (
+                  <a
                     key={pkg._id}
-                    onClick={() => handlePackageClick(pkg._id)}
-                    className={`py-2 px-3 cursor-pointer text-gray-700 hover:text-black hover:bg-gray-100 rounded-md ${
+                    href={`/detail/${pkg.urlName}`}
+                    className={`block py-2 px-3 cursor-pointer text-gray-700 hover:text-black hover:bg-gray-100 rounded-md ${
                       index < packages.length - 1
                         ? 'border-b border-gray-200'
                         : ''
                     }`}
                   >
                     {pkg.title}
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -168,7 +176,9 @@ const Header = () => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <span className="text-2xl font-bold text-primary">ShrineYatra</span>
+            <span className="text-2xl font-bold text-primary">
+              <Logo />
+            </span>
             <Button
               variant="ghost"
               size="icon"
@@ -177,17 +187,47 @@ const Header = () => {
               <X className="h-6 w-6" />
             </Button>
           </div>
-          <nav className="p-4">
-            <Link href="/" className="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md font-semibold">
+          <nav className="">
+            <Link
+              href="/"
+              className="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md font-semibold border-b"
+            >
               Home
             </Link>
-            <Link href="/blog" className="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md font-semibold">
-              Blogs
-            </Link>
+            <div className="">
+              <button className="border-b border-gray-200  flex items-center justify-between w-full py-2 px-4 text-left text-gray-700 hover:bg-gray-100 rounded-md font-semibold"
+              onClick={()=>setpackagesOpen(prev=>!prev)}>
+                {' '}
+                Packages
+                <ChevronDown
+                      className={`h-5 w-5 transition-transform duration-200 ${
+                        packagesOpen === true? 'rotate-180' : ''
+                      }`}
+                      />
+                      </button>
+                {
+                  packagesOpen && (
+                    <div className="ml-4 space-y-1">
+                      {packages.map((pkg) => (
+                        <Link
+                          key={pkg._id}
+                          href={`/detail/${pkg.urlName}`}
+                          className="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded-md"
+                        >
+                          {pkg.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )
+                }
+            </div>
 
-            <div className="mt-4 space-y-2">
+            <div className="space-y-2">
               {packages.map((pkg) => (
-                <div key={pkg._id} className="border-b border-gray-200 last:border-b-0">
+                <div
+                  key={pkg._id}
+                  className="border-b border-gray-200"
+                >
                   <button
                     onClick={() => togglePackageExpansion(pkg._id)}
                     className="flex items-center justify-between w-full py-2 px-4 text-left text-gray-700 hover:bg-gray-100 rounded-md font-semibold"
@@ -204,7 +244,7 @@ const Header = () => {
                       {pkg.trips.map((trip) => (
                         <Link
                           key={trip._id}
-                          href={`/package/${trip._id}`}
+                          href={`/package/${trip.urlName}`}
                           className="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded-md"
                         >
                           {trip.name}
@@ -215,6 +255,12 @@ const Header = () => {
                 </div>
               ))}
             </div>
+            <Link
+              href="/blog"
+              className="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded-md font-semibold"
+            >
+              Blogs
+            </Link>
           </nav>
         </div>
       </aside>

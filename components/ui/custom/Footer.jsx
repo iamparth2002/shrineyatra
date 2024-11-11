@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 
 import UserForm from './UserForm';
+import Obfuscate from 'react-obfuscate';
 
 export default function Footer() {
   const [packages, setPackages] = useState([
@@ -150,38 +151,57 @@ export default function Footer() {
           <div className="rounded-lg">
             <UserForm />
             <div className="mt-8">
-          <h3 className="font-bold mb-4">Connect with us :</h3>
-          <div className="flex gap-4">
-            <Link href="#" className="hover:opacity-80 bg-primary p-2 rounded-full">
-              <Facebook className="w-8 h-8" />
-            </Link>
-            <Link href="#" className="hover:opacity-80 p-2 rounded-full bg-primary">
-              <Instagram className="w-8 h-8" />
-            </Link>
-            <Link href="#" className="hover:opacity-80 p-2 rounded-full bg-primary">
-              <Youtube className="w-8 h-8" />
-            </Link>
-            <Link href="#" className="hover:opacity-80 p-2 rounded-full bg-primary">
-              <Twitter className="w-8 h-8" />
-            </Link>
-            <Link href="#" className="hover:opacity-80 p-2 rounded-full bg-primary">
-              <Linkedin className="w-8 h-8" />
-            </Link>
-          </div>
-        </div>
+              <h3 className="font-bold mb-4">Connect with us :</h3>
+              <div className="flex gap-4">
+                <Link
+                  href="#"
+                  className="hover:opacity-80 bg-primary p-2 rounded-full"
+                >
+                  <Facebook className="w-8 h-8" />
+                </Link>
+                <Link
+                  href="#"
+                  className="hover:opacity-80 p-2 rounded-full bg-primary"
+                >
+                  <Instagram className="w-8 h-8" />
+                </Link>
+                <Link
+                  href="#"
+                  className="hover:opacity-80 p-2 rounded-full bg-primary"
+                >
+                  <Youtube className="w-8 h-8" />
+                </Link>
+                <Link
+                  href="#"
+                  className="hover:opacity-80 p-2 rounded-full bg-primary"
+                >
+                  <Twitter className="w-8 h-8" />
+                </Link>
+                <Link
+                  href="#"
+                  className="hover:opacity-80 p-2 rounded-full bg-primary"
+                >
+                  <Linkedin className="w-8 h-8" />
+                </Link>
+              </div>
+            </div>
 
-        {/* Office Address Section */}
-        <div className="mt-8 flex flex-col gap-2">
-          <h3 className="font-bold mb-2">Office Address :</h3>
-          <address className="not-italic flex flex-col gap-2">
-            <p>The Kailash Yatra, R-112</p>
-            <p>East Vinod Nagar</p>
-            <p>New Delhi-110091, India</p>
-            
-          </address>
-          <p>Call : {details.contact}</p>
-            <p>E-mail : {details.email}</p>
-        </div>
+            {/* Office Address Section */}
+            <div className="mt-8 flex flex-col gap-2">
+              <h3 className="font-bold mb-2">Office Address :</h3>
+              <address className="not-italic flex flex-col gap-2">
+                <p>The Kailash Yatra, R-112</p>
+                <p>East Vinod Nagar</p>
+                <p>New Delhi-110091, India</p>
+                <p>
+                  Call :{' '}
+                  <a href={`tel:${details.contact}`}>{details.contact}</a>
+                </p>
+                <p>
+                  E-mail : <Obfuscate email={details.email} />
+                </p>
+              </address>
+            </div>
           </div>
 
           {/* Quick Links Section */}
@@ -194,31 +214,27 @@ export default function Footer() {
                     Home
                   </Link>{' '}
                   /
-                  <Link href="/" className="hover:underline">
+                  <Link href="/about-us" className="hover:underline">
                     {' '}
                     About us
                   </Link>{' '}
                   /
-                  <Link href="/" className="hover:underline">
+                  <Link href="/contact-us" className="hover:underline">
                     {' '}
                     Contact Us
                   </Link>{' '}
                   /
-                  <Link href="/" className="hover:underline">
+                  <Link href="/privacy-policy" className="hover:underline">
                     {' '}
                     Privacy Policy
                   </Link>{' '}
                   /
-                  <Link href="/" className="hover:underline">
+                  <Link href="/terms-and-conditions" className="hover:underline">
                     {' '}
                     Terms & Conditions
                   </Link>{' '}
                   /
-                  <Link href="/" className="hover:underline">
-                    {' '}
-                    Contact Us{' '}
-                    /
-                  </Link>
+          
                   <Link href="/blog" className="hover:underline">
                     {' '}
                     Blogs
@@ -237,7 +253,7 @@ export default function Footer() {
                         key={tripIndex}
                         className="whitespace-nowrap leading-7"
                       >
-                        <Link href={`/package/${trip._id}`}>{trip.name} /</Link>
+                        <Link href={`/package/${trip.urlName}`}>{trip.name} /</Link>
                       </p>
                     ))}
                   </div>
@@ -248,15 +264,14 @@ export default function Footer() {
         </div>
 
         {/* Connect with us Section */}
-       
 
         {/* Copyright */}
         <div className="mt-8 pt-4 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center text-sm">
-          <p>© 2024 Trip To Temples. All Rights Reserved.</p>
+          <p>© {footerDetails.year} The Kailash Yatra. All Rights Reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
-            <div>Privacy Policy</div>
-            <div>Terms & Conditions</div>
-            <div>Contact Us</div>
+            <a href='/privacy-policy'>Privacy Policy</a>
+            <a href='/terms-and-conditions'>Terms & Conditions</a>
+            <a href='/contact-us'>Contact Us</a>
           </div>
         </div>
       </div>

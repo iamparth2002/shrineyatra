@@ -21,6 +21,8 @@ const TripCard2 = ({
   originalPrice,
   realPrice,
   tripId,
+  urlName,
+  className
 }) => {
   const formatPrice = (value) => {
     return value ? value.toLocaleString() : 'N/A';
@@ -29,7 +31,7 @@ const TripCard2 = ({
   const router = useRouter();
 
   return (
-    <div className="w-[360px] rounded-lg overflow-hidden shadow-lg bg-white">
+    <div className={`${className && 'max-md:w-[380px]'} md:w-[360px] rounded-lg overflow-hidden shadow-lg bg-white`}>
 
       {/* Image Carousel */}
       <div className="relative h-[300px]">
@@ -63,7 +65,7 @@ const TripCard2 = ({
           <button
             className="flex-1 bg-white border border-primary text-primary py-2 rounded-lg text-sm font-semibold"
             onClick={() => {
-              router.push(`/package/${tripId}`);
+              router.push(`/package/${urlName}`);
             }}
           >
             View Details
