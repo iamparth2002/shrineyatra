@@ -20,31 +20,42 @@ export async function generateMetadata({ params }) {
       process.env.NEXT_PUBLIC_API_URL + `/attractions/${id}`
     );
     const attractionData = response.data.attractions;
+    const cleanDescription = attractionData.details.replace(/<[^>]*>/g, '').slice(0, 170);
+
+  console.log(attractionData)
 
     return {
-      title: attractionData.heading || 'ShrineYatra Attraction',
-      description:
-        attractionData.description ||
-        'Discover breathtaking attractions with ShrineYatra.',
+      title: attractionData.metaTitle || attractionData.heading || 'The Kailash yatra Attraction',
+      description: attractionData.metaDescription || cleanDescription,
       openGraph: {
-        title: attractionData.heading,
-        description: attractionData.description,
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/attractions/${attractionData._id}`,
+        title: attractionData.metaTitle || attractionData.heading || 'The Kailash yatra Attraction',
+        description: attractionData.metaDescription || cleanDescription,
+        url: `${process.env.NEXT_PUBLIC_URL}/attraction/${attractionData.urlName}`,
         images: [
           {
-            url: process.env.NEXT_PUBLIC_IMAGE_URL + attractionData.image,
+            url: attractionData.image,
             width: 800,
             height: 600,
-            alt: attractionData.heading,
+            alt: attractionData.imageAlt || attractionData.title,
           },
         ],
         type: 'article',
       },
       twitter: {
         card: 'summary_large_image',
-        title: attractionData.heading,
-        description: attractionData.description,
-        images: [process.env.NEXT_PUBLIC_IMAGE_URL + attractionData.image],
+        title: attractionData.metaTitle || attractionData.heading || 'The Kailash yatra Attraction',
+        description: attractionData.metaDescription || cleanDescription,
+        images: [
+          {
+            url: attractionData.image,
+            width: 800,
+            height: 600,
+            alt: attractionData.imageAlt || attractionData.title,
+          },
+        ],
+      },
+      alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_URL}/attraction/${attractionData.urlName}`,
       },
     };
   } catch (error) {
@@ -85,7 +96,7 @@ export default async function Page({ params }) {
             <meta itemProp="description" content={attractionData.description} />
             <meta itemProp="image" content={attractionData.image} />
             <meta itemProp="datePublished" content={attractionData.createdAt} />
-            
+
             <header className="mb-6">
               <p className="text-primary mt-2">
                 Published on {format(new Date(attractionData.createdAt), 'MMMM do, yyyy')}
@@ -98,7 +109,7 @@ export default async function Page({ params }) {
                 <span>12 min read</span>
               </div>
             </header>
-            
+
             <Image
               src={attractionData.image}
               alt={attractionData.heading}
@@ -118,7 +129,7 @@ export default async function Page({ params }) {
             <UserForm />
           </aside>
         </div>
-        
+
         <section className="mt-8">
           <div className="text-3xl font-bold mb-8">Related Packages</div>
           <PackageSlider trips={relatedTrips} />

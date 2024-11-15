@@ -7,7 +7,8 @@ const Logo = () => {
         <Image
           src="/logo.png"
           alt="Kailash Mansarovar Yatra Logo"
-          layout="fill"
+          height={100}
+          width={100}
           objectFit="contain"
           className='rounded-full'
         />

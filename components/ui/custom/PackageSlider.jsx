@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import TripCard2 from "../home/TripCard2"
 
-export default function PackageSlider({ options, trips }) {
+export default function PackageSlider({ options, trips,packageUrlName }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     ...options,
     align: "start",
@@ -70,6 +70,7 @@ export default function PackageSlider({ options, trips }) {
                 realPrice={trip.realPrice}
                 tripId={trip._id}
                 urlName={trip.urlName}
+                packageUrlName={packageUrlName || trip.packageId.urlName}
               />
             </div>
           ))}

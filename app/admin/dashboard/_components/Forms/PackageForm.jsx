@@ -29,6 +29,9 @@ export default function PackageForm({
       formData.append('description', data.description);
       formData.append('navName', data.navName);
       formData.append('urlName', data.urlName);
+      formData.append('metaTitle', data.metaTitle);
+      formData.append('metaDescription', data.metaDescription);
+      formData.append('imageAlt', data.imageAlt);
 
       if (data.image instanceof File) {
         formData.append('image', data.image); // Add the image file to formData
@@ -110,6 +113,24 @@ export default function PackageForm({
         )}
       </div>
       <div>
+        <Label htmlFor="metaTitle">Meta Title</Label>
+        <Input id="metaTitle" {...packageForm.register('metaTitle')} />
+        {packageForm.formState.errors.metaTitle && (
+          <p className="text-sm text-red-500">
+            {packageForm.formState.errors.metaTitle.message}
+          </p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="metaDescription">Meta Description</Label>
+        <Input id="metaDescription" {...packageForm.register('metaDescription')} />
+        {packageForm.formState.errors.metaDescription && (
+          <p className="text-sm text-red-500">
+            {packageForm.formState.errors.metaDescription.message}
+          </p>
+        )}
+      </div>
+      <div>
         <Label htmlFor="subHeading">Subheading</Label>
         <Input id="subHeading" {...packageForm.register('subHeading')} />
         {packageForm.formState.errors.subHeading && (
@@ -144,15 +165,15 @@ export default function PackageForm({
             {packageForm.formState.errors.image.message}
           </p>
         )}
-      </div>
       <div>
-        <Label htmlFor="description">Description</Label>
-        <Textarea id="description" {...packageForm.register('description')} />
-        {packageForm.formState.errors.description && (
+        <Label htmlFor="imageAlt">Image Description</Label>
+        <Textarea id="imageAlt" {...packageForm.register('imageAlt')} />
+        {packageForm.formState.errors.imageAlt && (
           <p className="text-sm text-red-500">
-            {packageForm.formState.errors.description.message}
+            {packageForm.formState.errors.imageAlt.message}
           </p>
         )}
+      </div>
       </div>
       <Button
         onClick={packageForm.handleSubmit(onSubmitPackage)}

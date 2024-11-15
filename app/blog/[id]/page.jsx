@@ -23,31 +23,51 @@ export async function generateMetadata({ params }) {
       process.env.NEXT_PUBLIC_API_URL + `/blogs/${id}`
     );
     const blogData = response.data.blogs;
+    const cleanDescription = blogData.content
+      .replace(/<[^>]*>/g, '')
+      .slice(0, 170);
 
     return {
-      title: blogData.title || 'ShrineYatra Blog',
+      title: blogData.metaTitle || blogData.title || 'The Kailash Yatra Blog',
       description:
-        blogData.description ||
-        'Explore insightful travel blogs on ShrineYatra.',
+        blogData.metaDescription ||
+        cleanDescription ||
+        'Explore insightful travel blogs on the kailash yatra.',
       openGraph: {
-        title: blogData.title,
-        description: blogData.description,
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/blogs/${blogData._id}`,
+        title: blogData.metaTitle || blogData.title || 'The Kailash Yatra Blog',
+        description:
+          blogData.metaDescription ||
+          cleanDescription ||
+          'Explore insightful travel blogs on the kailash yatra.',
+        url: `${process.env.NEXT_PUBLIC_URL}/blog/${blogData.urlName}`,
         images: [
           {
-            url: process.env.NEXT_PUBLIC_IMAGE_URL + blogData.image,
+            url: blogData.image,
             width: 800,
             height: 600,
-            alt: blogData.title,
+            alt: blogData.imageAlt || blogData.title,
           },
         ],
         type: 'article',
       },
       twitter: {
         card: 'summary_large_image',
-        title: blogData.title,
-        description: blogData.description,
-        images: [process.env.NEXT_PUBLIC_IMAGE_URL + blogData.image],
+        title: blogData.metaTitle || blogData.title || 'The Kailash Yatra Blog',
+        description:
+          blogData.metaDescription ||
+          cleanDescription ||
+          'Explore insightful travel blogs on the kailash yatra.',
+        images: [
+          {
+            url: blogData.image,
+            width: 800,
+            height: 600,
+            alt: blogData.imageAlt || blogData.title,
+          },
+        ],
+      },
+      alternates: {
+        canonical: `${process.env.NEXT_PUBLIC_URL}/blog/${blogData.urlName}`,
       },
     };
   } catch (error) {
@@ -84,27 +104,38 @@ export default async function Page({ params }) {
       <main className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 text-gray-900 p-4">
         <BackButton />
         <div className="flex flex-col lg:flex-row gap-8 mt-4">
-          <article className="lg:w-2/3" itemScope itemType="https://schema.org/Article">
+          <article
+            className="lg:w-2/3"
+            itemScope
+            itemType="https://schema.org/Article"
+          >
             <meta itemProp="author" content="ShrineYatra" />
             <meta itemProp="datePublished" content={blogData.createdAt} />
-            <meta itemProp="dateModified" content={blogData.updatedAt || blogData.createdAt} />
+            <meta
+              itemProp="dateModified"
+              content={blogData.updatedAt || blogData.createdAt}
+            />
             <meta itemProp="image" content={blogData.image} />
-            
+
             <header className="mb-6">
               <p className="text-primary mt-2" itemProp="datePublished">
-                Published on {format(new Date(blogData?.createdAt), 'MMMM do, yyyy')}
+                Published on{' '}
+                {format(new Date(blogData?.createdAt), 'MMMM do, yyyy')}
               </p>
-              <h1 className="text-3xl lg:text-4xl font-bold mb-4" itemProp="headline">
+              <h1
+                className="text-3xl lg:text-4xl font-bold mb-4"
+                itemProp="headline"
+              >
                 {blogData?.title}
               </h1>
               <div className="flex items-center text-gray-600">
-                <span >Author : Parth Gandhi</span>
+                <span>Author : Parth Gandhi</span>
               </div>
             </header>
-            
+
             <Image
               src={blogData?.image}
-              alt={blogData.title}
+              alt={blogData?.imageAlt}
               width={800}
               height={450}
               className="w-full h-96 object-cover rounded-2xl mb-6"
@@ -121,21 +152,25 @@ export default async function Page({ params }) {
             <UserForm />
             <Card className="w-full mt-4">
               <CardHeader>
-                <CardTitle className="text-lg font-semibold">RECENT BLOGS</CardTitle>
+                <CardTitle className="text-lg font-semibold">
+                  RECENT BLOGS
+                </CardTitle>
               </CardHeader>
               <CardContent className="grid gap-6">
                 {relatedBlogs.map((post) => (
                   <Link
                     key={post._id}
-                    href={`/blog/${post._id}`}
+                    href={`/blog/${post.urlName}`}
                     className="flex gap-4 group items-start"
                   >
-                    <div className="relative w-[100px] h-[70px] overflow-hidden rounded-md">
+                    <div className="relative h-[70px] w-[100px]  overflow-hidden rounded-md">
                       <Image
                         src={post.image}
-                        alt={post.title}
-                        fill
-                        className="object-cover transition-transform group-hover:scale-105"
+                        alt={post.imageAlt}
+                        width={300}
+                        height={300}
+                        layout="responsive"
+                        className="object-cover h-[70px] w-[100px]  transition-transform group-hover:scale-105 rounded-md"
                       />
                     </div>
                     <div className="flex-1 space-y-1">
@@ -152,7 +187,7 @@ export default async function Page({ params }) {
             </Card>
           </aside>
         </div>
-        
+
         <section className="mt-8">
           <div className="text-3xl font-bold mb-8">Related Packages</div>
           <PackageSlider trips={relatedTrips} />

@@ -41,7 +41,7 @@ const Header = () => {
   }, []);
 
   const handlePackageClick = (pkgId) => {
-    router.push(`/detail/${pkgId}`);
+    router.push(`/package/${pkgId}`);
   };
 
   const togglePackageExpansion = (pkgId) => {
@@ -120,7 +120,7 @@ const Header = () => {
                     {pkg.trips.map((trip, tripIndex) => (
                       <a
                         key={trip._id}
-                        href={`/package/${trip.urlName}`}
+                        href={`/${pkg.urlName}/${trip.urlName}`}
                         className={`block px-2 py-2 text-gray-700 hover:bg-gray-100 hover:text-black font-medium ${
                           tripIndex < pkg.trips.length - 1
                             ? 'border-b border-gray-200'
@@ -148,7 +148,7 @@ const Header = () => {
                 {packages.map((pkg, index) => (
                   <a
                     key={pkg._id}
-                    href={`/detail/${pkg.urlName}`}
+                    href={`/package/${pkg.urlName}`}
                     className={`block py-2 px-3 cursor-pointer text-gray-700 hover:text-black hover:bg-gray-100 rounded-md ${
                       index < packages.length - 1
                         ? 'border-b border-gray-200'
@@ -211,10 +211,10 @@ const Header = () => {
                       {packages.map((pkg) => (
                         <Link
                           key={pkg._id}
-                          href={`/detail/${pkg.urlName}`}
+                          href={`/package/${pkg.urlName}`}
                           className="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded-md"
                         >
-                          {pkg.title}
+                          {pkg.navName}
                         </Link>
                       ))}
                     </div>
@@ -244,7 +244,7 @@ const Header = () => {
                       {pkg.trips.map((trip) => (
                         <Link
                           key={trip._id}
-                          href={`/package/${trip.urlName}`}
+                          href={`/${pkg.urlName}/${trip.urlName}`}
                           className="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded-md"
                         >
                           {trip.name}

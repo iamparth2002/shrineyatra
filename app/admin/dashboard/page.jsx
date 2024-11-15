@@ -28,6 +28,9 @@ const packageSchema = (isEditing) =>
     description: z.string().min(1, 'Description is required'),
     navName: z.string().min(1, 'Navigation Name is required'),
     urlName: z.string().min(1, 'URL Name is required'),
+    metaTitle:z.string().min(1, 'Meta Title is required'),
+    metaDescription:z.string().min(1, 'Meta Description is required'),
+    imageAlt:z.string().min(1, 'Image Description is required')
   });
 
 const tripSchema=(isEditing) => z.object({
@@ -70,6 +73,9 @@ const blogSchema = (isEditing) =>
     tripId: z.string().min(1, 'Trip is required'),
     packageId: z.string().min(1, 'Package is required'),
     urlName: z.string().min(1, 'URL Name is required'),
+    metaTitle:z.string().min(1, 'Meta Title is required'),
+    metaDescription:z.string().min(1, 'Meta Description is required'),
+    imageAlt:z.string().min(1, 'Image Description is required')
   });
 
 const attractionSchema = (isEditing) =>
@@ -83,6 +89,9 @@ const attractionSchema = (isEditing) =>
     tripId: z.string().min(1, 'Trip is required'),
     packageId: z.string().min(1, 'Package is required'),
     urlName: z.string().min(1, 'URL Name is required'),
+    metaTitle:z.string().min(1, 'Meta Title is required'),
+    metaDescription:z.string().min(1, 'Meta Description is required'),
+    imageAlt:z.string().min(1, 'Image Description is required')
 
   });
 
@@ -134,6 +143,10 @@ export default function Dashboard() {
       title: '',
       content: '',
       image: '',
+      urlName:'',
+      metaTitle:'',
+      metaDescription:'',
+      imageAlt:''
     },
   });
   const packageForm = useForm({
@@ -261,6 +274,9 @@ export default function Dashboard() {
           image: item.image,
           navName: item.navName,
           urlName: item.urlName,
+          metaTitle: item.metaTitle,
+          metaDescription: item.metaDescription,
+          imageAlt: item.imageAlt,
         });
         break;
       case 'trips':
@@ -292,6 +308,9 @@ export default function Dashboard() {
           tripId: item.trip || '',
           packageId: item.package || '',
           urlName: item.urlName,
+          metaTitle: item.metaTitle,
+          metaDescription: item.metaDescription,
+          imageAlt: item.imageAlt,
         });
         break;
       case 'attractions':
@@ -303,6 +322,9 @@ export default function Dashboard() {
           tripId: item.trip || '',
           packageId: item.package || '',
           urlName: item.urlName,
+          metaTitle: item.metaTitle,
+          metaDescription: item.metaDescription,
+          imageAlt: item.imageAlt,
         });
         break;
     }

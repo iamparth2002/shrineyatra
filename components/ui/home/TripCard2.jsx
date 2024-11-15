@@ -22,7 +22,8 @@ const TripCard2 = ({
   realPrice,
   tripId,
   urlName,
-  className
+  className,
+  packageUrlName
 }) => {
   const formatPrice = (value) => {
     return value ? value.toLocaleString() : 'N/A';
@@ -65,7 +66,7 @@ const TripCard2 = ({
           <button
             className="flex-1 bg-white border border-primary text-primary py-2 rounded-lg text-sm font-semibold"
             onClick={() => {
-              router.push(`/package/${urlName}`);
+              router.push(`/${packageUrlName}/${urlName}`);
             }}
           >
             View Details

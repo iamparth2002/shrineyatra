@@ -12,9 +12,10 @@ import BlogSlider from '@/components/ui/custom/BlogSlider';
 import AttractionSlider from '@/components/ui/custom/AttractionSlider';
 import { useParams } from 'next/navigation';
 import BackButton from '@/components/ui/custom/BackButton';
-import Component from '../_components/MoreAbout';
+import Component from './MoreAbout';
 
-export default function PackageDetails() {
+
+export default function PackageInfo() {
   const params = useParams();
   const [data, setData] = useState(null); // This will hold packages data
   const [blogs, setBlogs] = useState([]); // Holds blogs data
@@ -92,7 +93,7 @@ export default function PackageDetails() {
   }
 
   // Destructuring the fetched data
-  const { packages, title, subHeading, description, trips, image } = data;
+  const { packages, title, subHeading, description, trips, image,urlName } = data;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -142,6 +143,7 @@ export default function PackageDetails() {
                   tripId={trip._id}
                   urlName={trip.urlName}
                   className="w-[380px]"
+                  packageUrlName={urlName}
                 />
               </div>
             ))}

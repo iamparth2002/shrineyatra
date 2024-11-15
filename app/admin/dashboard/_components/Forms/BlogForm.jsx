@@ -41,6 +41,9 @@ const BlogForm = ({
       formData.append('trip', data.tripId);
       formData.append('package', data.packageId);
       formData.append('urlName', data.urlName);
+      formData.append('metaTitle', data.metaTitle);
+      formData.append('metaDescription', data.metaDescription);
+      formData.append('imageAlt', data.imageAlt);
 
       if (data.image instanceof File) {
         formData.append('image', data.image);
@@ -89,6 +92,20 @@ const BlogForm = ({
         )}
       </div>
       <div>
+        <Label htmlFor="metaTitle">Meta Title</Label>
+        <Input id="metaTitle" {...blogForm.register('metaTitle')} />
+        {blogForm.formState.errors.metaTitle && (
+          <p className="text-sm text-red-500">{blogForm.formState.errors.metaTitle.message}</p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="metaDescription">Meta Descripition</Label>
+        <Input id="metaDescription" {...blogForm.register('metaDescription')} />
+        {blogForm.formState.errors.metaDescription && (
+          <p className="text-sm text-red-500">{blogForm.formState.errors.metaDescription.message}</p>
+        )}
+      </div>
+      <div>
         <Label htmlFor="content">Content</Label>
         <ReactQuill
           value={blogForm.watch('content') || ''}
@@ -116,6 +133,13 @@ const BlogForm = ({
         )}
         {blogForm.formState.errors.image && (
           <p className="text-sm text-red-500">{blogForm.formState.errors.image.message}</p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="imageAlt">Image Description</Label>
+        <Input id="imageAlt" {...blogForm.register('imageAlt')} />
+        {blogForm.formState.errors.imageAlt && (
+          <p className="text-sm text-red-500">{blogForm.formState.errors.imageAlt.message}</p>
         )}
       </div>
       <div>

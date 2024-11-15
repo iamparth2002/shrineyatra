@@ -17,118 +17,7 @@ import UserForm from './UserForm';
 import Obfuscate from 'react-obfuscate';
 
 export default function Footer() {
-  const [packages, setPackages] = useState([
-    {
-      _id: '67122efe0d0ae1217eeae8dd',
-      title: 'Adi Kailash Yatra Packages',
-      trips: [
-        {
-          _id: '6712d803663dbf24584b3aba',
-          name: 'Adi Kailash And Om Parvat Aerial Darshan 2024',
-        },
-        {
-          _id: '6712d803663dbf24584b3abb',
-          name: 'Adi Kailash Trekking Adventure',
-        },
-        {
-          _id: '6712d803663dbf24584b3abc',
-          name: 'Adi Kailash Spiritual Journey 2024',
-        },
-        {
-          _id: '6712d803663dbf24584b3abd',
-          name: 'Adi Kailash Helicopter Tour',
-        },
-      ],
-    },
-    {
-      _id: '671b54352dad3b65a682494f',
-      title: 'Chardham Yatra Packages',
-      trips: [
-        {
-          _id: '671b56622dad3b65a6824951',
-          name: 'Super Deluxe Char Dham Yatra 2024',
-        },
-        {
-          _id: '671b56622dad3b65a6824952',
-          name: 'Luxury Char Dham Package',
-        },
-        {
-          _id: '671b56622dad3b65a6824953',
-          name: 'Economy Char Dham Pilgrimage',
-        },
-        {
-          _id: '671b56622dad3b65a6824954',
-          name: 'Char Dham Budget Tour 2024',
-        },
-      ],
-    },
-    {
-      _id: '671c65432dfe3c75a6824960',
-      title: 'Kedarnath Yatra Packages',
-      trips: [
-        {
-          _id: '671c67632dfe3c75a6824961',
-          name: 'Kedarnath Helicopter Tour 2024',
-        },
-        {
-          _id: '671c67632dfe3c75a6824962',
-          name: 'Kedarnath Trekking Expedition',
-        },
-        {
-          _id: '671c67632dfe3c75a6824963',
-          name: 'Kedarnath Pilgrimage by Road',
-        },
-        {
-          _id: '671c67632dfe3c75a6824964',
-          name: 'Kedarnath Yatra VIP Darshan',
-        },
-      ],
-    },
-    {
-      _id: '671d74342efe7a35a6824971',
-      title: 'Badrinath Yatra Packages',
-      trips: [
-        {
-          _id: '671d76542efe7a35a6824972',
-          name: 'Badrinath Helicopter Yatra 2024',
-        },
-        {
-          _id: '671d76542efe7a35a6824973',
-          name: 'Badrinath by Luxury Bus',
-        },
-        {
-          _id: '671d76542efe7a35a6824974',
-          name: 'Badrinath Trek and Temple Tour',
-        },
-        {
-          _id: '671d76542efe7a35a6824975',
-          name: 'VIP Badrinath Yatra',
-        },
-      ],
-    },
-    {
-      _id: '671e85442dca8b55a6824982',
-      title: 'Gangotri Yatra Packages',
-      trips: [
-        {
-          _id: '671e87642dca8b55a6824983',
-          name: 'Gangotri Temple Darshan 2024',
-        },
-        {
-          _id: '671e87642dca8b55a6824984',
-          name: 'Gangotri and Yamunotri Twin Yatra',
-        },
-        {
-          _id: '671e87642dca8b55a6824985',
-          name: 'Gangotri Spiritual Tour Package',
-        },
-        {
-          _id: '671e87642dca8b55a6824986',
-          name: 'Gangotri River Exploration',
-        },
-      ],
-    },
-  ]);
+  const [packages, setPackages] = useState([]);
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -253,7 +142,7 @@ export default function Footer() {
                         key={tripIndex}
                         className="whitespace-nowrap leading-7"
                       >
-                        <Link href={`/package/${trip.urlName}`}>{trip.name} /</Link>
+                        <Link href={`/${item.urlName}/${trip.urlName}`}>{trip.name} /</Link>
                       </p>
                     ))}
                   </div>
