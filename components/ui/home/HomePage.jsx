@@ -98,7 +98,6 @@ const HomePage = () => {
           axios.get(process.env.NEXT_PUBLIC_API_URL + '/packages/all'),
           axios.get(process.env.NEXT_PUBLIC_API_URL + '/blogs/all'),
         ]);
-        console.log(packagesRes)
         setPackages(packagesRes.data);
         setBlogs(blogsRes.data);
       } catch (error) {

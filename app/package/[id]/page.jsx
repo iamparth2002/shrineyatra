@@ -21,7 +21,7 @@ export async function generateMetadata({ params }){
             alt: packageData?.imageAlt || packageData?.title
           },
         ],
-        url: `${process.env.NEXT_PUBLIC_URL}/detail/${params.id}`,
+        url: `${process.env.NEXT_PUBLIC_URL}/package/${params.id}`,
       },
       twitter: {
         title: packageData?.metaTitle || packageData?.title,
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }){
         ],
       },
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_URL}/detail/${params.id}`,
+        canonical: `${process.env.NEXT_PUBLIC_URL}/package/${params.id}`,
       },
     };
   } catch (error) {

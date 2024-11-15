@@ -8,6 +8,7 @@ console.log(params)
   try {
     const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/trips/${params.trip}`);
     const tourData = res.data.trip;
+    console.log({tourData})
     return {
       title: tourData?.name,
       description: tourData?.description.substring(0, 160), // Shortened description for SEO
@@ -23,7 +24,7 @@ console.log(params)
             alt: "Description of the image"
           },
         ],
-        url: `${process.env.NEXT_PUBLIC_URL}/package/${params.id}`,
+        url: `${process.env.NEXT_PUBLIC_URL}/${tourData?.packageId?.urlName}/${params.trip}`,
       },
       twitter: {
         title: tourData?.name,
@@ -38,7 +39,7 @@ console.log(params)
         ],
       },
       alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_URL}/package/${params.id}`,
+        canonical: `${process.env.NEXT_PUBLIC_URL}/${tourData?.packageId?.urlName}/${params.trip}`,
       },
     };
   } catch (error) {
