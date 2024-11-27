@@ -93,7 +93,7 @@ export default function PackageInfo() {
   }
 
   // Destructuring the fetched data
-  const { packages, title, subHeading, description, trips, image,urlName } = data;
+  const { packages, title, subHeading, description, trips, image,urlName,points } = data;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -150,7 +150,7 @@ export default function PackageInfo() {
           </div>
         </section>
 
-        <Component/>
+        <Component points={points} title={title}/>
 
         {/* Blogs Section */}
         {!loadingBlogs && blogs.length > 0 && (

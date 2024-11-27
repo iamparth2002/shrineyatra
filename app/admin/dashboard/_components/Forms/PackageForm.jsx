@@ -18,6 +18,11 @@ export default function PackageForm({
   const [uploading, setUploading] = useState(false);
   const [showImageInput, setShowImageInput] = useState(!isEditing);
   const [existingImage, setExistingImage] = useState(null);
+  const [points, setPoints] = useState([{ title: '', description: '' }]);
+
+  const check = () =>{
+    console.log(packageForm.getValues())
+  }
 
   const onSubmitPackage = async (data) => {
     setUploading(true);
@@ -32,6 +37,7 @@ export default function PackageForm({
       formData.append('metaTitle', data.metaTitle);
       formData.append('metaDescription', data.metaDescription);
       formData.append('imageAlt', data.imageAlt);
+      formData.append('points', JSON.stringify(points));
 
       if (data.image instanceof File) {
         formData.append('image', data.image); // Add the image file to formData
@@ -81,7 +87,27 @@ export default function PackageForm({
     if (isEditing && packageForm.watch('image')) {
       setExistingImage(packageForm.watch('image')); // Pre-fill existing image if editing
     }
+    if (isEditing && packageForm.watch('points')) {
+      setPoints(packageForm.watch('points') || []);
+    }
   }, [isEditing, packageForm]);
+
+  const handleAddPoint = () => {
+    setPoints([...points, { title: '', description: '' }]);
+  };
+
+  const handleRemovePoint = (index) => {
+    setPoints(points.filter((_, i) => i !== index));
+  };
+
+  const handlePointChange = (index, field, value) => {
+    const updatedPoints = [...points];
+    if (!updatedPoints[index]) {
+      updatedPoints[index] = { title: '', description: '' }; // Ensure it is an object
+    }
+    updatedPoints[index][field] = value;
+    setPoints(updatedPoints);
+  };
 
   return (
     <div className="space-y-4">
@@ -140,6 +166,53 @@ export default function PackageForm({
         )}
       </div>
       <div>
+        <Label htmlFor="description">Description</Label>
+        <Input id="description" {...packageForm.register('description')} />
+        {packageForm.formState.errors.description && (
+          <p className="text-sm text-red-500">
+            {packageForm.formState.errors.description.message}
+          </p>
+        )}
+      </div>
+      <div>
+        <Label>Points</Label>
+        {points.map((point, index) => (
+          <div key={index} className="space-y-2 border p-4 rounded mb-4">
+            <div>
+              <Label htmlFor={`point-title-${index}`}>Point Title</Label>
+              <Input
+                id={`point-title-${index}`}
+                value={point.title}
+                onChange={(e) =>
+                  handlePointChange(index, 'title', e.target.value)
+                }
+              />
+            </div>
+            <div>
+              <Label htmlFor={`point-description-${index}`}>
+                Point Description
+              </Label>
+              <Textarea
+                id={`point-description-${index}`}
+                value={point.description}
+                onChange={(e) =>
+                  handlePointChange(index, 'description', e.target.value)
+                }
+              />
+            </div>
+            <Button
+              variant="destructive"
+              onClick={() => handleRemovePoint(index)}
+            >
+              Remove Point
+            </Button>
+          </div>
+        ))}
+        <Button variant="secondary" onClick={handleAddPoint}>
+          Add Point
+        </Button>
+      </div>
+      <div>
         <Label htmlFor="image">Image</Label>
         {showImageInput || !isEditing ? (
           // Show image input field for uploading new image
@@ -177,6 +250,7 @@ export default function PackageForm({
       </div>
       <Button
         onClick={packageForm.handleSubmit(onSubmitPackage)}
+        // onClick={check}
         disabled={uploading}
       >
         {uploading ? 'Uploading...' : isEditing ? 'Update' : 'Create'}{' '}

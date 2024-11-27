@@ -30,7 +30,14 @@ const packageSchema = (isEditing) =>
     urlName: z.string().min(1, 'URL Name is required'),
     metaTitle:z.string().min(1, 'Meta Title is required'),
     metaDescription:z.string().min(1, 'Meta Description is required'),
-    imageAlt:z.string().min(1, 'Image Description is required')
+    imageAlt:z.string().min(1, 'Image Description is required'),
+    points: z
+    .array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+      })
+    )
   });
 
 const tripSchema=(isEditing) => z.object({
@@ -59,6 +66,9 @@ const tripSchema=(isEditing) => z.object({
   
   exclusions: z.array(z.string()).optional(),
   urlName: z.string().min(1, 'URL Name is required'),
+  metaTitle:z.string().min(1, 'Meta Title is required'),
+  metaDescription:z.string().min(1, 'Meta Description is required'),
+  imageAlt:z.string().min(1, 'Image Description is required'),
 
 });
 
@@ -151,7 +161,19 @@ export default function Dashboard() {
   });
   const packageForm = useForm({
     resolver: zodResolver(packageSchema(isEditing)),
-    defaultValues: {},
+    defaultValues: {
+    //   id: '',
+    // title: '',
+    // subHeading: '',
+    // image: '',
+    // description:'',
+    // navName: '',
+    // urlName: '',
+    // metaTitle:'',
+    // metaDescription:'',
+    // imageAlt:'',
+    // points:[]
+    },
   });
 
   const tripForm = useForm({
@@ -265,7 +287,9 @@ export default function Dashboard() {
     setSelectedItem(item);
     setIsEditing(true);
     switch (activeSection) {
+
       case 'packages':
+        console.log(item)
         packageForm.reset({
           id: item._id,
           title: item.title,
@@ -277,6 +301,7 @@ export default function Dashboard() {
           metaTitle: item.metaTitle,
           metaDescription: item.metaDescription,
           imageAlt: item.imageAlt,
+          points: item.points,
         });
         break;
       case 'trips':
@@ -296,7 +321,9 @@ export default function Dashboard() {
           inclusions: item.inclusions,
           exclusions: item.exclusions,
           urlName: item.urlName,
-
+          metaTitle: item.metaTitle,
+          metaDescription: item.metaDescription,
+          imageAlt: item.imageAlt,
         });
         break;
       case 'blogs':

@@ -59,6 +59,9 @@ export default function TripForm({
       formData.append('description', data.description);
       formData.append('packageId', data.packageId);
       formData.append('urlName', data.urlName);
+      formData.append('metaTitle', data.metaTitle);
+      formData.append('metaDescription', data.metaDescription);
+      formData.append('imageAlt', data.imageAlt);
 
       // Convert arrays to JSON strings
       data.itinerary.map(item => {
@@ -128,6 +131,24 @@ export default function TripForm({
         {tripForm.formState.errors.urlName && (
           <p className="text-sm text-red-500">
             {tripForm.formState.errors.urlName.message}
+          </p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="metaTitle">Meta Title</Label>
+        <Input id="metaTitle" {...tripForm.register('metaTitle')} />
+        {tripForm.formState.errors.metaTitle && (
+          <p className="text-sm text-red-500">
+            {tripForm.formState.errors.metaTitle.message}
+          </p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="metaDescription">Meta Description</Label>
+        <Input id="metaDescription" {...tripForm.register('metaDescription')} />
+        {tripForm.formState.errors.metaDescription && (
+          <p className="text-sm text-red-500">
+            {tripForm.formState.errors.metaDescription.message}
           </p>
         )}
       </div>
@@ -229,6 +250,15 @@ export default function TripForm({
         )}
         {tripForm.formState.errors.image && (
           <p className="text-sm text-red-500">{tripForm.formState.errors.image.message}</p>
+        )}
+      </div>
+      <div>
+        <Label htmlFor="imageAlt">Image Description</Label>
+        <Textarea id="imageAlt" {...tripForm.register('imageAlt')} />
+        {tripForm.formState.errors.imageAlt && (
+          <p className="text-sm text-red-500">
+            {tripForm.formState.errors.imageAlt.message}
+          </p>
         )}
       </div>
       <div>
