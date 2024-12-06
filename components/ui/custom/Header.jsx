@@ -214,7 +214,7 @@ const Header = () => {
                           href={`/package/${pkg.urlName}`}
                           className="block py-2 px-4 text-gray-600 hover:bg-gray-100 rounded-md"
                         >
-                          {pkg.navName}
+                          {pkg.title}
                         </Link>
                       ))}
                     </div>
@@ -232,7 +232,7 @@ const Header = () => {
                     onClick={() => togglePackageExpansion(pkg._id)}
                     className="flex items-center justify-between w-full py-2 px-4 text-left text-gray-700 hover:bg-gray-100 rounded-md font-semibold"
                   >
-                    {pkg.title}
+                    {pkg.navName}
                     <ChevronDown
                       className={`h-5 w-5 transition-transform duration-200 ${
                         expandedPackage === pkg._id ? 'rotate-180' : ''
