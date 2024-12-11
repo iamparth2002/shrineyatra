@@ -5,6 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import axiosInstance from '@/utils/axios';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css'; // Import Quill CSS for styling
+import { modules } from '@/utils/data';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function PackageForm({
   packageForm,
@@ -20,7 +24,7 @@ export default function PackageForm({
   const [existingImage, setExistingImage] = useState(null);
   const [points, setPoints] = useState([{ title: '', description: '' }]);
 
-  const check = () =>{
+  const check = () => {
     console.log(packageForm.getValues())
   }
 
@@ -54,7 +58,7 @@ export default function PackageForm({
             },
           }
         );
-        
+
         setPackages(
           packages.map((item) => (item._id === response.data._id ? response.data : item))
         );
@@ -167,7 +171,11 @@ export default function PackageForm({
       </div>
       <div>
         <Label htmlFor="description">Description</Label>
-        <Input id="description" {...packageForm.register('description')} />
+        <ReactQuill
+          value={packageForm.watch('description')}
+          onChange={(value) => packageForm.setValue('description', value)}
+          modules={modules}
+        />
         {packageForm.formState.errors.description && (
           <p className="text-sm text-red-500">
             {packageForm.formState.errors.description.message}
@@ -192,12 +200,12 @@ export default function PackageForm({
               <Label htmlFor={`point-description-${index}`}>
                 Point Description
               </Label>
-              <Textarea
-                id={`point-description-${index}`}
+              <ReactQuill
                 value={point.description}
-                onChange={(e) =>
-                  handlePointChange(index, 'description', e.target.value)
+                onChange={(value) =>
+                  handlePointChange(index, 'description', value)
                 }
+                modules={modules}
               />
             </div>
             <Button
@@ -212,6 +220,7 @@ export default function PackageForm({
           Add Point
         </Button>
       </div>
+
       <div>
         <Label htmlFor="image">Image</Label>
         {showImageInput || !isEditing ? (
@@ -238,15 +247,15 @@ export default function PackageForm({
             {packageForm.formState.errors.image.message}
           </p>
         )}
-      <div>
-        <Label htmlFor="imageAlt">Image Description</Label>
-        <Textarea id="imageAlt" {...packageForm.register('imageAlt')} />
-        {packageForm.formState.errors.imageAlt && (
-          <p className="text-sm text-red-500">
-            {packageForm.formState.errors.imageAlt.message}
-          </p>
-        )}
-      </div>
+        <div>
+          <Label htmlFor="imageAlt">Image Description</Label>
+          <Textarea id="imageAlt" {...packageForm.register('imageAlt')} />
+          {packageForm.formState.errors.imageAlt && (
+            <p className="text-sm text-red-500">
+              {packageForm.formState.errors.imageAlt.message}
+            </p>
+          )}
+        </div>
       </div>
       <Button
         onClick={packageForm.handleSubmit(onSubmitPackage)}

@@ -192,23 +192,31 @@ export const schemas = {
 
 
 export const modules = {
-  toolbar: [
-    [
-      { header: '1' },
-      { header: '2' },
-      { header: '3' },
-      { header: '4' },
-      { header: '5' },
-      { header: '6' },
-      { font: [] },
+  toolbar: {
+    container: [
+      [
+        { header: '1' },
+        { header: '2' },
+        { header: '3' },
+        { header: '4' },
+        { header: '5' },
+        { header: '6' },
+        { font: [] },
+      ],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ script: 'sub' }, { script: 'super' }],
+      [{ align: [] }],
+      ['blockquote', 'code-block'],
+      [{ color: [] }, { background: [] }],
+      ['link', 'image', 'video'], // Link option included
+      ['clean'],
     ],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ script: 'sub' }, { script: 'super' }],
-    [{ align: [] }],
-    ['blockquote', 'code-block'],
-    [{ color: [] }, { background: [] }],
-    ['link', 'image', 'video'],
-    ['clean'],
-  ],
+  },
+  
 };
+
+
+
+
+

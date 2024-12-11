@@ -56,7 +56,7 @@ export default function BlogSlider({ options, blogs }) {
     <div className="relative mx-auto">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
-          {blogs.map((blog, subIndex) => (
+          {blogs?.map((blog, subIndex) => (
             <div key={subIndex} className="flex-[0_0_360px] mr-4">
               <BlogCard
                 blog={blog}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -30,6 +30,41 @@ const BlogForm = ({
       setExistingImage(blogForm.watch('image'));
     }
   }, [isEditing, blogForm]);
+
+  const quillRef = useRef(null);
+
+  useEffect(() => {
+    const quill = quillRef.current?.getEditor();  // Safe check for quillRef
+
+    if (quill) {
+      const imageHandler = () => {
+        const range = quill.getSelection();
+        const value = prompt('Enter image URL or base64:');
+
+        if (value) {
+          let altText = '';
+
+          // Check if the value is a base64 image
+          if (value.startsWith('data:image')) {
+            // Generate a default alt text based on the image type (jpeg, png, etc.)
+            const type = value.split(';')[0].split('/')[1];
+            altText = `image-${type}`;  // e.g., 'image-jpeg', 'image-png'
+          } else {
+            // If it's a URL, extract the filename and use it as alt text
+            const filename = value.split('/').pop();
+            altText = filename ? filename.split('.')[0] : 'image'; // Remove extension
+          }
+
+          const image = `<img src="${value}" alt="${altText}">`;
+          quill.clipboard.dangerouslyPasteHTML(range.index, image);
+        }
+      };
+
+      // Get the quill toolbar and add the custom image handler
+      const toolbar = quill.getModule('toolbar');
+      toolbar.addHandler('image', imageHandler);
+    }
+  }, []);
 
   const onSubmitBlog = async (data) => {
     setUploading(true);
@@ -108,6 +143,7 @@ const BlogForm = ({
       <div>
         <Label htmlFor="content">Content</Label>
         <ReactQuill
+          ref={quillRef}
           value={blogForm.watch('content') || ''}
           onChange={(value) => blogForm.setValue('content', value)}
           modules={modules}

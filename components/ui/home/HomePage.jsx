@@ -1,31 +1,12 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+// 'use client'; // Remove this line because we are turning this into a server component
+
+import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { motion } from 'framer-motion';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import {
-  MenuIcon,
-  XIcon,
-  SearchIcon,
-  CalendarIcon,
-  MapPinIcon,
-  UserIcon,
-  ChevronRightIcon,
-  FacebookIcon,
-  TwitterIcon,
-  InstagramIcon,
-  Search,
-  MessageSquare,
-} from 'lucide-react';
 import * as Icons from 'lucide-react';
 import Image from 'next/image';
 import { DATA, Numbers } from '@/utils/data';
-import TripCard from '@/components/ui/home/TripCard';
 import Review from '@/components/ui/home/Review';
-import BlogCard from '@/components/ui/home/BlogCard';
 import Link from 'next/link';
-import TripCard2 from '@/components/ui/home/TripCard2';
 import PackageSlider from '@/components/ui/custom/PackageSlider';
 import BlogSlider from '@/components/ui/custom/BlogSlider';
 import Header from '@/components/ui/custom/Header';
@@ -33,82 +14,27 @@ import Footer from '@/components/ui/custom/Footer';
 import axios from 'axios';
 import Hero from '@/components/ui/home/Hero';
 
-const HomePage = () => {
-    const [hoveredIndex, setHoveredIndex] = useState(null);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, x: 100 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-      },
-    },
-  };
-  const bannerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  const [packages, setPackages] = useState([]);
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
-
-  // Fetch data from backend
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const [packagesRes, blogsRes] = await Promise.all([
-          axios.get(process.env.NEXT_PUBLIC_API_URL + '/packages/all'),
-          axios.get(process.env.NEXT_PUBLIC_API_URL + '/blogs/all'),
-        ]);
-        setPackages(packagesRes.data);
-        setBlogs(blogsRes.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
+// Fetch the packages and blogs data on the server
+const fetchData = async () => {
+  try {
+    const [packagesRes, blogsRes] = await Promise.all([
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/packages/all`),
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blogs/all`)
+    ]);
+    return {
+      packages: packagesRes.data,
+      blogs: blogsRes.data
     };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return { packages: [], blogs: [] };
+  }
+};
 
-    fetchData();
-  }, []);
+const HomePage = async () => {
+  // Fetch data directly on the server
+  const { packages, blogs } = await fetchData();
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Main Content */}
@@ -140,20 +66,11 @@ const HomePage = () => {
           </div>
         </section>
 
-
         {/* One Click Section */}
         <section className="py-12 bg-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              className="grid md:grid-cols-2 gap-8 items-center"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.div
-                className="relative h-[400px] rounded-lg overflow-hidden"
-                variants={itemVariants}
-              >
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="relative h-[400px] rounded-lg overflow-hidden">
                 <Image
                   src="https://images.pexels.com/photos/57901/pexels-photo-57901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   alt="One click for you"
@@ -161,82 +78,45 @@ const HomePage = () => {
                   objectFit="cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent flex items-center justify-center">
-                  <motion.p
-                    className="text-3xl text-center font-bold text-white px-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.5 }}
-                  >
+                  <p className="text-3xl text-center font-bold text-white px-4">
                     Embark on your spiritual journey easily with us.
-                  </motion.p>
+                  </p>
                 </div>
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <motion.p
-                  className="text-lg max-md:text-center font-bold mb-2 text-primary/80"
-                  variants={itemVariants}
-                >
+              </div>
+              <div>
+                <p className="text-lg max-md:text-center font-bold mb-2 text-primary/80">
                   How it works?
-                </motion.p>
-                <motion.div
-                  className="text-3xl font-bold mb-6 max-md:text-center"
-                  variants={itemVariants}
-                >
+                </p>
+                <div className="text-3xl font-bold mb-6 max-md:text-center">
                   One click for you
-                </motion.div>
-                <motion.ul className="space-y-4" variants={containerVariants}>
+                </div>
+                <ul className="space-y-4">
                   {DATA.features.map((feature, index) => (
-                    <motion.li
+                    <li
                       key={index}
                       className="flex gap-4 items-start hover:shadow-lg p-4 rounded-xl hover:bg-white hover:cursor-pointer transition-all duration-300"
-                      variants={itemVariants}
-                      onHoverStart={() => setHoveredIndex(index)}
-                      onHoverEnd={() => setHoveredIndex(null)}
-                      whileHover={{ scale: 1.05 }}
                     >
-                      <motion.div
-                        className={`p-4 rounded-full flex items-center justify-center ${
-                          index === 0
-                            ? 'bg-blue-500'
-                            : index === 1
+                      <div
+                        className={`p-4 rounded-full flex items-center justify-center ${index === 0
+                          ? 'bg-blue-500'
+                          : index === 1
                             ? 'bg-red-500'
                             : 'bg-green-500'
-                        }`}
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.5 }}
+                          }`}
                       >
-                        <feature.icon
-                          size={15}
-                          className="w-6 h-6"
-                          color="white"
-                        />
-                      </motion.div>
-                      <div>
-                        <motion.div
-                          className="font-bold"
-                          animate={{
-                            scale: hoveredIndex === index ? 1 : 1,
-                          }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          {feature.heading}
-                        </motion.div>
-                        <motion.p
-                          className="text-gray-500 text-sm mt-2"
-                          initial={{ opacity: 0 }}
-                          animate={{
-                            opacity: hoveredIndex === index ? 1 : 0.7,
-                          }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          {feature.subheading}
-                        </motion.p>
+                        <feature.icon size={15} className="w-6 h-6" color="white" />
                       </div>
-                    </motion.li>
+                      <div>
+                        <div className="font-bold">{feature.heading}</div>
+                        <p className="text-gray-500 text-sm mt-2">
+                          {feature.subheading}
+                        </p>
+                      </div>
+                    </li>
                   ))}
-                </motion.ul>
-              </motion.div>
-            </motion.div>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -248,10 +128,10 @@ const HomePage = () => {
                   <div className="flex items-center justify-between mt-12">
                     <h2 className="text-3xl font-bold">{packageItem.title}</h2>
                     <Link href={`/package/${packageItem.urlName}`}>
-                      <Button className="max-md:hidden" onClick={() => {}}>
+                      <div className="max-md:hidden">
                         View All
                         <Icons.ArrowRight size={20} className="ml-2" />
-                      </Button>
+                      </div>
                     </Link>
                   </div>
 
@@ -279,10 +159,10 @@ const HomePage = () => {
             <div className="flex justify-between items-center mb-8">
               <h3 className="text-3xl font-bold">Our Blogs</h3>
               <Link href={`/blog`}>
-                <Button className="max-md:hidden">
+                <div className="max-md:hidden">
                   View All
                   <Icons.ArrowRight size={20} className="ml-2" />
-                </Button>
+                </div>
               </Link>
             </div>
 
@@ -292,7 +172,7 @@ const HomePage = () => {
         <Footer />
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
