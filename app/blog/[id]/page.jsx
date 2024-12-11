@@ -14,6 +14,7 @@ import axios from 'axios';
 import UserForm from '@/components/ui/custom/UserForm';
 import Link from 'next/link';
 import Image from 'next/image';
+import { MobileBar } from '@/components/ui/custom/MobileBar';
 
 export async function generateMetadata({ params }) {
   const { id } = params;
@@ -194,6 +195,7 @@ export default async function Page({ params }) {
         </section>
       </main>
       <Footer />
+      <MobileBar/>
     </>
   );
 }

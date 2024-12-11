@@ -1,6 +1,7 @@
 import Blogs from './_components/Blogs';
 import Footer from '@/components/ui/custom/Footer';
 import Header from '@/components/ui/custom/Header';
+import { MobileBar } from '@/components/ui/custom/MobileBar';
 import axiosInstance from '@/utils/axios';
 import { metadataObj } from '@/utils/data';
 
@@ -28,6 +29,7 @@ export default function Component() {
       <Header />
       <Blogs />
       <Footer />
+      <MobileBar/>
     </div>
   );
 }

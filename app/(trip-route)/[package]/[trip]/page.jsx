@@ -2,6 +2,7 @@ import Header from '@/components/ui/custom/Header';
 import Footer from '@/components/ui/custom/Footer';
 import axiosInstance from '@/utils/axios';
 import TripDetail from '../../_components/TripDetails';
+import { MobileBar } from '@/components/ui/custom/MobileBar';
 
 export async function generateMetadata({ params }){
 console.log(params)
@@ -57,6 +58,7 @@ export default function TourDetailPage() {
       <Header />
         <TripDetail/>
       <Footer />
+      <MobileBar/>
     </div>
   );
 }

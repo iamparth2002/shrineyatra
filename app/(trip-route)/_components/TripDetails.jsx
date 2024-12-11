@@ -141,10 +141,6 @@ const TripDetail = () => {
                                 <MapPin className="w-4 h-4 mr-1" />
                                 {tourData?.location}
                             </span>
-                            {/* <span className="flex items-center">
-              <Tag className="w-4 h-4 mr-1" />
-              {tourData?.tags?.join(', ')}
-            </span> */}
                         </div>
                     </div>
 

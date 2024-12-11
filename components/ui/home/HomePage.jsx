@@ -13,6 +13,7 @@ import Header from '@/components/ui/custom/Header';
 import Footer from '@/components/ui/custom/Footer';
 import axios from 'axios';
 import Hero from '@/components/ui/home/Hero';
+import { MobileBar } from '../custom/MobileBar';
 
 // Fetch the packages and blogs data on the server
 const fetchData = async () => {
@@ -170,6 +171,7 @@ const HomePage = async () => {
           </div>
         </section>
         <Footer />
+        <MobileBar/>
       </main>
     </div>
   );

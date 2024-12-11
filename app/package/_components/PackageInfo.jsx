@@ -7,6 +7,7 @@ import BlogSlider from '@/components/ui/custom/BlogSlider';
 import AttractionSlider from '@/components/ui/custom/AttractionSlider';
 import BackButton from '@/components/ui/custom/BackButton';
 import Component from './MoreAbout';
+import { MobileBar } from '@/components/ui/custom/MobileBar';
 
 
 export default function PackageInfo({ data, blogs, attractions, error }) {
@@ -92,6 +93,7 @@ export default function PackageInfo({ data, blogs, attractions, error }) {
       </main>
 
       <Footer />
+      <MobileBar/>
     </div>
   );
 }

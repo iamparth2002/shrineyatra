@@ -95,9 +95,7 @@ const TripCard2 = ({
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="flex-grow w-full ml-2 h-12 bg-primary hover:bg-primary/90 text-sm"
-               onClick={()=>{}}
-              
+              <Button className="flex-grow w-full ml-2 h-12 bg-primary hover:bg-primary/90 text-sm"           
               >
                 Avail This Offer
               </Button>

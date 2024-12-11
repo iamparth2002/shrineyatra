@@ -11,6 +11,7 @@ import PackageSlider from '@/components/ui/custom/PackageSlider';
 import axios from 'axios';
 import UserForm from '@/components/ui/custom/UserForm';
 import Image from 'next/image';
+import { MobileBar } from '@/components/ui/custom/MobileBar';
 
 export async function generateMetadata({ params }) {
   const { id } = params;
@@ -136,6 +137,7 @@ export default async function Page({ params }) {
         </section>
       </main>
       <Footer />
+      <MobileBar/>
     </>
   );
 }
