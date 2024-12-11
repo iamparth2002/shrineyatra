@@ -61,7 +61,6 @@ const TripDetail = () => {
                     const response = await axios.get(
                         `${process.env.NEXT_PUBLIC_API_URL}/trips/${id}`
                     );
-                    console.log(response)
                     setTourData(response.data.trip);
                     setOtherTrips(response.data.otherTrips);
                 } catch (error) {
@@ -78,7 +77,6 @@ const TripDetail = () => {
                 const response = await axios.get(
                     `${process.env.NEXT_PUBLIC_API_URL}/blogs/trip/${id}`
                 );
-                console.log(response.data);
                 setBlogs(response.data);
             } catch (error) {
                 console.error('Error fetching blogs:', error);

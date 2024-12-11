@@ -80,7 +80,7 @@ export default function UserForm({
         const response = await axiosInstance.post('/query/create', formValues);
 
         if (response.status === 201) {
-          console.log('Form submitted with values:', formValues);
+          
           setIsSubmitted(true);
         } else {
           setServerError(

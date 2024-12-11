@@ -58,7 +58,7 @@ export default async function PackageDetails({params}) {
     const resAttractions = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/attractions/package/${params.id}`);
     const attractions = resAttractions.data;
 
-    console.log({data,blogs,attractions})
+  
 
     return (
       <PackageInfo
@@ -69,7 +69,6 @@ export default async function PackageDetails({params}) {
       />
     );
   } catch (error) {
-    console.log('Error fetching data:', error.message);
     return <PackageInfo data={null} blogs={[]} attractions={[]} error="Failed to load data" />;
   }
 }

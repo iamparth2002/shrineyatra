@@ -5,11 +5,9 @@ import TripDetail from '../../_components/TripDetails';
 import { MobileBar } from '@/components/ui/custom/MobileBar';
 
 export async function generateMetadata({ params }){
-console.log(params)
   try {
     const res = await axiosInstance.get(`${process.env.NEXT_PUBLIC_API_URL}/trips/${params.trip}`);
     const tourData = res.data.trip;
-    console.log({tourData})
     return {
       title: tourData?.name,
       description: tourData?.description.substring(0, 160), // Shortened description for SEO
@@ -44,7 +42,6 @@ console.log(params)
       },
     };
   } catch (error) {
-    // console.error('Error fetching tour data:', error);
     return {
       title: 'Tour Package',
       description: 'Explore our tour packages and discover exciting travel opportunities.',

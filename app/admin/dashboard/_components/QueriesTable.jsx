@@ -58,7 +58,6 @@ export default function QueriesTable({
   handleDeleteQuery = (id) => console.log(`Delete query with id: ${id}`),
 }) {
   const [selectedQuery, setSelectedQuery] = useState(null);
-  console.log(queries)
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden">

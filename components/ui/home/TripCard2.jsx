@@ -32,19 +32,6 @@ const TripCard2 = ({
 
   const router = useRouter();
 
-  console.log({
-    image,
-    title,
-    days,
-    price,
-    originalPrice,
-    realPrice,
-    tripId,
-    urlName,
-    className,
-    packageUrlName
-  })
-
   return (
     <div className={`${className && 'max-md:w-[380px]'} md:w-[360px] rounded-lg overflow-hidden shadow-lg bg-white`}>
 

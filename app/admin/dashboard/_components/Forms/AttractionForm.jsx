@@ -41,7 +41,7 @@ const AttractionForm = ({
   }, [isEditing, attractionForm]);
 
   const onSubmitAttraction = async (data) => {
-    console.log(data);
+
     setUploading(true);
     if (isEditing) {
     }
@@ -68,7 +68,6 @@ const AttractionForm = ({
             'Content-Type': 'multipart/form-data',
           },
         });
-        console.log('Attraction updated:', response.data);
         setAttractions(attractions.map((attraction) => (attraction._id === response.data._id ? response.data : attraction)));
       } else {
         
@@ -78,7 +77,6 @@ const AttractionForm = ({
           },
         });
         setAttractions([...attractions, response.data]);
-        console.log('attraction created:', response.data);
       }
     } catch (error) {
       console.error(

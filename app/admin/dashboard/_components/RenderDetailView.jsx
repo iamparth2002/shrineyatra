@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function RenderDetailView({ activeSection, selectedItem, trips }) {
   if (!selectedItem) return null;
 
-  console.log(selectedItem)
 
   const imageUrl = `${selectedItem.image}`
 

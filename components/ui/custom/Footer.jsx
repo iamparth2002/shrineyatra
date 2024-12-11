@@ -43,31 +43,36 @@ export default function Footer() {
               <h3 className="font-bold mb-4">Connect with us :</h3>
               <div className="flex gap-4">
                 <Link
-                  href="#"
+                  href={details?.links?.facebook}
+                  target="_blank"
                   className="hover:opacity-80 bg-primary p-2 rounded-full"
                 >
                   <Facebook className="w-8 h-8" />
                 </Link>
                 <Link
-                  href="#"
+                  href={details?.links?.instagram}
+                  target="_blank"
                   className="hover:opacity-80 p-2 rounded-full bg-primary"
                 >
                   <Instagram className="w-8 h-8" />
                 </Link>
                 <Link
-                  href="#"
+                  href={details?.links?.youtube}
+                  target="_blank"
                   className="hover:opacity-80 p-2 rounded-full bg-primary"
                 >
                   <Youtube className="w-8 h-8" />
                 </Link>
                 <Link
-                  href="#"
+                  href={details?.links?.twitter}
+                  target="_blank"
                   className="hover:opacity-80 p-2 rounded-full bg-primary"
                 >
                   <Twitter className="w-8 h-8" />
                 </Link>
                 <Link
-                  href="#"
+                  href={details?.links?.linkedin}
+                  target="_blank"
                   className="hover:opacity-80 p-2 rounded-full bg-primary"
                 >
                   <Linkedin className="w-8 h-8" />
@@ -123,7 +128,7 @@ export default function Footer() {
                     Terms & Conditions
                   </Link>{' '}
                   /
-          
+
                   <Link href="/blog" className="hover:underline">
                     {' '}
                     Blogs

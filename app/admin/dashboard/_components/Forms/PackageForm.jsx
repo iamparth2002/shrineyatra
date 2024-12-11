@@ -24,9 +24,7 @@ export default function PackageForm({
   const [existingImage, setExistingImage] = useState(null);
   const [points, setPoints] = useState([{ title: '', description: '' }]);
 
-  const check = () => {
-    console.log(packageForm.getValues())
-  }
+ 
 
   const onSubmitPackage = async (data) => {
     setUploading(true);
@@ -62,7 +60,7 @@ export default function PackageForm({
         setPackages(
           packages.map((item) => (item._id === response.data._id ? response.data : item))
         );
-        console.log(packages)
+        
       } else {
         // Create logic
         const response = await axiosInstance.post('/packages/create', formData, {
@@ -71,7 +69,7 @@ export default function PackageForm({
           },
         });
         setPackages([...packages, response.data]);
-        console.log('Package created:', response.data);
+        
       }
     } catch (error) {
       console.error(

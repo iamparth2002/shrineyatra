@@ -289,7 +289,6 @@ export default function Dashboard() {
     switch (activeSection) {
 
       case 'packages':
-        console.log(item)
         packageForm.reset({
           id: item._id,
           title: item.title,
@@ -305,7 +304,6 @@ export default function Dashboard() {
         });
         break;
       case 'trips':
-        console.log(item)
         tripForm.reset({
           id: item._id,
           name: item.name,

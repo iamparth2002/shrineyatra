@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import TripCard2 from '@/components/ui/home/TripCard2';
@@ -9,9 +11,9 @@ import BackButton from '@/components/ui/custom/BackButton';
 import Component from './MoreAbout';
 import { MobileBar } from '@/components/ui/custom/MobileBar';
 
-
 export default function PackageInfo({ data, blogs, attractions, error }) {
-  console.log({data,blogs,error,attractions})
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   if (!data || error) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -21,6 +23,12 @@ export default function PackageInfo({ data, blogs, attractions, error }) {
   }
 
   const { title, subHeading, description, trips, image, urlName, points } = data;
+
+  // Function to shorten the description to 30 words
+  const truncateDescription = (text, wordLimit) => {
+    const words = text.split(' ');
+    return words.length > wordLimit ? words.slice(0, wordLimit).join(' ') + '...' : text;
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -48,10 +56,32 @@ export default function PackageInfo({ data, blogs, attractions, error }) {
         </div>
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-justify">{subHeading}</h2>
-          <div
-            className="text-gray-600 mt-2 mb-10 text-justify"
-            dangerouslySetInnerHTML={{ __html: description }}
-          ></div>
+          <div className="text-gray-600 mt-2 mb-10 text-justify">
+            {showFullDescription
+              ? (
+                <div>
+                  <p dangerouslySetInnerHTML={{ __html: description }}></p>
+                  <button
+                    onClick={() => setShowFullDescription(false)}
+                    className="text-blue-500 hover:underline mt-2 block"
+                  >
+                    Read Less
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <p>
+                    {truncateDescription(description.replace(/<\/?[^>]+(>|$)/g, ""), 70)}
+                  </p>
+                  <button
+                    onClick={() => setShowFullDescription(true)}
+                    className="text-blue-500 hover:underline mt-2 block"
+                  >
+                    Read More
+                  </button>
+                </div>
+              )}
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {trips.map((trip, subIndex) => (
               <div key={subIndex} className="flex-[0_0_360px] mr-4">

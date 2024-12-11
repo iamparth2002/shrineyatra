@@ -23,7 +23,6 @@ export async function generateMetadata({ params }) {
     const attractionData = response.data.attractions;
     const cleanDescription = attractionData.details.replace(/<[^>]*>/g, '').slice(0, 170);
 
-  console.log(attractionData)
 
     return {
       title: attractionData.metaTitle || attractionData.heading || 'The Kailash yatra Attraction',

@@ -47,7 +47,6 @@ export default function TripForm({
   }, [isEditing, tripForm]);
 
   const onSubmitTrip = async (data) => {
-    console.log('hi')
     setUploading(true);
     try {
       const formData = new FormData();
@@ -90,7 +89,6 @@ export default function TripForm({
           },
         });
         
-      console.log('Trip created:', data);
         setTrips([...trips, { ...response.data}]);
       }
       
