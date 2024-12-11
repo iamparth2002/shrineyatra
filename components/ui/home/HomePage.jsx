@@ -128,7 +128,7 @@ const HomePage = async () => {
                   <div className="flex items-center justify-between mt-12">
                     <h2 className="text-3xl font-bold">{packageItem.title}</h2>
                     <Link href={`/package/${packageItem.urlName}`}>
-                      <div className="max-md:hidden">
+                      <div className="max-md:hidden flex items-center bg-primary p-2 text-white rounded-lg">
                         View All
                         <Icons.ArrowRight size={20} className="ml-2" />
                       </div>
@@ -159,7 +159,7 @@ const HomePage = async () => {
             <div className="flex justify-between items-center mb-8">
               <h3 className="text-3xl font-bold">Our Blogs</h3>
               <Link href={`/blog`}>
-                <div className="max-md:hidden">
+                <div className="max-md:hidden flex items-center bg-primary p-2 text-white rounded-lg">
                   View All
                   <Icons.ArrowRight size={20} className="ml-2" />
                 </div>

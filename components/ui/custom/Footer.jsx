@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 
 import UserForm from './UserForm';
-import Obfuscate from 'react-obfuscate';
+
 
 export default function Footer() {
   const [packages, setPackages] = useState([]);
@@ -87,7 +87,7 @@ export default function Footer() {
                   <a href={`tel:${details.contact}`}>{details.contact}</a>
                 </p>
                 <p>
-                  E-mail : <Obfuscate email={details.email} />
+                  E-mail : {details.email}
                 </p>
               </address>
             </div>
