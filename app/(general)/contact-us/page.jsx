@@ -13,6 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import Header from '@/components/ui/custom/Header';
 import Footer from '@/components/ui/custom/Footer';
 import UserForm from '@/components/ui/custom/UserForm';
+import { details } from '@/utils/data';
 
 export default function ContactUs() {
   const offices = [
@@ -100,12 +101,21 @@ export default function ContactUs() {
                           href="mailto:info@shrineyatra.com"
                           className="hover:underline"
                         >
-                          info@shrineyatra.com
+                          {details?.email}
                         </a>
                       </div>
                       <div className="flex items-start">
                         <Globe className="w-5 h-5 mr-2 text-primary mt-1" />
                         <div className="flex flex-col">
+
+                          <a
+                            href="https://www.thekailashyatra.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline"
+                          >
+                            www.thekailashyatra.com
+                          </a>
                           <a
                             href="https://www.shrineyatra.com"
                             target="_blank"
@@ -114,41 +124,37 @@ export default function ContactUs() {
                           >
                             www.shrineyatra.com
                           </a>
-                          <a
-                            href="https://www.thekumbhyatra.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:underline"
-                          >
-                            www.thekumbhyatra.com
-                          </a>
                         </div>
                       </div>
                       <Separator />
                       <div className="flex justify-center space-x-4">
                         <a
-                          href="#"
+                          href={details?.links?.facebook}
+                          target="_blank"
                           className="text-primary hover:text-primary-dark"
                         >
                           <Facebook className="w-6 h-6" />
                           <span className="sr-only">Facebook</span>
                         </a>
                         <a
-                          href="#"
+                          href={details?.links?.twitter}
+                          target="_blank"
                           className="text-primary hover:text-primary-dark"
                         >
                           <Twitter className="w-6 h-6" />
                           <span className="sr-only">Twitter</span>
                         </a>
                         <a
-                          href="#"
+                          href={details?.links?.linkedin}
+                          target="_blank"
                           className="text-primary hover:text-primary-dark"
                         >
                           <Linkedin className="w-6 h-6" />
                           <span className="sr-only">LinkedIn</span>
                         </a>
                         <a
-                          href="#"
+                          href={details?.links?.youtube}
+                          target="_blank"
                           className="text-primary hover:text-primary-dark"
                         >
                           <Youtube className="w-6 h-6" />

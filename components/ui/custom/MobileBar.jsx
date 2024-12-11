@@ -16,7 +16,7 @@ import { handleSupportClick, handleWhatsAppClick } from '@/lib/utils'
 export function MobileBar() {
   return (
     <div className="fixed shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-1px_rgba(0,0,0,0.06)] bottom-0 left-0 right-0 z-50 flex gap-2 h-20 items-center justify-between bg-white px-4 text-white md:hidden">
-      <Button variant="ghost" size="icon" className="text-primary border border-primary hover:text-primary">
+      <Button variant="ghost" size="icon" className="text-[#F87F2C] border-2 border-primary hover:text-primary">
         <Phone className="h-5 w-5" onClick={handleSupportClick} fill='#F87F2C'/>
       </Button>
       <Dialog>
@@ -32,9 +32,9 @@ export function MobileBar() {
           <UserForm/>
         </DialogContent>
       </Dialog>
-      <Button variant="ghost" size="icon" className="text-primary border border-primary hover:text-primary" onClick={handleWhatsAppClick}>
+      <Button variant="ghost" size="icon" className="text-primary border-2 border-primary hover:text-primary" onClick={handleWhatsAppClick}>
         {/* <MessageCircle className="h-5 w-5" /> */}
-        <img src="/whatsapp.svg" alt="Whatsapp" width={28} height={28} />
+        <img src="/whatsapp.svg" alt="Whatsapp" width={20} height={20} />
       </Button>
     </div>
   )

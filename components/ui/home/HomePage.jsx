@@ -67,6 +67,36 @@ const HomePage = async () => {
           </div>
         </section>
 
+        
+
+        <section className="" id="packages">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {packages?.map((packageItem, index) => (
+              <div key={index}>
+                <div>
+                  <div className="flex items-center justify-between mt-12">
+                    <h2 className="text-3xl font-bold">{packageItem.title}</h2>
+                    <Link href={`/package/${packageItem.urlName}`}>
+                      <div className="max-md:hidden flex items-center bg-primary p-2 text-white rounded-lg">
+                        View All
+                        <Icons.ArrowRight size={20} className="ml-2" />
+                      </div>
+                    </Link>
+                  </div>
+
+                  <p className="text-gray-600 mt-2 mb-10">
+                    {packageItem.subHeading}
+                  </p>
+                </div>
+
+                <div>
+                  <PackageSlider trips={packageItem.trips} packageUrlName={packageItem?.urlName} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* One Click Section */}
         <section className="py-12 bg-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -118,34 +148,6 @@ const HomePage = async () => {
                 </ul>
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="" id="packages">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {packages?.map((packageItem, index) => (
-              <div key={index}>
-                <div>
-                  <div className="flex items-center justify-between mt-12">
-                    <h2 className="text-3xl font-bold">{packageItem.title}</h2>
-                    <Link href={`/package/${packageItem.urlName}`}>
-                      <div className="max-md:hidden flex items-center bg-primary p-2 text-white rounded-lg">
-                        View All
-                        <Icons.ArrowRight size={20} className="ml-2" />
-                      </div>
-                    </Link>
-                  </div>
-
-                  <p className="text-gray-600 mt-2 mb-10">
-                    {packageItem.subHeading}
-                  </p>
-                </div>
-
-                <div>
-                  <PackageSlider trips={packageItem.trips} packageUrlName={packageItem?.urlName} />
-                </div>
-              </div>
-            ))}
           </div>
         </section>
 

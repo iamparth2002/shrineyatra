@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import UserForm from '../custom/UserForm';
+import { handleSupportClick } from '@/lib/utils';
 
 const TripCard2 = ({
   image,
@@ -41,7 +42,8 @@ const TripCard2 = ({
     tripId,
     urlName,
     className,
-    packageUrlName})
+    packageUrlName
+  })
 
   return (
     <div className={`${className && 'max-md:w-[380px]'} md:w-[360px] rounded-lg overflow-hidden shadow-lg bg-white`}>
@@ -76,7 +78,7 @@ const TripCard2 = ({
 
         <div className="flex justify-between w-full gap-2">
           <button
-            className="flex-1 bg-white border border-primary text-primary py-2 rounded-lg text-sm font-semibold"
+            className="flex-1 bg-white border-2 border-primary text-primary py-2 rounded-lg text-sm font-semibold"
             onClick={() => {
               router.push(`/${packageUrlName}/${urlName}`);
             }}
@@ -89,19 +91,21 @@ const TripCard2 = ({
           <Button
             variant="outline"
             size="icon"
-            className="h-12 w-12 flex-shrink-0 border border-primary"
+            className="h-12 w-12 flex-shrink-0 border-2 border-primary text-[#F87F2C]"
           >
-            <Phone className="h-4 w-4" color="#f97316" />
+            {/* <Phone className="h-4 w-4" color="#f97316" /> */}
+            <Phone className="h-5 w-5" onClick={handleSupportClick} fill='#F87F2C' />
+
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="flex-grow w-full ml-2 h-12 bg-primary hover:bg-primary/90 text-sm"           
+              <Button className="flex-grow w-full ml-2 h-12 bg-primary hover:bg-primary/90 text-sm"
               >
                 Avail This Offer
               </Button>
             </DialogTrigger>
             <DialogContent>
-              <UserForm title={title} price={price} originalPrice={realPrice} tripId={tripId}/>
+              <UserForm title={title} price={price} originalPrice={realPrice} tripId={tripId} />
             </DialogContent>
           </Dialog>
         </div>
