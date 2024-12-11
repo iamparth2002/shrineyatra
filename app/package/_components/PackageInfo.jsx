@@ -26,7 +26,7 @@ export default function PackageInfo({ data, blogs, attractions, error }) {
     <div className="min-h-screen bg-gray-100">
       <Header />
 
-      <section className="relative h-[300px] sm:h-[400px] md:h-[500px]">
+      <section className="relative h-[620px] md:h-[500px]">
         <Image
           src={image}
           alt="Package Image"

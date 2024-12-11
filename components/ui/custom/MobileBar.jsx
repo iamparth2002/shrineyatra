@@ -34,7 +34,7 @@ export function MobileBar() {
       </Dialog>
       <Button variant="ghost" size="icon" className="text-primary border border-primary hover:text-primary" onClick={handleWhatsAppClick}>
         {/* <MessageCircle className="h-5 w-5" /> */}
-        <img src="/whatsapp.svg" alt="Logo" width={28} height={28} />
+        <img src="/whatsapp.svg" alt="Whatsapp" width={28} height={28} />
       </Button>
     </div>
   )
