@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import axiosInstance from '@/utils/axios';
 import dynamic from 'next/dynamic';
-
+// import 'jodit/build/jodit.min.css';
 
 const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
@@ -25,6 +25,8 @@ const BlogForm = ({
   const [showImageInput, setShowImageInput] = useState(!isEditing);
   const [existingImage, setExistingImage] = useState(null);
 
+  const [editorContent, setEditorContent] = useState(blogForm.watch('content') || '');
+
   const editorRef = useRef(null); // Reference for the editor
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const BlogForm = ({
 
   const config = {
     readonly: false, // Enables editing
-    height: 400, // Editor height
+    height:500,
     uploader: { insertImageAsBase64URI: true }, // Enable base64 image uploads
     buttons: [
       'source', 'bold', 'italic', 'underline', 'strikethrough', 'eraser', 'ul', 'ol', 'outdent',
@@ -51,7 +53,7 @@ const BlogForm = ({
     try {
       const formData = new FormData();
       formData.append('title', data.title);
-      formData.append('content', data.content); // HTML content
+      formData.append('content', editorContent); // HTML content
       formData.append('trip', data.tripId);
       formData.append('package', data.packageId);
       formData.append('urlName', data.urlName);
@@ -123,10 +125,10 @@ const BlogForm = ({
         <Label htmlFor="content">Content</Label>
         <JoditEditor
           ref={editorRef}
-          value={blogForm.watch('content') || ''}
+          value={editorContent}
           config={config}
-          onBlur={(value) => blogForm.setValue('content', value)} // Updates the form value
-          onChange={(value) => blogForm.setValue('content', value)} // Real-time updates
+          onBlur={(value) => setEditorContent(value)} // Update content on blur
+          onChange={(value) => {}}  // Real-time updates
         />
         {blogForm.formState.errors.content && (
           <p className="text-sm text-red-500">{blogForm.formState.errors.content.message}</p>
