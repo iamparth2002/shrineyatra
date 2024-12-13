@@ -4,11 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import axiosInstance from '@/utils/axios';
-import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css'; // Import Quill CSS for styling
-import { modules } from '@/utils/data';
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import JoditEditor from 'jodit-react';
 
 const BlogForm = ({
   blogs,
@@ -25,13 +21,25 @@ const BlogForm = ({
   const [showImageInput, setShowImageInput] = useState(!isEditing);
   const [existingImage, setExistingImage] = useState(null);
 
+  const editorRef = useRef(null); // Reference for the editor
+
   useEffect(() => {
     if (isEditing && blogForm.watch('image')) {
       setExistingImage(blogForm.watch('image'));
     }
   }, [isEditing, blogForm]);
 
-
+  const config = {
+    readonly: false, // Enables editing
+    height: 400, // Editor height
+    uploader: { insertImageAsBase64URI: true }, // Enable base64 image uploads
+    buttons: [
+      'source', 'bold', 'italic', 'underline', 'strikethrough', 'eraser', 'ul', 'ol', 'outdent',
+      'indent', 'superscript', 'subscript', 'font', 'fontsize', 'brush', 'paragraph', 'image',
+      'video', 'table', 'link', 'align', 'undo', 'redo', 'cut', 'copy', 'paste', 'hr', 'symbol',
+      'fullsize', 'print', 'about',
+    ],
+  };
 
   const onSubmitBlog = async (data) => {
     setUploading(true);
@@ -109,10 +117,12 @@ const BlogForm = ({
       </div>
       <div>
         <Label htmlFor="content">Content</Label>
-        <ReactQuill
+        <JoditEditor
+          ref={editorRef}
           value={blogForm.watch('content') || ''}
-          onChange={(value) => blogForm.setValue('content', value)}
-          modules={modules}
+          config={config}
+          onBlur={(value) => blogForm.setValue('content', value)} // Updates the form value
+          onChange={(value) => blogForm.setValue('content', value)} // Real-time updates
         />
         {blogForm.formState.errors.content && (
           <p className="text-sm text-red-500">{blogForm.formState.errors.content.message}</p>
@@ -129,7 +139,7 @@ const BlogForm = ({
           />
         ) : (
           <div>
-            <p className='mt-2'>{existingImage ? existingImage : 'No image selected'}</p>
+            <p className="mt-2">{existingImage ? existingImage : 'No image selected'}</p>
             <Button onClick={() => setShowImageInput(true)}>Change Image</Button>
           </div>
         )}
