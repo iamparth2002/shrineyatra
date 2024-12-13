@@ -1,10 +1,14 @@
+'use client'
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import axiosInstance from '@/utils/axios';
-import JoditEditor from 'jodit-react';
+import dynamic from 'next/dynamic';
+
+
+const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
 const BlogForm = ({
   blogs,
