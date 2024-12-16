@@ -1,8 +1,8 @@
 import Image from 'next/image'
-
+import Link from 'next/link'
 const Logo = () => {
   return (
-    <div className="flex items-center space-x-2">
+    <Link href="/" className="flex items-center space-x-2 cursor-pointer">
       <div className="relative w-12 h-12 sm:w-16 sm:h-16 bg-primary rounded-full">
         <Image
           src="/logo.png"
@@ -17,7 +17,7 @@ const Logo = () => {
         <span className="text-lg sm:text-xl font-bold text-black">The Kailash Yatra</span>
         <span className="text-sm sm:text-base font-medium text-primary">द कैलाश यात्रा</span>
       </div>
-    </div>
+    </Link>
   )
 }
 

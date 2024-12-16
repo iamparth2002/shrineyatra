@@ -175,7 +175,7 @@ export default async function Page({ params }) {
                       />
                     </div>
                     <div className="flex-1 space-y-1">
-                      <h3 className="font-serif text-lg leading-tight group-hover:text-primary transition-colors">
+                      <h3 className="text-lg leading-tight group-hover:text-primary transition-colors line-clamp-2">
                         {post.title}
                       </h3>
                       <p className="text-sm text-muted-foreground">

@@ -262,16 +262,6 @@ export default function PackageForm({
         >
           {uploading ? 'Uploading...' : isEditing ? 'Update' : 'Submit'}
         </Button>
-        <Button
-          variant="secondary"
-          onClick={() => {
-            setIsEditing(false);
-            setIsCreating(false);
-            packageForm.reset();
-          }}
-        >
-          Cancel
-        </Button>
       </div>
     </div>
   );

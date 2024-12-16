@@ -25,22 +25,22 @@ const packageSchema = (isEditing) =>
     image: isEditing
       ? z.union([z.instanceof(File), z.string()]).optional()
       : z.instanceof(File, { message: 'Image is required' }),
-    description: z.string().min(1, 'Description is required'),
+    description: z.string().optional(),
     navName: z.string().min(1, 'Navigation Name is required'),
     urlName: z.string().min(1, 'URL Name is required'),
-    metaTitle:z.string().min(1, 'Meta Title is required'),
-    metaDescription:z.string().min(1, 'Meta Description is required'),
-    imageAlt:z.string().min(1, 'Image Description is required'),
+    metaTitle: z.string().min(1, 'Meta Title is required'),
+    metaDescription: z.string().min(1, 'Meta Description is required'),
+    imageAlt: z.string().min(1, 'Image Description is required'),
     points: z
-    .array(
-      z.object({
-        title: z.string(),
-        description: z.string(),
-      })
-    )
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+        })
+      ).optional()
   });
 
-const tripSchema=(isEditing) => z.object({
+const tripSchema = (isEditing) => z.object({
   id: z.string(),
   name: z.string().min(1, 'Name is required'),
   days: z.number().min(1, 'Days must be at least 1'),
@@ -50,8 +50,8 @@ const tripSchema=(isEditing) => z.object({
   description: z.string().min(1, 'Description is required'),
   packageId: z.string().min(1, 'Package is required'),
   image: isEditing
-  ? z.union([z.instanceof(File), z.string()]).optional()
-  : z.instanceof(File, { message: 'Image is required' }),
+    ? z.union([z.instanceof(File), z.string()]).optional()
+    : z.instanceof(File, { message: 'Image is required' }),
   itinerary: z
     .array(
       z.object({
@@ -63,12 +63,12 @@ const tripSchema=(isEditing) => z.object({
     .optional(),
   highlights: z.array(z.string()).optional(),
   inclusions: z.array(z.string()).optional(),
-  
+
   exclusions: z.array(z.string()).optional(),
   urlName: z.string().min(1, 'URL Name is required'),
-  metaTitle:z.string().min(1, 'Meta Title is required'),
-  metaDescription:z.string().min(1, 'Meta Description is required'),
-  imageAlt:z.string().min(1, 'Image Description is required'),
+  metaTitle: z.string().min(1, 'Meta Title is required'),
+  metaDescription: z.string().min(1, 'Meta Description is required'),
+  imageAlt: z.string().min(1, 'Image Description is required'),
 
 });
 
@@ -76,32 +76,32 @@ const blogSchema = (isEditing) =>
   z.object({
     id: z.string().optional(),
     title: z.string().min(1, 'Title is required'),
-    content: z.string().min(1, 'Content is required'),
+    content: z.string().optional(),
     image: isEditing
       ? z.union([z.instanceof(File), z.string()]).optional()
       : z.instanceof(File, { message: 'Image is required' }),
     tripId: z.string().min(1, 'Trip is required'),
     packageId: z.string().min(1, 'Package is required'),
     urlName: z.string().min(1, 'URL Name is required'),
-    metaTitle:z.string().min(1, 'Meta Title is required'),
-    metaDescription:z.string().min(1, 'Meta Description is required'),
-    imageAlt:z.string().min(1, 'Image Description is required')
+    metaTitle: z.string().min(1, 'Meta Title is required'),
+    metaDescription: z.string().min(1, 'Meta Description is required'),
+    imageAlt: z.string().min(1, 'Image Description is required')
   });
 
 const attractionSchema = (isEditing) =>
   z.object({
     id: z.string(),
     heading: z.string().min(1, 'Heading is required'),
-    details: z.string().min(1, 'Details are required'),
+    details: z.string().optional(),
     image: isEditing
       ? z.union([z.instanceof(File), z.string()]).optional()
       : z.instanceof(File, { message: 'Image is required' }),
     tripId: z.string().min(1, 'Trip is required'),
     packageId: z.string().min(1, 'Package is required'),
     urlName: z.string().min(1, 'URL Name is required'),
-    metaTitle:z.string().min(1, 'Meta Title is required'),
-    metaDescription:z.string().min(1, 'Meta Description is required'),
-    imageAlt:z.string().min(1, 'Image Description is required')
+    metaTitle: z.string().min(1, 'Meta Title is required'),
+    metaDescription: z.string().min(1, 'Meta Description is required'),
+    imageAlt: z.string().min(1, 'Image Description is required')
 
   });
 
@@ -153,26 +153,26 @@ export default function Dashboard() {
       title: '',
       content: '',
       image: '',
-      urlName:'',
-      metaTitle:'',
-      metaDescription:'',
-      imageAlt:''
+      urlName: '',
+      metaTitle: '',
+      metaDescription: '',
+      imageAlt: ''
     },
   });
   const packageForm = useForm({
     resolver: zodResolver(packageSchema(isEditing)),
     defaultValues: {
-    //   id: '',
-    // title: '',
-    // subHeading: '',
-    // image: '',
-    // description:'',
-    // navName: '',
-    // urlName: '',
-    // metaTitle:'',
-    // metaDescription:'',
-    // imageAlt:'',
-    // points:[]
+      //   id: '',
+      // title: '',
+      // subHeading: '',
+      // image: '',
+      // description:'',
+      // navName: '',
+      // urlName: '',
+      // metaTitle:'',
+      // metaDescription:'',
+      // imageAlt:'',
+      // points:[]
     },
   });
 
@@ -540,7 +540,7 @@ export default function Dashboard() {
           setIsSidebarOpen={setIsSidebarOpen}
           isSidebarOpen={isSidebarOpen}
           handleCreate={handleCreate}
-          
+
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
@@ -548,8 +548,8 @@ export default function Dashboard() {
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
             {activeSection === 'queries' ? (
-              <QueriesTable 
-                queries={filteredItems()} 
+              <QueriesTable
+                queries={filteredItems()}
                 handleDeleteQuery={handleDeleteQuery}
               />
             ) : selectedItem || isCreating ? (
@@ -588,7 +588,7 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-md:px-2">
-                {filteredItems().map((item,index) => (
+                {filteredItems().map((item, index) => (
                   <Card
                     key={index}
                     className="cursor-pointer h-[420px] hover:shadow-md transition-shadow duration-200"
@@ -604,10 +604,10 @@ export default function Dashboard() {
                         {activeSection === 'packages'
                           ? item.title
                           : activeSection === 'trips'
-                          ? item.name
-                          : activeSection === 'blogs'
-                          ? item.title
-                          : item.heading}
+                            ? item.name
+                            : activeSection === 'blogs'
+                              ? item.title
+                              : item.heading}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="p-4 pt-0 flex flex-col gap-2 ">
@@ -615,10 +615,10 @@ export default function Dashboard() {
                         {activeSection === 'packages'
                           ? item.subHeading
                           : activeSection === 'trips'
-                          ? item.location
-                          : activeSection === 'blogs'
-                          ? item.content.replace(/<[^>]*>/g, '').substring(0, 50) + '...'
-                          : item.details.replace(/<[^>]*>/g, '').substring(0, 50) + '...'}
+                            ? item.location
+                            : activeSection === 'blogs'
+                              ? item.content.replace(/<[^>]*>/g, '').substring(0, 50) + '...'
+                              : item.details.replace(/<[^>]*>/g, '').substring(0, 50) + '...'}
                       </p>
 
                       <div className="flex gap-2">
