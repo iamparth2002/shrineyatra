@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(2); // Initial count of blogs to display
+  const [visibleCount, setVisibleCount] = useState(5); // Initial count of blogs to display
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const Blogs = () => {
                     <div className="text-sm text-muted-foreground mb-2">
                       {format(new Date(blogs[0].createdAt), 'MMMM do, yyyy')}
                     </div>
-                    <h1 className="text-3xl font-serif mb-4 hover:text-orange-500 transition-colors">
+                    <h1 className="text-3xl text-semibold mb-4 hover:text-orange-500 transition-colors">
                       {blogs[0].title}
                     </h1>
                     <p className="mb-4 text-gray-600 line-clamp-3">
@@ -89,7 +89,7 @@ const Blogs = () => {
                       <div className="text-sm text-muted-foreground mb-2">
                         {format(new Date(post.createdAt), 'MMMM do, yyyy')}
                       </div>
-                      <h2 className="text-xl font-serif mb-2 hover:text-orange-500 transition-colors">
+                      <h2 className="text-xl font-medium mb-2 hover:text-orange-500 transition-colors">
                         {post.title}
                       </h2>
                       <p className="text-muted-foreground text-sm mb-4">

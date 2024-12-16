@@ -5,13 +5,14 @@ import Link from 'next/link';
 export default function AttractionCard({
   data
 }) {
+  console.log({data})
   return (
     <Link href={`/attraction/${data.urlName}`}>
     <Card className="relative h-[400px] w-[360px] max-w-sm overflow-hidden group">
       <div className="aspect-[3/4] w-full">
         <Image
           src={data.image}
-          alt={data.title}
+          alt={data.imageAlt || "The Kailash Yatra"}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-all group-hover:scale-105"
