@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/select';
 import { X } from 'lucide-react';
 import axiosInstance from '@/utils/axios'; // Import axios instance
+import { useFieldArray } from 'react-hook-form';
 
 export default function TripForm({
   tripForm,

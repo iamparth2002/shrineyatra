@@ -215,6 +215,17 @@ export const modules = {
   },
   
 };
+export const config = {
+  readonly: false, // Enables editing
+  height:500,
+  uploader: { insertImageAsBase64URI: true }, // Enable base64 image uploads
+  buttons: [
+    'source', 'bold', 'italic', 'underline', 'strikethrough', 'eraser', 'ul', 'ol', 'outdent',
+    'indent', 'superscript', 'subscript', 'font', 'fontsize', 'brush', 'paragraph', 'image',
+    'video', 'table', 'link', 'align', 'undo', 'redo', 'cut', 'copy', 'paste', 'hr', 'symbol',
+    'fullsize', 'print', 'about',
+  ],
+};
 
 
 

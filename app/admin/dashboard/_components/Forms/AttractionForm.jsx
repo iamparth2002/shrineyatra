@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -14,10 +14,7 @@ import {
 } from '@/components/ui/select';
 import axiosInstance from '@/utils/axios';
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css'; // Import Quill CSS for styling
-import { modules } from '@/utils/data';
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
 
 const AttractionForm = ({
   attractions,
@@ -34,11 +31,27 @@ const AttractionForm = ({
   const [showImageInput, setShowImageInput] = useState(!isEditing);
   const [existingImage, setExistingImage] = useState(null);
 
+  const [editorContent, setEditorContent] = useState(attractionForm.watch('details') || '');
+
+  const editorRef = useRef(null); 
+
   useEffect(() => {
     if (isEditing && attractionForm.watch('image')) {
       setExistingImage(attractionForm.watch('image'));
     }
   }, [isEditing, attractionForm]);
+
+  const config = {
+    readonly: false, // Enables editing
+    height:500,
+    uploader: { insertImageAsBase64URI: true }, // Enable base64 image uploads
+    buttons: [
+      'source', 'bold', 'italic', 'underline', 'strikethrough', 'eraser', 'ul', 'ol', 'outdent',
+      'indent', 'superscript', 'subscript', 'font', 'fontsize', 'brush', 'paragraph', 'image',
+      'video', 'table', 'link', 'align', 'undo', 'redo', 'cut', 'copy', 'paste', 'hr', 'symbol',
+      'fullsize', 'print', 'about',
+    ],
+  };
 
   const onSubmitAttraction = async (data) => {
 
@@ -49,7 +62,7 @@ const AttractionForm = ({
       const formData = new FormData();
 
       formData.append('heading', data.heading);
-      formData.append('details', data.details);
+      formData.append('details', editorContent);
       formData.append('trip', data.tripId);
       formData.append('package', data.packageId);
       formData.append('urlName', data.urlName);
@@ -136,24 +149,17 @@ const AttractionForm = ({
       </div>
       <div>
         <Label htmlFor="details">Details</Label>
-        <ReactQuill
-          value={attractionForm.watch('details') || ''}
-          onChange={(value) => attractionForm.setValue('details', value)}
-          modules={modules}
+        <JoditEditor
+          ref={editorRef}
+          value={editorContent}
+          config={config}
+          onBlur={(value) => setEditorContent(value)} // Update content on blur
+          onChange={(value) => {}}  // Real-time updates
         />
         {attractionForm.formState.errors.content && (
           <p className="text-sm text-red-500">{attractionForm.formState.errors.content.message}</p>
         )}
       </div>
-      {/* <div>
-        <Label htmlFor="details">Details</Label>
-        <Textarea id="details" {...attractionForm.register('details')} />
-        {attractionForm.formState.errors.details && (
-          <p className="text-sm text-red-500">
-            {attractionForm.formState.errors.details.message}
-          </p>
-        )}
-      </div> */}
       <div>
         <Label htmlFor="image">Image</Label>
         {showImageInput || !isEditing ? (

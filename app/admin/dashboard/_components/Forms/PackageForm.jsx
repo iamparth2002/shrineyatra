@@ -6,9 +6,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import axiosInstance from '@/utils/axios';
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css'; // Import Quill CSS for styling
-import { modules } from '@/utils/data';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import { useRef } from 'react';
+import { config } from '@/utils/data';
+
+ // Import JoditEditor
+ const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
+
 
 export default function PackageForm({
   packageForm,
@@ -23,8 +26,7 @@ export default function PackageForm({
   const [showImageInput, setShowImageInput] = useState(!isEditing);
   const [existingImage, setExistingImage] = useState(null);
   const [points, setPoints] = useState([{ title: '', description: '' }]);
-
- 
+  const editorRef = useRef(null); // Ref for Jodit Editor
 
   const onSubmitPackage = async (data) => {
     setUploading(true);
@@ -60,7 +62,6 @@ export default function PackageForm({
         setPackages(
           packages.map((item) => (item._id === response.data._id ? response.data : item))
         );
-        
       } else {
         // Create logic
         const response = await axiosInstance.post('/packages/create', formData, {
@@ -69,7 +70,6 @@ export default function PackageForm({
           },
         });
         setPackages([...packages, response.data]);
-        
       }
     } catch (error) {
       console.error(
@@ -169,10 +169,10 @@ export default function PackageForm({
       </div>
       <div>
         <Label htmlFor="description">Description</Label>
-        <ReactQuill
+        <JoditEditor
+          ref={editorRef}
           value={packageForm.watch('description')}
           onChange={(value) => packageForm.setValue('description', value)}
-          modules={modules}
         />
         {packageForm.formState.errors.description && (
           <p className="text-sm text-red-500">
@@ -198,12 +198,11 @@ export default function PackageForm({
               <Label htmlFor={`point-description-${index}`}>
                 Point Description
               </Label>
-              <ReactQuill
+              <JoditEditor
                 value={point.description}
                 onChange={(value) =>
                   handlePointChange(index, 'description', value)
                 }
-                modules={modules}
               />
             </div>
             <Button
@@ -255,14 +254,25 @@ export default function PackageForm({
           )}
         </div>
       </div>
-      <Button
-        onClick={packageForm.handleSubmit(onSubmitPackage)}
-        // onClick={check}
-        disabled={uploading}
-      >
-        {uploading ? 'Uploading...' : isEditing ? 'Update' : 'Create'}{' '}
-        {uploading ? '' : 'Package'}
-      </Button>
+
+      <div>
+        <Button
+          onClick={packageForm.handleSubmit(onSubmitPackage)}
+          disabled={uploading}
+        >
+          {uploading ? 'Uploading...' : isEditing ? 'Update' : 'Submit'}
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            setIsEditing(false);
+            setIsCreating(false);
+            packageForm.reset();
+          }}
+        >
+          Cancel
+        </Button>
+      </div>
     </div>
   );
 }

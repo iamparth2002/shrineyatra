@@ -27,7 +27,7 @@ const BlogForm = ({
 
   const [editorContent, setEditorContent] = useState(blogForm.watch('content') || '');
 
-  const editorRef = useRef(null); // Reference for the editor
+  const editorRef = useRef(null); 
 
   useEffect(() => {
     if (isEditing && blogForm.watch('image')) {

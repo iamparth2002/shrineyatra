@@ -286,6 +286,7 @@ export default function Dashboard() {
   const handleEdit = (item) => {
     setSelectedItem(item);
     setIsEditing(true);
+    console.log(item)
     switch (activeSection) {
 
       case 'packages':
