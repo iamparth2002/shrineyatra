@@ -77,11 +77,18 @@ export default async function Page({ params }) {
   const attractionData = response.data.attractions;
   const relatedTrips = response.data.relatedTrips;
 
-  if (!attractionData) {
+  console.log({attractionData})
+
+  if (attractionData.length==0){
     return (
-      <div className="flex justify-center items-center h-screen">
+      <>
+        <Header/>
+        <div className="flex justify-center items-center h-screen">
         <p>Attraction not found.</p>
       </div>
+        <Footer/>
+      </>
+      
     );
   }
 

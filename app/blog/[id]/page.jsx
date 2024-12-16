@@ -91,11 +91,16 @@ export default async function Page({ params }) {
   const relatedBlogs = response.data.otherBlogs;
   const relatedTrips = response.data.relatedTrips;
 
-  if (!blogData) {
+  if (blogData.length==0) {
     return (
+      <>
+      <Header/>
       <div className="flex justify-center items-center h-screen">
         <p>Blog not found.</p>
       </div>
+      <Footer/>
+      </>
+      
     );
   }
 

@@ -16,9 +16,14 @@ export default function PackageInfo({ data, blogs, attractions, error }) {
 
   if (!data || error) {
     return (
+      <>
+      <Header/>
       <div className="flex justify-center items-center h-screen">
         <p className="text-red-500">{error || 'Failed to load data'}</p>
       </div>
+      <Footer/>
+      </>
+      
     );
   }
 
