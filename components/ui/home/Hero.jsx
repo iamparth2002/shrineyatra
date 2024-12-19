@@ -5,10 +5,6 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { slideTexts } from '@/utils/data'
 
-const bannerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1 } },
-}
 
 const textVariants = {
   hidden: { opacity: 0, x: 100 },
@@ -34,10 +30,9 @@ export default function Hero() {
         className="absolute inset-0 z-0"
         initial="hidden"
         animate="visible"
-        variants={bannerVariants}
       >
         <Image
-          src="/home-banner.jpg"
+          src="/home-banner.webp"
           alt="Beautiful cityscape with boats"
           layout="fill"
           objectFit="cover"

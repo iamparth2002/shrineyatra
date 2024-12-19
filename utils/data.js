@@ -1,22 +1,4 @@
-import { Facebook, MessageSquare, Search, Zap } from 'lucide-react';
-
-export const metadataObj = {
-  default: {
-    title: 'The Kailash Yatra',
-    description:
-      'Kailash Mansarovar Yatra is a sacred pilgrimage that leads to Kailash Mansarovar, the abode of Lord Shiva, located in Tibet.',
-    image: '/home-banner.jpg', // Image in public folder
-    url: `${process.env.NEXT_PUBLIC_URL}`,
-    type: 'website',
-  },
-  blogs: {
-    title: 'Blogs - The Kilash Yatra',
-    description:
-      "Dive into the world of 'The Kailash Yatra' with insightful articles, travel tips, spiritual guides, and updates.",
-    url: `${process.env.NEXT_PUBLIC_URL}/blog`,
-  },
-};
-
+import {MessageSquare, Search, Zap } from 'lucide-react';
 export const slideTexts = [
   {
     heading: 'Discover Your Next Adventure',
@@ -130,11 +112,24 @@ export const details = {
 };
 export const footerDetails = {
   year: '2024',
-  subheading:
-    'Trusted in more than 100 countries & 5 million customers. Have any query? Contact us, we are here for you.',
 };
 
-
+export const metadataObj = {
+  default: {
+    title: 'The Kailash Yatra',
+    description:
+      'Kailash Mansarovar Yatra is a sacred pilgrimage that leads to Kailash Mansarovar, the abode of Lord Shiva, located in Tibet.',
+    image: '/home-banner.jpg', // Image in public folder
+    url: `${process.env.NEXT_PUBLIC_URL}`,
+    type: 'website',
+  },
+  blogs: {
+    title: 'Blogs - The Kilash Yatra',
+    description:
+      "Dive into the world of 'The Kailash Yatra' with insightful articles, travel tips, spiritual guides, and updates.",
+    url: `${process.env.NEXT_PUBLIC_URL}/blog`,
+  },
+};
 
 export const schemas = {
   website: {

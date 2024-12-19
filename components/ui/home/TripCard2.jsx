@@ -78,7 +78,7 @@ const TripCard2 = ({
           <Button
             variant="outline"
             size="icon"
-            className="h-12 w-12 flex-shrink-0 border-2 border-primary text-[#F87F2C]"
+            className="h-12 w-12 flex-shrink-0 border-2 border-primary text-[#F87F2C] hover:text-[#F87F2C]"
           >
             {/* <Phone className="h-4 w-4" color="#f97316" /> */}
             <Phone className="h-5 w-5" onClick={handleSupportClick} fill='#F87F2C' />
