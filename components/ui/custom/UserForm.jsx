@@ -152,13 +152,12 @@ export default function UserForm({
             )}
           </div>
           <div className="grid grid-cols-4 gap-2">
-            <Select name="countryCode" defaultValue="+91">
+            <Select name="countryCode" defaultValue="+91" aria-label="Select country code">
               <SelectTrigger>
                 <SelectValue placeholder="Code" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="+91">+91</SelectItem>
-                {/* Add more country codes as needed */}
+                <SelectItem value="+91" aria-label="India (+91)">+91</SelectItem>
               </SelectContent>
             </Select>
             <div className="col-span-3">

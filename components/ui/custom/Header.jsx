@@ -61,6 +61,7 @@ const Header = () => {
           size="icon"
           className="lg:hidden ml-auto"
           onClick={() => setSidebarOpen(true)}
+          aria-label="Menu Icon"
         >
           <MenuIcon className="h-6 w-6" />
         </Button>
@@ -183,6 +184,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setSidebarOpen(false)}
+              aria-label="Close sidebar"
             >
               <X className="h-6 w-6" />
             </Button>

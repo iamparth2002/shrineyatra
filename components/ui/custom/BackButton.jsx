@@ -5,9 +5,10 @@ import { Button } from '../button';
 import { ArrowLeft } from 'lucide-react';
 
 const BackButton = () => {
-    const router = useRouter()
+  const router = useRouter()
   return (
-    <Button className="mb-2" onClick={() => router.back()} >
+    <Button className="mb-2" onClick={() => router.back()}
+    >
       {' '}
       <ArrowLeft className="w-4 h-4 mr-2" /> Go
       Back

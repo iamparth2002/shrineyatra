@@ -85,6 +85,7 @@ export default function PackageSlider({ options, trips,packageUrlName }) {
             size="icon"
             onClick={scrollPrev}
             disabled={prevBtnDisabled}
+            aria-label="Left Button"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -93,6 +94,8 @@ export default function PackageSlider({ options, trips,packageUrlName }) {
             size="icon"
             onClick={scrollNext}
             disabled={nextBtnDisabled}
+            aria-label="Right Button"
+
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
@@ -107,6 +110,7 @@ export default function PackageSlider({ options, trips,packageUrlName }) {
                 index === selectedIndex ? "bg-primary" : "bg-primary/20"
               }`}
               onClick={() => scrollTo(index)}
+              aria-label={`Slide Index`}
             />
           ))}
         </div>
@@ -120,6 +124,8 @@ export default function PackageSlider({ options, trips,packageUrlName }) {
           className="absolute left-4 top-1/2 transform -translate-y-1/2"
           onClick={scrollPrev}
           disabled={prevBtnDisabled}
+          aria-label="Left Button"
+
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
@@ -129,6 +135,8 @@ export default function PackageSlider({ options, trips,packageUrlName }) {
           className="absolute right-4 top-1/2 transform -translate-y-1/2"
           onClick={scrollNext}
           disabled={nextBtnDisabled}
+          aria-label="Right Button"
+
         >
           <ChevronRight className="h-4 w-4" />
         </Button>
@@ -142,6 +150,7 @@ export default function PackageSlider({ options, trips,packageUrlName }) {
                 index === selectedIndex ? "bg-primary" : "bg-primary/20"
               }`}
               onClick={() => scrollTo(index)}
+              aria-label={`Slide Index`}
             />
           ))}
         </div>

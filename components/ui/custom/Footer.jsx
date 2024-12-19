@@ -46,6 +46,7 @@ export default function Footer() {
                   href={details?.links?.facebook}
                   target="_blank"
                   className="hover:opacity-80 bg-primary p-2 rounded-full"
+                  aria-label="Visit our Facebook page"
                 >
                   <Facebook className="w-8 h-8" />
                 </Link>
@@ -53,6 +54,7 @@ export default function Footer() {
                   href={details?.links?.instagram}
                   target="_blank"
                   className="hover:opacity-80 p-2 rounded-full bg-primary"
+                  aria-label="Visit our Instagram page"
                 >
                   <Instagram className="w-8 h-8" />
                 </Link>
@@ -60,6 +62,7 @@ export default function Footer() {
                   href={details?.links?.youtube}
                   target="_blank"
                   className="hover:opacity-80 p-2 rounded-full bg-primary"
+                  aria-label="Visit our YouTube channel"
                 >
                   <Youtube className="w-8 h-8" />
                 </Link>
@@ -67,6 +70,7 @@ export default function Footer() {
                   href={details?.links?.twitter}
                   target="_blank"
                   className="hover:opacity-80 p-2 rounded-full bg-primary"
+                  aria-label="Follow us on Twitter"
                 >
                   <Twitter className="w-8 h-8" />
                 </Link>
@@ -74,6 +78,7 @@ export default function Footer() {
                   href={details?.links?.linkedin}
                   target="_blank"
                   className="hover:opacity-80 p-2 rounded-full bg-primary"
+                  aria-label="Connect with us on LinkedIn"
                 >
                   <Linkedin className="w-8 h-8" />
                 </Link>
